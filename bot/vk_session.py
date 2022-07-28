@@ -1,0 +1,4 @@
+import vk_api
+
+token = "vk1.a.dmeOyHG1FyokLXkTxETchbft3bxx6QPd8tyKPiD4rn2iA1CDi682zEEgpxI_8Q5sk9T5JYNyJ3XHvkemkNILJXXilHMT9vFwWLaQNpTQaq6dqfYfGlxWhMtW6vmtx1hfLtxkMw6kCtQkU9Dypo1mgIUPBITSpMdhBvdqIzCwDieDHS-pU-fIHRC6Zs3myDOQ"
+vk_session = vk_api.VkApi(token=token)
