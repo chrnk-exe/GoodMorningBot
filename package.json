@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/chrnk-exe/TS_Bot_VK_service/issues"
   },
-  "homepage": "https://github.com/chrnk-exe/TS_Bot_VK_service#readme",
-  "dependencies": {
-    "@types/react-router-dom": "^5.3.3",
-    "react-router": "^6.3.0"
-  }
+  "homepage": "https://github.com/chrnk-exe/TS_Bot_VK_service#readme"
 }
