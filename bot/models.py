@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import BYTEA
 import time
 import json
 
-engine = create_engine('postgresql://postgres:1234@localhost:5432/test', echo=False)
+engine = create_engine('postgresql://postgres:1234@localhost:5432/BotDB', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
@@ -14,7 +14,6 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    name = Column(String)
     email = Column(String)
     password = Column(String)
     vklink = Column(String)
@@ -44,6 +43,16 @@ class Videos(Base):
         self.ownerid = ownerid
         self.content = content
         self.day = day
+
+class MailingUser(Base):
+    __tablename__ = 'mailing_list'
+    id = Column(Integer, primary_key=True)
+    vklink = Column(String)
+    customVideos = Column(Text)
+
+    def __init__(self, ownerid, content, day):
+        self.vklink = vklink
+        self.customVideos = customVideos
 
 Base.metadata.create_all(engine)
 
