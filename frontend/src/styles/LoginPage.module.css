@@ -1,0 +1,36 @@
+.loginPage {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e6e6;
+}
+
+.loginPageContainer {
+    background-color: #FFFFF1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 130px;
+    min-width: 25%;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.vkIcon {
+    cursor: pointer;
+}
+
+.loginPageItem {
+    margin-top: 10px;
+    min-width: 200px;
+    width: 100%;
+}
+
+.passwordRecoveryPage {
+    text-align: right;
+    font-size: large;
+}
+

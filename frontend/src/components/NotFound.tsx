@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../app/hooks'
-import { useNavigate } from 'react-router'
 import { Navigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
@@ -9,7 +8,7 @@ import classes from '../styles/NotFound.module.css'
 const NotFound = () => {
     const [timer, setTime] = useState(5)
     const user = useAppSelector(state => state.user)
-    const navigator = useNavigate()
+    
     if(user.userID !== -1){
         
     }
