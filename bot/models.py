@@ -50,7 +50,8 @@ class MailingUser(Base):
     vklink = Column(String)
     customVideos = Column(Text)
 
-    def __init__(self, ownerid, content, day):
+    def __init__(self, vklink, vkid, customVideos):
+        self.id = vkid
         self.vklink = vklink
         self.customVideos = customVideos
 
