@@ -54,5 +54,5 @@ if __name__ == '__main__':
                     for id in mailing_users_ids():
                         write_msg(id, 'Здарова, рассылочка подъехала!', configure_keyboard(id))
                 contents = get_attach_content_user(attachments, VIDEO)
-                if len(contents):
+                if len(contents) and isAdmin(user_id):
                     add_video_to_mailing(user_id, contents)
