@@ -1,5 +1,6 @@
 import vk_api, json, requests
 import random
+import re
 import youtube_dl
 from models import session, User
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
@@ -29,7 +30,7 @@ def add_video(name):
     }
 
 def write_msg(user_id, message, keyboard):
-    vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": 0, "keyboard": keyboard})
+    vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": random.randint(1, 99999999), "keyboard": keyboard})
 
 def configure_keyboard(user_id):
     user = session.query(User).filter_by(id = user_id).first()
@@ -60,16 +61,26 @@ def configure_keyboard(user_id):
     keyboard = str(keyboard.decode("utf-8"))
     return keyboard
 
+# сделать проверку на videos, чтоб человек не мог добавить фото
+
 def get_attach_keys(arr):
     keys = list(arr.keys())
-    new_keys = keys[1:len(keys):2]
+    append = True
+    new_keys = []
+    for key in keys:
+        if (re.search('\d+', key) is not None) and append:
+            new_keys.append(key)
+        append = key == 'video'
     return new_keys
 
-def get_attach_content_user(arr):
-    keys = get_attach_keys(arr)
+def get_attach_content_user(arr, content):
+    keys = list(arr.keys())
     result = []
+    append = True
     for key in keys:
-        result.append(arr[key])
+        if (re.search('\d+', arr[key]) is not None) and append:
+            result.append(arr[key])
+        append = arr[key] == content
     return result
 
 def get_attach_content_only(arr):

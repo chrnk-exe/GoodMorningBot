@@ -38,11 +38,13 @@ class Videos(Base):
     id = Column(Integer, primary_key=True)
     ownerid = Column(Integer)
     content = Column(BYTEA)
+    vkcontent = Column(String)
     day = Column(Integer)
     
-    def __init__(self, ownerid, content, day):
+    def __init__(self, ownerid, content, vkcontent, day):
         self.ownerid = ownerid
         self.content = content
+        self.vkcontent = vkcontent
         self.day = day
 
 class MailingUser(Base):

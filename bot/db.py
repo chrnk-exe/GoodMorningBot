@@ -13,8 +13,10 @@ def add_mailing_user(id):
     session.commit()
     
 
-def add_video_to_user(user_id, video):
-    pass
+def add_video_to_mailing(user_id, video_seeds):
+    for seed in video_seeds:
+        session.add(Videos(user_id, None, seed, 0))
+    session.commit()
 
 def delete_user_from_mailing(id):
     user = session.query(MailingUser).filter_by(id=id).first()

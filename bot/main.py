@@ -1,7 +1,3 @@
-from ast import Pass
-import vk_api, json, requests
-import random
-import time
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.upload import VkUpload
@@ -10,8 +6,9 @@ from apifuncs import write_msg, add_video, configure_keyboard, get_attach_conten
 from vk_session import vk_session
 from db import *
 
-
 videos = []
+
+VIDEO = 'video'
 
 buttons = { 'sub':'Подписаться на рассылку', 
             'unsub': 'Отписаться от рассылки', 
@@ -36,30 +33,26 @@ if __name__ == '__main__':
                 if request == buttons['sub']:
                     write_msg(user_id, 'Спасибо!', configure_keyboard(user_id))
                     add_mailing_user(user_id)
+
                 if request == buttons['unsub']:
                     write_msg(user_id, delete_user_from_mailing(user_id), configure_keyboard(user_id))
+
                 if request == buttons['about']:
                     write_msg(user_id, 'https://vk.com/no_one_hears_u', configure_keyboard(user_id))
+
                 if request == buttons['add']:
                     write_msg(user_id, 'Пришлите ваше видео!', configure_keyboard(user_id))
+
                 if request.find('добавить админа') != -1 and isAdmin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, add_admin(id[0]), configure_keyboard(user_id))
+
                 if request.find('удалить админа') != -1 and isAdmin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, delete_admin(id[0]), configure_keyboard(user_id))
                 if request == buttons['send'] and isAdmin(user_id):
-                    print(mailing_users_ids())
                     for id in mailing_users_ids():
                         write_msg(id, 'Здарова, рассылочка подъехала!', configure_keyboard(id))
-                # print(attachments)
-                # print(get_attach_content_user(attachments))
-                # print(get_attach_content_only(attachments))
-        #         try:
-        #         	n = int(event.text)
-        #         	if n < 4095 and n > 0:
-        #         		write_msg(event.user_id, 'a' * n, keyboard)
-        #         	else: 
-        #         		write_msg(event.user_id, 'Плохое число...', keyboard)
-        #         except:
-        #         	write_msg(event.user_id, event.text, keyboard)
+                contents = get_attach_content_user(attachments, VIDEO)
+                if len(contents):
+                    add_video_to_mailing(user_id, contents)
