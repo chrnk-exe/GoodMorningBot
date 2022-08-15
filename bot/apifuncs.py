@@ -1,6 +1,7 @@
 import vk_api, json, requests
 import random
 import youtube_dl
+from models import session, User
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.upload import VkUpload
@@ -30,15 +31,31 @@ def add_video(name):
 def write_msg(user_id, message, keyboard):
     vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": 0, "keyboard": keyboard})
 
-def configure_keyboard(arr):
-    buttons = []
-    for button in arr:
-        buttons.append([get_button(button['text'], button['color'])])
-    buttons[len(buttons)-1].append(get_button('Добавить своё видео', 'secondary'))
-    keyboard = {
-        "one_time": False,
-        "buttons": buttons
-    }
+def configure_keyboard(user_id):
+    user = session.query(User).filter_by(id = user_id).first()
+    arr = [
+            {'text': 'Подписаться на рассылку', 'color': 'positive'}, 
+            {'text': 'Отписаться от рассылки', 'color': 'negative'}, 
+            {'text': 'Об авторе', 'color': 'secondary'}
+        ]
+    if user == None or user.isAdmin == False:        
+        buttons = []
+        for button in arr:
+            buttons.append([get_button(button['text'], button['color'])])
+        buttons[len(buttons)-1].append(get_button('Добавить своё видео', 'secondary'))
+        keyboard = {
+            "one_time": False,
+            "buttons": buttons
+        }
+    else:
+        buttons = []
+        buttons.append([get_button(arr[0]['text'], arr[0]['color']), get_button(arr[1]['text'], arr[1]['color'])])
+        buttons.append([get_button('Разослать!', 'secondary')])
+        buttons.append([get_button(arr[2]['text'], arr[2]['color']), get_button('Добавить своё видео', 'secondary')])
+        keyboard = {
+            "one_time": False,
+            "buttons": buttons
+        }
     keyboard = json.dumps(keyboard, ensure_ascii=False).encode("utf-8")
     keyboard = str(keyboard.decode("utf-8"))
     return keyboard

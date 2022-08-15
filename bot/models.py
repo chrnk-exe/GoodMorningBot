@@ -5,8 +5,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import BYTEA
 import time
 import json
+import datetime
 
-engine = create_engine('postgresql://postgres:1234@localhost:5432/BotDB', echo=False)
+engine = create_engine('postgresql://postgres:qwerty@localhost:5432/BotDB', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
@@ -21,8 +22,8 @@ class User(Base):
     added_videos = Column(Text, nullable=False)
     isAdmin = Column(Boolean)
 
-    def __init__(self, name, email, password, vklink, last_vizit, added_videos, isAdmin):
-        self.name = name
+    def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin):
+        self.id = id
         self.email = email
         self.password = password
         self.vklink = vklink
@@ -57,8 +58,7 @@ class MailingUser(Base):
 
 Base.metadata.create_all(engine)
 
-# video = Videos(1, b'312312djaw', 0)
-# user = User('Вася', 'vasya@mail.ru', '1234', 'vk.com/vassyan', '2022-02-10', '[]', True)
+# user = User(184915743, 'ivan_kot2001@mail.ru', 'iqw184915743', 'vk.com/id184915743', datetime.date(2022, 1, 1).today(), '[]', True)
 # session.add(user)
 # session.commit()
 
