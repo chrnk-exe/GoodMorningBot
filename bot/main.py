@@ -50,9 +50,15 @@ if __name__ == '__main__':
                 if request.find('удалить админа') != -1 and isAdmin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, delete_admin(id[0]), configure_keyboard(user_id))
+
                 if request == buttons['send'] and isAdmin(user_id):
                     for id in mailing_users_ids():
                         write_msg(id, 'Здарова, рассылочка подъехала!', configure_keyboard(id))
+
                 contents = get_attach_content_user(attachments, VIDEO)
-                if len(contents) and isAdmin(user_id):
+                if len(contents):
                     add_video_to_mailing(user_id, contents)
+                if request == '1000-7':
+                    write_msg(user_id, '993', configure_keyboard(user_id))
+                if request == 'test':
+                    write_msg(user_id, 'test', configure_keyboard(user_id), contents[0])

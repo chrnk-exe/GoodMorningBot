@@ -29,8 +29,11 @@ def add_video(name):
         'no_comments': 1,
     }
 
-def write_msg(user_id, message, keyboard):
-    vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": random.randint(1, 99999999), "keyboard": keyboard})
+def write_msg(user_id, message, keyboard, attachment=None):
+    if attachment == None:
+        vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": random.randint(1, 99999999), "keyboard": keyboard})
+    else:
+        vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": random.randint(1, 99999999), "keyboard": keyboard, "attachment": 'video'+attachment})
 
 def configure_keyboard(user_id):
     user = session.query(User).filter_by(id = user_id).first()

@@ -4,6 +4,7 @@ import datetime
 
 def check_mailing_user(id):
     user = session.query(MailingUser).filter_by(id=id).first()
+    session.commit()
     return user
 
 def add_mailing_user(id):
@@ -13,10 +14,15 @@ def add_mailing_user(id):
     session.commit()
     
 
+# Доделать прикручивание видео к определённому юзеру
 def add_video_to_mailing(user_id, video_seeds):
     for seed in video_seeds:
         session.add(Videos(user_id, None, seed, 0))
     session.commit()
+    # // here
+
+    # //
+
 
 def delete_user_from_mailing(id):
     user = session.query(MailingUser).filter_by(id=id).first()
