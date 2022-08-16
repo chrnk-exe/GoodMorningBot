@@ -59,7 +59,10 @@ def delete_admin(id):
 def isAdmin(id):
     user = session.query(User).filter_by(id=id).first()
     session.commit()
-    return user.isAdmin
+    try:
+        return user.isAdmin
+    except:
+        return False
 
 def mailing_users_ids():
     mailing_users = session.query(MailingUser).all()

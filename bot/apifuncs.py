@@ -101,7 +101,6 @@ def configure_link_to_load(attach_item):
 #     ydl.download(['https://vk.com/video-184915743_456239137'])
 
 def get_random_video():
-    videos = session.query(Videos).all()
-    videos = list(map(lambda x: x.vkcontent, videos))
-    r = random.randint(0, len(videos) - 1)
-    return videos[r]
+    videos = list(map(lambda x: x.vkcontent, session.query(Videos).all()))
+    session.commit()
+    return videos[random.randint(0, len(videos) - 1)]
