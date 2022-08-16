@@ -1,5 +1,5 @@
 from models import session, User, Videos, MailingUser, Column
-import datetime
+import datetime, json
 
 def check_mailing_user(id):
     user = session.query(MailingUser).filter_by(id=id).first()
@@ -21,9 +21,14 @@ def add_video_to_mailing(user_id, video_seeds):
         if seed not in videos:
             session.add(Videos(user_id, None, seed, 0))
     session.commit()
-    # // here
-
-    # //
+    return 
+    # needs testing
+    videos = list(map(lambda x: x.id, session.query(Videos).filter(Videos.vkcontent._in(video_seeds)).all()))
+    user = session.query(User).filter_by(id=user_id).first()
+    ids = json.loads(user.added_videos)
+    ids.append(videos)
+    user.added_videos = json.dumps(ids)
+    session.commit()
 
 
 def delete_user_from_mailing(id):
@@ -36,15 +41,20 @@ def delete_user_from_mailing(id):
     session.commit()
     return 'За что...'
 
-# переделать на то, если юзер с таким id уже есть делать его админом
 def add_admin(id):
-    user = User(id ,'None', '', 'vk.com/id' + str(id), datetime.date(2022, 1, 1).today(), '[]', True)
-    try: 
-        session.add(user)
+    user = session.query(User).filter_by(id=id).first()
+    if user == None:
+        user = User(id ,'None', '', 'vk.com/id' + str(id), datetime.date(2022, 1, 1).today(), '[]', True)
+        try: 
+            session.add(user)
+            session.commit()
+            return 'vk.com/id' + str(id) + ' теперь админ!'
+        except:
+            return 'vk.com/id' + str(id) + ' и так админ!'
+    else:
+        user.isAdmin = True
         session.commit()
         return 'vk.com/id' + str(id) + ' теперь админ!'
-    except:
-        return 'vk.com/id' + str(id) + ' и так админ!'
 
 
 def delete_admin(id):
