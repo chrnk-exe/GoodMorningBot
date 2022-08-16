@@ -1,12 +1,8 @@
-from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 from vk_api.longpoll import VkLongPoll, VkEventType
-from vk_api.upload import VkUpload
 
-from apifuncs import write_msg, add_video, configure_keyboard, get_attach_content_user, get_attach_content_only
+from apifuncs import write_msg, configure_keyboard, get_attach_content_user, get_random_video
 from vk_session import vk_session
 from db import *
-
-videos = []
 
 VIDEO = 'video'
 
@@ -53,7 +49,7 @@ if __name__ == '__main__':
 
                 if request == buttons['send'] and isAdmin(user_id):
                     for id in mailing_users_ids():
-                        write_msg(id, 'Здарова, рассылочка подъехала!', configure_keyboard(id))
+                        write_msg(id, 'С добрым утром!', configure_keyboard(id), get_random_video())
 
                 contents = get_attach_content_user(attachments, VIDEO)
                 if len(contents):
@@ -62,3 +58,4 @@ if __name__ == '__main__':
                     write_msg(user_id, '993', configure_keyboard(user_id))
                 if request == 'test':
                     write_msg(user_id, 'test', configure_keyboard(user_id), contents[0])
+                    print(contents[0])

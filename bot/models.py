@@ -1,11 +1,10 @@
+import datetime
+from enum import unique
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, Text, Date, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import BYTEA
-import time
-import json
-import datetime
 
 engine = create_engine('postgresql://postgres:qwerty@localhost:5432/BotDB', echo=False)
 Session = sessionmaker(bind=engine)
@@ -32,7 +31,6 @@ class User(Base):
         self.isAdmin = isAdmin
 
 
-
 class Videos(Base):
     __tablename__ = 'videos'
     id = Column(Integer, primary_key=True)
@@ -40,12 +38,14 @@ class Videos(Base):
     content = Column(BYTEA)
     vkcontent = Column(String)
     day = Column(Integer)
+    date_of_creation = Column(Date)
     
     def __init__(self, ownerid, content, vkcontent, day):
         self.ownerid = ownerid
         self.content = content
         self.vkcontent = vkcontent
         self.day = day
+        self.date_of_creation = datetime.datetime.now()
 
 class MailingUser(Base):
     __tablename__ = 'mailing_list'

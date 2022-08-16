@@ -1,11 +1,5 @@
-import vk_api, json, requests
-import random
-import re
-import youtube_dl
-from models import session, User
-from vk_api.keyboard import VkKeyboard, VkKeyboardColor
-from vk_api.longpoll import VkLongPoll, VkEventType
-from vk_api.upload import VkUpload
+import json, random, re
+from models import session, User, Videos
 
 from vk_session import vk_session
 
@@ -63,8 +57,7 @@ def configure_keyboard(user_id):
     keyboard = json.dumps(keyboard, ensure_ascii=False).encode("utf-8")
     keyboard = str(keyboard.decode("utf-8"))
     return keyboard
-
-# сделать проверку на videos, чтоб человек не мог добавить фото
+    
 
 def get_attach_keys(arr):
     keys = list(arr.keys())
@@ -106,3 +99,9 @@ def configure_link_to_load(attach_item):
 
 # with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 #     ydl.download(['https://vk.com/video-184915743_456239137'])
+
+def get_random_video():
+    videos = session.query(Videos).all()
+    videos = list(map(lambda x: x.vkcontent, videos))
+    r = random.randint(0, len(videos) - 1)
+    return videos[r]

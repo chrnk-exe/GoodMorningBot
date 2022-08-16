@@ -1,5 +1,4 @@
 from models import session, User, Videos, MailingUser, Column
-from sqlalchemy.orm import load_only
 import datetime
 
 def check_mailing_user(id):
@@ -16,8 +15,11 @@ def add_mailing_user(id):
 
 # Доделать прикручивание видео к определённому юзеру
 def add_video_to_mailing(user_id, video_seeds):
+    videos = session.query(Videos).all()
+    videos = list(map(lambda x: x.vkcontent, videos))
     for seed in video_seeds:
-        session.add(Videos(user_id, None, seed, 0))
+        if seed not in videos:
+            session.add(Videos(user_id, None, seed, 0))
     session.commit()
     # // here
 
