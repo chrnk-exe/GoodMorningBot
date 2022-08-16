@@ -52,10 +52,10 @@ if __name__ == '__main__':
                         write_msg(id, 'С добрым утром!', configure_keyboard(id), get_random_video())
 
                 contents = get_attach_content_user(attachments, VIDEO)
-                if len(contents):
+                if len(contents) and isAdmin(user_id):
                     add_video_to_mailing(user_id, contents)
                 if request == '1000-7':
                     write_msg(user_id, '993', configure_keyboard(user_id))
                 if request == 'test':
-                    write_msg(user_id, 'test', configure_keyboard(user_id), contents[0])
+                    write_msg(user_id, 'test video', configure_keyboard(user_id), contents[0])
                     print(contents[0])
