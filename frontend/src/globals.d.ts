@@ -24,13 +24,23 @@ declare interface AxiosRequestConfig<T = any> {
     params?: any;
 }
 
+declare interface LoginResponse {
+    auth: boolean
+    id: number
+    vklink: string
+    last_vizit: Date
+    added_videos: number
+    isAdmin: boolean
+    activated: boolean
+}
+
 declare interface RegistrationResponse {
     user_id: number
     username: string
     user_rules: number
 }
 
-declare interface LoginResponse extends RegistrationResponse {
-    user_vkid: number
-    user_vk_avatar: number
-}
+// declare interface LoginResponse extends RegistrationResponse {
+//     user_vkid: number
+//     user_vk_avatar: number
+// }

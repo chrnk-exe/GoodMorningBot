@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
 
-const seq = new Sequelize('postgres://postgres:qwerty@localhost:5432/BotDB')
-
+const seq = new Sequelize('postgres://postgres:qwerty@localhost:5432/BotDB', {
+	logging: false
+})
 
 const test = async () => {
 	try {

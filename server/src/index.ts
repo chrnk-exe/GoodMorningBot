@@ -1,11 +1,13 @@
 import express, { Express, Request, Response } from 'express';
 import router from './api';
 import cors from 'cors'
+import path from 'path';
 
 const app: Express = express();
 const port = 5000;
 
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
@@ -17,6 +19,11 @@ app.post('/save_video', (req: Request, res: Response) => {
 })
 
 app.use('/api', router)
+
+// static ver.
+// app.get('*', (req: Request, res: Response) => {
+//   res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+// })
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at https://localhost:${port}`);

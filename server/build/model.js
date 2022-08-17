@@ -27,7 +27,8 @@ MailingUser.init({
 }, {
     sequelize: db_1.default,
     modelName: 'mailing_list',
-    tableName: 'mailing_list'
+    tableName: 'mailing_list',
+    timestamps: false
 });
 Videos.init({
     id: {
@@ -43,7 +44,8 @@ Videos.init({
 }, {
     sequelize: db_1.default,
     modelName: 'videos',
-    tableName: 'videos'
+    tableName: 'videos',
+    timestamps: false
 });
 User.init({
     id: {
@@ -61,7 +63,8 @@ User.init({
 }, {
     sequelize: db_1.default,
     modelName: 'users',
-    tableName: 'users'
+    tableName: 'users',
+    timestamps: false
 });
 db_1.default.sync();
 //# sourceMappingURL=model.js.map

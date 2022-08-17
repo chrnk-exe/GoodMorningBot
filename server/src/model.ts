@@ -18,7 +18,8 @@ MailingUser.init({
 }, {
     sequelize: seq,
     modelName: 'mailing_list',
-    tableName: 'mailing_list'
+    tableName: 'mailing_list',
+    timestamps: false
 })
 
 
@@ -36,7 +37,8 @@ Videos.init({
 }, {
     sequelize: seq,
     modelName: 'videos',
-    tableName: 'videos'
+    tableName: 'videos',
+    timestamps: false
 })
 
 
@@ -56,7 +58,8 @@ User.init({
 }, {
     sequelize: seq,
     modelName: 'users',
-    tableName: 'users'
+    tableName: 'users',
+    timestamps: false
 })
 
 seq.sync()
