@@ -1,12 +1,17 @@
-import { Pool } from 'pg'
+import { Sequelize } from "sequelize";
 
-const pool = new Pool({
-    user: 'postgres',
-	password: '1234',
-	database: 'test',
-	host: 'localhost',
-	port: 5432
-})
+const seq = new Sequelize('postgres://postgres:qwerty@localhost:5432/BotDB')
 
-// module.exports = pool
-export default pool;
+
+const test = async () => {
+	try {
+		await seq.authenticate();
+		console.log('Connection has been established successfully.');
+	  } catch (error) {
+		console.error('Unable to connect to the database:', error);
+	}
+}
+
+test()
+
+export default seq;

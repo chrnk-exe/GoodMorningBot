@@ -34,3 +34,20 @@
     font-size: large;
 }
 
+.loginPageContainer h2 {
+    font-weight: 700;
+    color: #222;
+}
+
+.recoveryButton {
+    font-size: .925em;
+    text-decoration: none;
+    color: gray;
+    transition: all .2s ease-in-out;
+}
+
+.recoveryButton:hover {
+    color: blue;
+    text-decoration: underline;
+}
+

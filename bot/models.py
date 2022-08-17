@@ -20,8 +20,9 @@ class User(Base):
     last_vizit = Column(Date)
     added_videos = Column(Text, nullable=False)
     isAdmin = Column(Boolean)
+    activated = Column(Boolean)
 
-    def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin):
+    def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin, activated = False):
         self.id = id
         self.email = email
         self.password = password
@@ -29,6 +30,7 @@ class User(Base):
         self.last_vizit = last_vizit
         self.added_videos = added_videos
         self.isAdmin = isAdmin
+        self.activated = activated
 
 
 class Videos(Base):
