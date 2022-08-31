@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import classes from '../styles/LoginPage.module.css'
 import { TextField, Button } from '@mui/material'
+import TextFieldPassword from '../UI/TextFieldPassword'
 import vkicon from '../assets/vk-icon.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -24,7 +25,6 @@ const LoginPage = () => {
     }
 
     const authWithLogin = async () => {
-        console.log('Auth Comint soon!')
         console.log(userState)
         const response: AxiosResponse<LoginResponse> = await axios.post('http://localhost:5000/api/login', {
             headers: {
@@ -41,7 +41,6 @@ const LoginPage = () => {
     }
 
     const registerNewUser = async () => {
-        console.log('Register Coming soon!')
         const response: AxiosResponse<RegistrationResponse> = await axios.post('http://localhost:5000/api/register', {
             headers: {
                 'Content-Type': 'application/json'
@@ -60,18 +59,14 @@ const LoginPage = () => {
                 <h2 className={classes.loginPageItem}>{pageState}</h2>
                 <div className={classes.loginPageItem} >
                     <TextField 
-                            style={{width:'100%'}} 
+                            // inputProps={{style: {fontSize: '1.1em'}}}
+                            fullWidth
                             label="Email" 
                             variant="outlined" 
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserState({...userState, login: e.target.value})}/>
                 </div>
                 <div className={classes.loginPageItem} >
-                    <TextField 
-                            style={{width:'100%'}} 
-                            label="Пароль" 
-                            variant="outlined" 
-                            type={'password'}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserState({...userState, password: e.target.value})}/>
+                    <TextFieldPassword onChangeEventFunction={(e: React.ChangeEvent<HTMLInputElement>) => setUserState({...userState, password: e.target.value})}/>
                 </div>
                 <div className={[classes.loginPageItem, classes.passwordRecoveryPage].join(' ')}><Link className={classes.recoveryButton} to={'/recovery'} replace>Забыли пароль?</Link></div>
                 <div className={classes.loginPageItem} >

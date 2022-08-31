@@ -1,0 +1,10 @@
+const resolve = require('path').resolve
+
+const info = {
+    'config': resolve('build', 'config', 'db.config.js'),
+    'models-path': resolve('build', 'models'),
+    'seeders-path': resolve('build', 'seeders'),
+    'migrations-path': resolve('build', 'migrations')
+};
+
+module.exports = info

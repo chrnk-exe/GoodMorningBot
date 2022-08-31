@@ -39,7 +39,6 @@ declare interface RegistrationResponse {
     username: string
     user_rules: number
 }
-
 // declare interface LoginResponse extends RegistrationResponse {
 //     user_vkid: number
 //     user_vk_avatar: number

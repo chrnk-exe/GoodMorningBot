@@ -11,7 +11,8 @@ MailingUser.init({
     id: {
         type: INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     vklink: STRING,
     customVideos: TEXT
@@ -19,7 +20,7 @@ MailingUser.init({
     sequelize: seq,
     modelName: 'mailing_list',
     tableName: 'mailing_list',
-    timestamps: false
+    timestamps: true
 })
 
 
@@ -27,7 +28,8 @@ Videos.init({
     id: {
         type: INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     ownerid: INTEGER,
     content: BLOB,
@@ -38,7 +40,7 @@ Videos.init({
     sequelize: seq,
     modelName: 'videos',
     tableName: 'videos',
-    timestamps: false
+    timestamps: true
 })
 
 
@@ -46,7 +48,8 @@ User.init({
     id: {
         type: INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     email: STRING,
     password: STRING,
@@ -59,7 +62,7 @@ User.init({
     sequelize: seq,
     modelName: 'users',
     tableName: 'users',
-    timestamps: false
+    timestamps: true
 })
 
 seq.sync()

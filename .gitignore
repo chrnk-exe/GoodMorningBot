@@ -2,3 +2,5 @@ node_modules/
 *.mp4
 venv/
 testVideos/
+__init__.py
+.env

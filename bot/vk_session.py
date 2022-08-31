@@ -1,4 +1,8 @@
 import vk_api
+import os
+from dotenv import load_dotenv
 
-token = "vk1.a.dmeOyHG1FyokLXkTxETchbft3bxx6QPd8tyKPiD4rn2iA1CDi682zEEgpxI_8Q5sk9T5JYNyJ3XHvkemkNILJXXilHMT9vFwWLaQNpTQaq6dqfYfGlxWhMtW6vmtx1hfLtxkMw6kCtQkU9Dypo1mgIUPBITSpMdhBvdqIzCwDieDHS-pU-fIHRC6Zs3myDOQ"
+load_dotenv()
+
+token = os.getenv('TOKEN')
 vk_session = vk_api.VkApi(token=token)

@@ -29,27 +29,35 @@ if __name__ == '__main__':
                 if request == buttons['sub']:
                     write_msg(user_id, 'Спасибо!', configure_keyboard(user_id))
                     add_mailing_user(user_id)
+                    continue
 
                 if request == buttons['unsub']:
                     write_msg(user_id, delete_user_from_mailing(user_id), configure_keyboard(user_id))
+                    continue
+
 
                 if request == buttons['about']:
                     write_msg(user_id, 'https://vk.com/no_one_hears_u', configure_keyboard(user_id))
-
+                    continue
+                    
                 if request == buttons['add']:
                     write_msg(user_id, 'Пришлите ваше видео!', configure_keyboard(user_id))
+                    continue
 
                 if request.find('добавить админа') != -1 and isAdmin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, add_admin(id[0]), configure_keyboard(user_id))
+                    continue
 
                 if request.find('удалить админа') != -1 and isAdmin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, delete_admin(id[0]), configure_keyboard(user_id))
+                    continue
 
                 if request == buttons['send'] and isAdmin(user_id):
                     for id in mailing_users_ids():
                         write_msg(id, 'С добрым утром!', configure_keyboard(id), get_random_video())
+                    continue
 
                 contents = get_attach_content_user(attachments, VIDEO)
                 if len(contents) and isAdmin(user_id):
@@ -59,3 +67,4 @@ if __name__ == '__main__':
                 if request == 'test':
                     write_msg(user_id, 'test video', configure_keyboard(user_id), contents[0])
                     print(contents[0])
+                write_msg(user_id, 'ну привет!', configure_keyboard(user_id))

@@ -25,7 +25,7 @@
 
 .loginPageItem {
     margin-top: 10px;
-    min-width: 200px;
+    /* min-width: 200px; */
     width: 100%;
 }
 
@@ -37,6 +37,7 @@
 .loginPageContainer h2 {
     font-weight: 700;
     color: #222;
+    color: #5e5c74;
 }
 
 .recoveryButton {

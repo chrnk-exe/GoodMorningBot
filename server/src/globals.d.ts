@@ -13,3 +13,5 @@ declare enum loginErrors {
     USER_DOESNT_EXIST,
     DUPLICATE_USER
 }
+
+declare module 'path';

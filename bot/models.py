@@ -21,6 +21,8 @@ class User(Base):
     added_videos = Column(Text, nullable=False)
     isAdmin = Column(Boolean)
     activated = Column(Boolean)
+    createdAt = Column(Date)
+    updatedAt = Column(Date)
 
     def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin, activated = False):
         self.id = id
@@ -41,6 +43,8 @@ class Videos(Base):
     vkcontent = Column(String)
     day = Column(Integer)
     date_of_creation = Column(Date)
+    createdAt = Column(Date)
+    updatedAt = Column(Date)
     
     def __init__(self, ownerid, content, vkcontent, day):
         self.ownerid = ownerid
@@ -54,6 +58,8 @@ class MailingUser(Base):
     id = Column(Integer, primary_key=True)
     vklink = Column(String)
     customVideos = Column(Text)
+    createdAt = Column(Date)
+    updatedAt = Column(Date)
 
     def __init__(self, vklink, vkid, customVideos):
         self.id = vkid
