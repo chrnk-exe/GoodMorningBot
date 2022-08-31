@@ -2,7 +2,7 @@
 
 const path = require('path');
 const mypath = path.resolve(process.cwd(), 'src' , '.env')
-require('dotenv').config({ path: mypath});
+require('dotenv').config({path: mypath});
 
 // console.log(process.env.DB_PORT, mypath)
 
