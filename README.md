@@ -6,7 +6,7 @@ Included libs:
 - MaterialUI;
 - Redux;
 - Express (TS);
-- PG (TS);
+- Sequelize (TS);
 - vk-api;
 - SQLalchemy;
 
