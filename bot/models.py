@@ -1,10 +1,12 @@
 import datetime
 from enum import unique
+from time import timezone
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Text, Date, Boolean
+from sqlalchemy import Column, Integer, String, Text, Date, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import BYTEA
+from sqlalchemy.sql import func
 
 engine = create_engine('postgresql://postgres:qwerty@localhost:5432/BotDB', echo=False)
 Session = sessionmaker(bind=engine)
@@ -21,8 +23,8 @@ class User(Base):
     added_videos = Column(Text, nullable=False)
     isAdmin = Column(Boolean)
     activated = Column(Boolean)
-    createdAt = Column(Date)
-    updatedAt = Column(Date)
+    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
+    updatedAt = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin, activated = False):
         self.id = id
@@ -43,8 +45,8 @@ class Videos(Base):
     vkcontent = Column(String)
     day = Column(Integer)
     date_of_creation = Column(Date)
-    createdAt = Column(Date)
-    updatedAt = Column(Date)
+    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
+    updatedAt = Column(DateTime, default=datetime.datetime.utcnow)
     
     def __init__(self, ownerid, content, vkcontent, day):
         self.ownerid = ownerid
@@ -58,8 +60,8 @@ class MailingUser(Base):
     id = Column(Integer, primary_key=True)
     vklink = Column(String)
     customVideos = Column(Text)
-    createdAt = Column(Date)
-    updatedAt = Column(Date)
+    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
+    updatedAt = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, vklink, vkid, customVideos):
         self.id = vkid

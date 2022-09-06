@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const seq = new sequelize_1.Sequelize('postgres://postgres:qwerty@localhost:5432/BotDB', {
+const sequelize = new sequelize_1.Sequelize('postgres://postgres:qwerty@localhost:5432/BotDB', {
     logging: false
 });
 const test = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield seq.authenticate();
+        yield sequelize.authenticate();
         console.log('Connection has been established successfully.');
     }
     catch (error) {
@@ -23,5 +23,4 @@ const test = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 test();
-exports.default = seq;
-//# sourceMappingURL=db.js.map
+exports.default = sequelize;

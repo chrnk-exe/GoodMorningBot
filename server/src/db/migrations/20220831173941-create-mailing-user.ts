@@ -1,30 +1,31 @@
 'use strict';
+import {QueryInterface, DataTypes} from 'sequelize'
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface: QueryInterface) {
     await queryInterface.createTable('mailing_list', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       vklink: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       customVideos: {
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface) {
     await queryInterface.dropTable('mailing_list');
   }
 };

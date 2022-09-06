@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd build && node index.js",
-    "build": "cd src && npx tsc"
+    "build": "cd src && npx tsc",
+    "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "unseeds": "npx sequelize-cli db:seed:undo:all",
+    "unmigrate": "npx sequelize-cli db:migrate:undo",
+    "re-migrate": "npm run unmigrate && npm run migrate"
   },
   "author": "zxchrnk",
   "license": "ISC",

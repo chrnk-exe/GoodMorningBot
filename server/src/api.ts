@@ -1,7 +1,15 @@
 import express, { Express, Request, Response, Router } from 'express';
-import seq from './db';
-import { MailingUser, User, Videos } from './model';
-import { Op } from 'sequelize';
+import sequelize from './db';
+
+// import { MailingUser, User, Videos } from './model';
+
+import mailingUser from './db/models/mailinguser'
+import user from './db/models/user';
+import videos from './db/models/videos';
+
+const User = user(sequelize)
+const MailingUser = mailingUser(sequelize)
+const Videos = videos(sequelize)
 
 const router: Router = express.Router()
 
@@ -34,12 +42,19 @@ router.post('/login', async (req: Request<never, {}, LoginRequest>, res: Respons
                 email: login
             }
         })
-        res.json({auth: false, code: users.length != 0 ? loginErrors.INCORRECT_PASSWORD : loginErrors.USER_DOESNT_EXIST})
+        res.json({
+            auth: false, 
+            code: users.length != 0 
+                ? loginErrors.INCORRECT_PASSWORD 
+                : loginErrors.USER_DOESNT_EXIST
+        })
     }
 })
 
 router.post('/register', (req: Request, res: Response) => {
     res.json({'register': 'world!'})
 })
+
+
 
 export default router;

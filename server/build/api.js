@@ -13,12 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const model_1 = require("./model");
+const db_1 = __importDefault(require("./db"));
+// import { MailingUser, User, Videos } from './model';
+const mailinguser_1 = __importDefault(require("./db/models/mailinguser"));
+const user_1 = __importDefault(require("./db/models/user"));
+const videos_1 = __importDefault(require("./db/models/videos"));
+const User = (0, user_1.default)(db_1.default);
+const MailingUser = (0, mailinguser_1.default)(db_1.default);
+const Videos = (0, videos_1.default)(db_1.default);
 const router = express_1.default.Router();
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { data } = req.body;
     const { login, password } = data;
-    const user = yield model_1.User.findAll({
+    const user = yield User.findAll({
         where: {
             email: login,
             password: password
@@ -41,16 +48,20 @@ router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.json({ auth: false, code: loginErrors.DUPLICATE_USER });
     }
     else {
-        const users = yield model_1.User.findAll({
+        const users = yield User.findAll({
             where: {
                 email: login
             }
         });
-        res.json({ auth: false, code: users.length != 0 ? loginErrors.INCORRECT_PASSWORD : loginErrors.USER_DOESNT_EXIST });
+        res.json({
+            auth: false,
+            code: users.length != 0
+                ? loginErrors.INCORRECT_PASSWORD
+                : loginErrors.USER_DOESNT_EXIST
+        });
     }
 }));
 router.post('/register', (req, res) => {
     res.json({ 'register': 'world!' });
 });
 exports.default = router;
-//# sourceMappingURL=api.js.map

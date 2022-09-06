@@ -70,4 +70,3 @@ User.init({
     timestamps: true
 });
 db_1.default.sync();
-//# sourceMappingURL=model.js.map

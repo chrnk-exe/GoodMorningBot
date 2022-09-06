@@ -1,39 +1,40 @@
-'use strict';
+import {QueryInterface, DataTypes } from 'sequelize'
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface: QueryInterface) {
     await queryInterface.createTable('videos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       ownerid: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       content: {
-        type: Sequelize.BLOB
+        type: DataTypes.BLOB
       },
       vkcontent: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       day: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       date_of_creation: {
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface) {
     await queryInterface.dropTable('videos');
   }
 };
