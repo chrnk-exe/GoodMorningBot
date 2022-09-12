@@ -3,7 +3,7 @@ import { useAppSelector } from '../app/hooks'
 import { Navigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
-import classes from '../styles/NotFound.module.css'
+import classes from '../styles/NotFound.module.scss'
 
 const NotFound = () => {
     const [timer, setTime] = useState(5)

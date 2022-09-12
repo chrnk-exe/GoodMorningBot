@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import classes from '../styles/LoginPage.module.css'
+import classes from '../styles/LoginPage.module.scss'
 import { TextField, Button } from '@mui/material'
 import TextFieldPassword from '../UI/TextFieldPassword'
 import vkicon from '../assets/vk-icon.svg'
