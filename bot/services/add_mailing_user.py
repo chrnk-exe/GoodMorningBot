@@ -1,6 +1,6 @@
 from models import session, User, Videos, MailingUser, Column
 import datetime, json
-from check_mailing_user import *
+from services.check_mailing_user import *
 
 def add_mailing_user(id):
     if check_mailing_user(id) == None:

@@ -1,8 +1,10 @@
+import imp
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 from apifuncs import write_msg, configure_keyboard, get_attach_content_user, get_random_video
 from vk_session import vk_session
-from db import *
+# from db import *
+from services.services import *
 
 VIDEO = 'video'
 
