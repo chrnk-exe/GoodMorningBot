@@ -2,18 +2,17 @@
   "name": "pythonbot",
   "version": "1.0.0",
   "description": "Included libs: \r - React (TS);\r - MaterialUI;\r - Redux;\r - Express (TS);\r - PG (TS);\r - vk-api;\r - SQLalchemy;",
-  "main": "index.js",
   "scripts": {
     "build": "cd server && npm run build && cd .. && cd frontend && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrnk-exe/TS_Bot_VK_service.git"
+    "url": "git+https://github.com/chrnk-exe/GoodMorningBot.git"
   },
   "author": "zxchrnk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chrnk-exe/TS_Bot_VK_service/issues"
+    "url": "https://github.com/chrnk-exe/GoodMorningBot/issues"
   },
-  "homepage": "https://github.com/chrnk-exe/TS_Bot_VK_service#readme"
+  "homepage": "https://github.com/chrnk-exe/GoodMorningBot#readme"
 }
