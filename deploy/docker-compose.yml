@@ -25,6 +25,6 @@ services:
     environment:
       POSTGRES_PASSWORD: 'qwerty'
       POSTGRES_USER: 'postgres'
-      POSTGRES_DB: 'awesomeblog'
+      POSTGRES_DB: 'BotDB'
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql

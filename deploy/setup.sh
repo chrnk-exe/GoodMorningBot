@@ -15,6 +15,8 @@ sudo docker-compose up -d;
 sudo apt install nodejs
 # install npm
 sudo apt install npm
+# install pip
+sudo apt-get -y install python3-pip
 
 # install git
 sudo apt-get install git
