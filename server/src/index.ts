@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import router from './api';
+import {default as privateRoutes} from './api';
 import cors from 'cors'
 import path from 'path';
 
@@ -18,7 +18,7 @@ app.post('/save_video', (req: Request, res: Response) => {
   res.json({'video': 'saved'});
 })
 
-app.use('/api', router)
+app.use('/api', privateRoutes)
 
 // static ver.
 // app.get('*', (req: Request, res: Response) => {

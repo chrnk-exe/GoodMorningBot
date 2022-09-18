@@ -10,7 +10,8 @@
     "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "unseeds": "npx sequelize-cli db:seed:undo:all",
     "unmigrate": "npx sequelize-cli db:migrate:undo",
-    "re-migrate": "npm run unmigrate && npm run migrate"
+    "re-migrate": "npm run unmigrate && npm run migrate",
+    "startpm2": "npm run build && cd build && pm2 start index.js"
   },
   "author": "zxchrnk",
   "license": "ISC",

@@ -3,4 +3,5 @@ node_modules/
 venv/
 testVideos/
 __init__.py
-.env
+
+bot/.env
