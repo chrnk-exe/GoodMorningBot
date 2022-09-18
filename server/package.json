@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd build && node index.js",
+    "start": "npm run build && npm run start-server",
+    "start-server": "cd server && node index.js",
     "build": "cd src && npx tsc",
     "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "unseeds": "npx sequelize-cli db:seed:undo:all",
     "unmigrate": "npx sequelize-cli db:migrate:undo",
     "re-migrate": "npm run unmigrate && npm run migrate",
-    "startpm2": "npm run build && cd build && pm2 start index.js"
+    "startpm2": "npm run build && cd server && pm2 start index.js"
   },
   "author": "zxchrnk",
   "license": "ISC",

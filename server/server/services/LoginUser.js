@@ -9,10 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUser = void 0;
-function addUser(user) {
-    return __awaiter(this, void 0, void 0, function* () {
+const models_1 = require("./models");
+exports.default = (login, password) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield models_1.User.findOne({
+        where: {
+            email: login,
+            password: password
+        }
     });
-}
-exports.addUser = addUser;
-//# sourceMappingURL=dbapi.js.map
+    return user;
+    // if(typeof user === null){
+    //     return {
+    //         auth: false,
+    //         info: "User doesn't exist"
+    //     }
+    // } else {
+    //     return user
+    // }
+});

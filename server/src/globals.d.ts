@@ -1,9 +1,4 @@
 declare interface LoginRequest {
-    headers?: object
-    data: LoginData
-}
-
-declare interface LoginData {
     login: string
     password: string
 }
@@ -13,5 +8,9 @@ declare enum loginErrors {
     USER_DOESNT_EXIST,
     DUPLICATE_USER
 }
+
+declare interface TypedRequestBody<T> extends Express.Request { body: T }
+
+declare interface TypedRequestQuery<T extends Express.Request.QueryString.ParsedQs> extends Express.Request { query: T}
 
 declare module 'path';

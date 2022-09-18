@@ -1,24 +1,21 @@
-import express, { Express, Request, Response } from 'express';
-import {default as privateRoutes} from './api';
+import express, { Express, NextFunction, Request, Response } from 'express';
+import {default as privateRoutes} from './routes/api';
+import {default as publicRoutes} from './routes/public'
 import cors from 'cors'
 import path from 'path';
 
 const app: Express = express();
 const port = 5000;
 
-app.use(cors())
+app.use(cors({origin: true, credentials: true}))
 app.use(express.json())
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
-
-app.post('/save_video', (req: Request, res: Response) => {
-  console.log('save video')
-  res.json({'video': 'saved'});
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`[server]: ${req.url}`)
+  next()
 })
 
 app.use('/api', privateRoutes)
+app.use(publicRoutes)
 
 // static ver.
 // app.get('*', (req: Request, res: Response) => {
