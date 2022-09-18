@@ -9,7 +9,7 @@ sudo systemctl enable docker
 
 # run docker-compose.yml
 # cd /home/admin/app/
-sudo docker-compose up -d;
+docker-compose up -d;
 
 # install node
 sudo apt install nodejs
@@ -24,11 +24,13 @@ sudo apt-get install git
 mkdir -p App
 git clone https://github.com/chrnk-exe/TS_Bot_VK_service ./App
 # install pm2
-sudo npm install -g pm2
+npm install -g pm2
 cd App
 # install dependencies
 # install Python deps
 cd bot 
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 cd ..
 # install App deps
@@ -36,8 +38,12 @@ cd server
 npm install
 # initial DB
 npm run migrate
-#-startpm2
-npm run startpm2
+# startpm2
+npm run startpm2 
+cd ..
+# start bot
+cd bot
+python3 main.py
 
 # clear history
 history -c
