@@ -1,10 +1,10 @@
 const resolve = require('path').resolve
 
 const info = {
-    'config': resolve('build', 'config', 'db.config.js'),
-    'models-path': resolve('build', 'db', 'models'),
-    'seeders-path': resolve('build', 'db', 'seeders'),
-    'migrations-path': resolve('build', 'db', 'migrations')
+    'config': resolve('server', 'config', 'db.config.js'),
+    'models-path': resolve('server', 'db', 'models'),
+    'seeders-path': resolve('server', 'db', 'seeders'),
+    'migrations-path': resolve('server', 'db', 'migrations')
 };
 
 module.exports = info
