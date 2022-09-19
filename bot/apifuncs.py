@@ -1,17 +1,18 @@
 import json, random, re
-from models import session, User, Videos
+from models import session, User, Videos, MailingUser
+from services.services import is_subscribed, is_admin
 
 from vk_session import vk_session
 
 
-def get_button(text, color):
+def get_button(button):
     return {
         "action": {
             "type": "text",
             "payload": "{\"button\": \""+ "1" + "\"}",
-            "label": str(text)
+            "label": str(button['text'])
         },
-        "color": str(color)
+        "color": str(button['color'])
     }
 
 def add_video(name):
@@ -29,31 +30,39 @@ def write_msg(user_id, message, keyboard, attachment=None):
     else:
         vk_session.method('messages.send', {'user_id': user_id, 'message': message, "random_id": random.randint(1, 99999999), "keyboard": keyboard, "attachment": 'video'+attachment})
 
-def configure_keyboard(user_id):
-    user = session.query(User).filter_by(id = user_id).first()
-    arr = [
-            {'text': 'Подписаться на рассылку', 'color': 'positive'}, 
-            {'text': 'Отписаться от рассылки', 'color': 'negative'}, 
-            {'text': 'Об авторе', 'color': 'secondary'}
-        ]
-    if user == None or user.isAdmin == False:        
-        buttons = []
-        for button in arr:
-            buttons.append([get_button(button['text'], button['color'])])
-        buttons[len(buttons)-1].append(get_button('Добавить своё видео', 'secondary'))
-        keyboard = {
-            "one_time": False,
-            "buttons": buttons
-        }
+def get_keyboard_arr(item):
+    if type(item) is list:
+        return list(map(get_button, item))
     else:
-        buttons = []
-        buttons.append([get_button(arr[0]['text'], arr[0]['color']), get_button(arr[1]['text'], arr[1]['color'])])
-        buttons.append([get_button('Разослать!', 'secondary')])
-        buttons.append([get_button(arr[2]['text'], arr[2]['color']), get_button('Добавить своё видео', 'secondary')])
-        keyboard = {
-            "one_time": False,
-            "buttons": buttons
-        }
+        return [get_button(item)]
+
+def configure_keyboard(user_id):
+    user_is_admin = is_admin(user_id)
+    user_is_subscribed = is_subscribed(user_id)
+
+    # configure_keyboard
+    arr = []
+    if user_is_subscribed:
+        arr.append({'text': 'Отписаться от рассылки', 'color': 'negative'})
+    else:
+        arr.append({'text': 'Подписаться на рассылку', 'color': 'positive'})
+    if user_is_admin:
+        arr.append({'text': 'Разослать!', 'color': 'secondary'})
+    arr.append([
+        {'text': 'Об авторе', 'color': 'secondary'}, 
+        {'text': 'Как добавить видео', 'color': 'secondary'}
+    ])
+
+    # getting keyboard 
+    buttons = []
+    for line_of_buttons in arr:
+        buttons.append(get_keyboard_arr(line_of_buttons))
+
+    # keyboard settings 
+    keyboard = {
+        "one_time": False,
+        "buttons": buttons
+    }
     keyboard = json.dumps(keyboard, ensure_ascii=False).encode("utf-8")
     keyboard = str(keyboard.decode("utf-8"))
     return keyboard

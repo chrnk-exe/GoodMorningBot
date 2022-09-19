@@ -19,18 +19,15 @@ if __name__ == '__main__':
     # Работа с сообщениями
     # Основной цикл
     for event in longpoll.listen():
-        # write_msg(631757212, 'здарова это рассылка', keyboard)
-        # # Если пришло новое сообщение
+        # Если пришло новое сообщение
         if event.type == VkEventType.MESSAGE_NEW:
             # Если оно имеет метку для бота
             if event.to_me:
                 # Сообщение от пользователя
-                user_id = event.user_id
-                request = event.text
-                attachments = event.attachments
+                user_id, attachments, request = event.user_id, event.attachments, event.text
                 if request == buttons['sub']:
-                    write_msg(user_id, 'Спасибо!', configure_keyboard(user_id))
                     add_mailing_user(user_id)
+                    write_msg(user_id, 'Спасибо!', configure_keyboard(user_id))
                     continue
 
                 if request == buttons['unsub']:
@@ -46,23 +43,23 @@ if __name__ == '__main__':
                     write_msg(user_id, 'Пришлите ваше видео!', configure_keyboard(user_id))
                     continue
 
-                if request.find('добавить админа') != -1 and isAdmin(user_id):
+                if request.find('добавить админа') != -1 and is_admin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, add_admin(id[0]), configure_keyboard(user_id))
                     continue
 
-                if request.find('удалить админа') != -1 and isAdmin(user_id):
+                if request.find('удалить админа') != -1 and is_admin(user_id):
                     id = [int(s) for s in request.split(' ') if s.isdigit()]
                     write_msg(user_id, delete_admin(id[0]), configure_keyboard(user_id))
                     continue
 
-                if request == buttons['send'] and isAdmin(user_id):
+                if request == buttons['send'] and is_admin(user_id):
                     for id in mailing_users_ids():
                         write_msg(id, 'С добрым утром!', configure_keyboard(id), get_random_video())
                     continue
 
                 contents = get_attach_content_user(attachments, VIDEO)
-                if len(contents) and isAdmin(user_id):
+                if len(contents) and is_admin(user_id):
                     add_video_to_mailing(user_id, contents)
                 if request == '1000-7':
                     write_msg(user_id, '993', configure_keyboard(user_id))

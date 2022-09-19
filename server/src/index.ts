@@ -19,7 +19,7 @@ app.use(publicRoutes)
 
 // static ver.
 // app.get('*', (req: Request, res: Response) => {
-//   res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+//   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 // })
 
 app.listen(port, () => {
