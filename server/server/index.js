@@ -19,7 +19,7 @@ app.use('/api', api_1.default);
 app.use(public_1.default);
 // static ver.
 // app.get('*', (req: Request, res: Response) => {
-//   res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+//   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 // })
 app.listen(port, () => {
     console.log(`[server]: Server is running at https://localhost:${port}`);

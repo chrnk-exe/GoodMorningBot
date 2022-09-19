@@ -4,8 +4,6 @@ import LoginUser from '../services/LoginUser';
 
 const router: Router = express.Router()
 
-interface TypedRequestQuery<T extends Query> extends Express.Request { query: T}
-
 router.post('/login', async (req: TypedRequestBody<LoginRequest>, res: Response) => {
     const { login, password } = req.body
     const user = await LoginUser(login, password)

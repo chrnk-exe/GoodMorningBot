@@ -17,13 +17,10 @@ exports.default = (login, password) => __awaiter(void 0, void 0, void 0, functio
             password: password
         }
     });
-    return user;
-    // if(typeof user === null){
-    //     return {
-    //         auth: false,
-    //         info: "User doesn't exist"
-    //     }
-    // } else {
-    //     return user
-    // }
+    if (user === null) {
+        return user;
+    }
+    else {
+        return user;
+    }
 });
