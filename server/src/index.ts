@@ -1,6 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
-import {default as privateRoutes} from './routes/api';
-import {default as publicRoutes} from './routes/public'
+import privateRoutes from './routes/api';
+import publicRoutes from './routes/public'
 import cors from 'cors'
 import path from 'path';
 

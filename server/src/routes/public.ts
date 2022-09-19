@@ -1,10 +1,11 @@
 import express, { Express, Request, Response, Router } from 'express';
-import { Query } from 'express-serve-static-core';
 import LoginUser from '../services/LoginUser';
+import {TypedRequestBody, TypedRequestQuery} from '../expressTypes'
 
 const router: Router = express.Router()
 
 router.post('/login', async (req: TypedRequestBody<LoginRequest>, res: Response) => {
+    console.log(req.query)
     const { login, password } = req.body
     const user = await LoginUser(login, password)
     console.log(user)
@@ -14,6 +15,10 @@ router.post('/login', async (req: TypedRequestBody<LoginRequest>, res: Response)
 router.post('/register', (req: Request, res: Response) => {
     res.json({'register': 'world!'})
 })
+
+// router.get('/user', async (req : TypedRequestQuery<{id: string}>, res: Response) => {
+//     const { id } = req.query
+// })
 
 
 

@@ -1,8 +1,7 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
-// import { MailingUserAttr, MailingUserInput } from "../../globals";
 
 export default (sequelize: Sequelize) => {
-  class MailingUser extends Model<MailingUserAttr, MailingUserInput> {  }
+  class MailingUser extends Model {  }
   MailingUser.init({
     id: {
       type: DataTypes.INTEGER,

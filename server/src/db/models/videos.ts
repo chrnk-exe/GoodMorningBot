@@ -1,6 +1,7 @@
-import {Sequelize, DataTypes} from 'sequelize'
+import {Sequelize, DataTypes, Model} from 'sequelize'
 
 export default (sequelize: Sequelize) => {
+  // class Videos extends Model {}
   const Videos = sequelize.define('videos', {
     id: {
       type: DataTypes.INTEGER,

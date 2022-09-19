@@ -35,6 +35,7 @@ const LoginPage = () => {
                 password: userState.password
             }
         })
+        console.log(await response)
         if(response.data.auth && response.data.activated){
             navigator('/app', {replace: true})
         }
