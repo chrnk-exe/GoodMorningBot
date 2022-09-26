@@ -10,7 +10,7 @@ declare interface DBConfig{
           charset: string,
           collate: utf8_general_ci,
         },
-        dialectOptions: any
+        dialectOptions?: object
         logging: boolean, 
       },
       production: {
@@ -24,7 +24,7 @@ declare interface DBConfig{
           charset: string,
           collate: utf8_general_ci,
         },
-        dialectOptions: any
+        dialectOptions?: object
         logging: boolean, 
       },
       test: {
@@ -38,7 +38,7 @@ declare interface DBConfig{
           charset: string,
           collate: utf8_general_ci,
         },
-        dialectOptions: any
+        dialectOptions?: object
         logging: boolean, 
       },
 }
