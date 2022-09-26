@@ -16,10 +16,10 @@ const sequelize = new sequelize_1.Sequelize('postgres://postgres:qwerty@localhos
 const test = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log('[DB]: Connection has been established successfully.');
     }
     catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('[DB]: Unable to connect to the database:', error);
     }
 });
 test();

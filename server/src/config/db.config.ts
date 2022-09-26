@@ -1,19 +1,22 @@
 'use strict';
+import path from "path";
+import dotenv from 'dotenv'
+import { env } from "process";
 
-const path = require('path');
-const mypath = path.resolve(process.cwd(), '.env')
-require('dotenv').config({path: mypath});
+const mypath = path.resolve(__dirname, '../../.env')
+dotenv.config({path: mypath})
 
 // console.log(process.env.DB_PORT, mypath)
 
-module.exports = {
+export default {
   development: {
-    database: process.env.DB_DATABASE,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    database: env.DB_DATABASE,
+    username: env.DB_USERNAME,
+    password: env.DB_PASSWORD,
+    host: env.DB_HOST,
+    port: env.DB_PORT,
     dialect: 'postgres',
+    use_env_variable: true,
     define: {
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -25,12 +28,13 @@ module.exports = {
     logging: false, // console.log,
   },
   production: {
-    database: process.env.DB_DATABASE,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    database: env.DB_DATABASE,
+    username: env.DB_USERNAME,
+    password: env.DB_PASSWORD,
+    host: env.DB_HOST,
+    port: env.DB_PORT,
     dialect: 'postgres',
+    use_env_variable: true,
     define: {
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -42,11 +46,12 @@ module.exports = {
     logging: false,
   },
   test: {
-    database: process.env.DB_DATABASE,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    database: env.DB_DATABASE,
+    username: env.DB_USERNAME,
+    password: env.DB_PASSWORD,
+    host: env.DB_HOST,
+    port: env.DB_PORT,
+    use_env_variable: true,
     dialect: 'postgres',
     define: {
       charset: 'utf8',
@@ -58,4 +63,4 @@ module.exports = {
     // },
     logging: false,
   },
-};
+} as DBConfig

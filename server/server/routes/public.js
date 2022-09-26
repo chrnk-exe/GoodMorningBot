@@ -16,12 +16,22 @@ const express_1 = __importDefault(require("express"));
 const LoginUser_1 = __importDefault(require("../services/LoginUser"));
 const router = express_1.default.Router();
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { login, password } = req.body;
+    const { login, password } = req.body.data;
     const user = yield (0, LoginUser_1.default)(login, password);
-    console.log(user);
-    res.json({ 'aaa': 'aaa' });
+    if (user) {
+        res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { createdAt: undefined, updatedAt: undefined }));
+    }
+    else {
+        res.json({
+            auth: false,
+            info: 'Incorrect login/password'
+        });
+    }
 }));
 router.post('/register', (req, res) => {
     res.json({ 'register': 'world!' });
 });
+// router.get('/user', async (req : TypedRequestQuery<{id: string}>, res: Response) => {
+//     const { id } = req.query
+// })
 exports.default = router;

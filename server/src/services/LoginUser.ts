@@ -5,11 +5,8 @@ export default async (login: string, password: string) => {
         where: {
             email: login,
             password: password
-        }
+        },
+        raw: true
     })
-    if(user === null){
-        return user
-    } else {
-        return user
-    }
+    return user
 }

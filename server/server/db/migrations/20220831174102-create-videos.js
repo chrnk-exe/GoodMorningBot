@@ -32,16 +32,15 @@ module.exports = {
                 day: {
                     type: sequelize_1.DataTypes.INTEGER
                 },
-                date_of_creation: {
-                    type: sequelize_1.DataTypes.DATE
-                },
                 createdAt: {
                     allowNull: false,
-                    type: sequelize_1.DataTypes.DATE
+                    type: sequelize_1.DataTypes.DATE,
+                    defaultValue: sequelize_1.DataTypes.NOW
                 },
                 updatedAt: {
                     allowNull: false,
-                    type: sequelize_1.DataTypes.DATE
+                    type: sequelize_1.DataTypes.DATE,
+                    defaultValue: sequelize_1.DataTypes.NOW
                 }
             });
         });

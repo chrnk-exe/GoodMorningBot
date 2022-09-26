@@ -5,11 +5,22 @@ import {TypedRequestBody, TypedRequestQuery} from '../expressTypes'
 const router: Router = express.Router()
 
 router.post('/login', async (req: TypedRequestBody<LoginRequest>, res: Response) => {
-    console.log(req.query)
-    const { login, password } = req.body
+    const { login, password } = req.body.data
     const user = await LoginUser(login, password)
-    console.log(user)
-    res.json({'aaa': 'aaa'})
+    if(user){
+        res.json({
+            auth: true,
+            info: 'Success!',
+            ...user,
+            createdAt: undefined,
+            updatedAt: undefined
+        })
+    } else {
+        res.json({
+            auth: false,
+            info: 'Incorrect login/password'
+        })
+    }
 })
 
 router.post('/register', (req: Request, res: Response) => {

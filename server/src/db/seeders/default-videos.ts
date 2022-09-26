@@ -13,7 +13,6 @@ module.exports = {
             content: null,
             vkcontent: `184915743_${i}`,
             day: 0,
-            date_of_creation: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
         })

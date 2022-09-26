@@ -6,7 +6,7 @@ type Props = {}
 const App = (props: Props) => {
   return (
     <div className={classes.App}>
-
+      MainApp
     </div>
   )
 }

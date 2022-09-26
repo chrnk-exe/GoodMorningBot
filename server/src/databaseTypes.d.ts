@@ -1,16 +1,27 @@
-import {Videos, User, MailingUser} from './models'
-import { Attributes } from 'sequelize/types';
+import {InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-declare interface Timestamps {
-    createdAt: Date;
-    updatedAt: Date;
+export interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
+    id: number;
+    email: string;
+    password: string;
+    vklink: string;
+    last_vizit: Date;
+    added_videos: string;
+    isAdmin: boolean;
+    activated: boolean;
 }
 
-declare interface MailingUserAttr extends Partial<Timestamps> {
+export interface MailingUserModel extends Model<InferAttributes<MailingUserModel>, InferCreationAttributes<MailingUserModel>> {
     id: number;
     vklink: string;
     customVideos: string;
 }
 
-declare interface MailingUserInput extends Optional<MailingUserAttr, 'id' | 'vklink' | 'customVideos'> { }
-declare interface MailingUserOuput extends Required<MailingUserAttr> {}
+export interface VideoModel extends Model<InferAttributes<VideoModel>, InferCreationAttributes<VideoModel>> {
+    id: number;
+    ownerid: number;
+    content: BinaryType;
+    vkcontent: string;
+    day: dayOfTheWeek;
+}
+

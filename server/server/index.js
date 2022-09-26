@@ -22,5 +22,5 @@ app.use(public_1.default);
 //   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 // })
 app.listen(port, () => {
-    console.log(`[server]: Server is running at https://localhost:${port}`);
+    console.log(`[server]: Server is running at http://localhost:${port}`);
 });

@@ -26,7 +26,7 @@ const LoginPage = () => {
 
     const authWithLogin = async () => {
         console.log(userState)
-        const response: AxiosResponse<LoginResponse> = await axios.post('http://localhost:5000/api/login', {
+        const response: AxiosResponse<LoginResponse> = await axios.post('http://localhost:5000/login', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,7 +35,6 @@ const LoginPage = () => {
                 password: userState.password
             }
         })
-        console.log(await response)
         if(response.data.auth && response.data.activated){
             navigator('/app', {replace: true})
         }

@@ -1,8 +1,8 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
+import { MailingUserModel } from "../../databaseTypes";
 
 export default (sequelize: Sequelize) => {
-  class MailingUser extends Model {  }
-  MailingUser.init({
+  const MailingUser = sequelize.define<MailingUserModel>('mailing_list', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -11,19 +11,7 @@ export default (sequelize: Sequelize) => {
     },
     vklink: DataTypes.STRING,
     customVideos: DataTypes.TEXT,
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    },
-  },
-  {
-    sequelize,
+  }, {
     modelName: "mailing_list",
     tableName: "mailing_list",
     timestamps: true,

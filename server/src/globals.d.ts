@@ -11,3 +11,13 @@ declare enum loginErrors {
     DUPLICATE_USER
 }
 
+declare enum dayOfTheWeek {
+    all,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}

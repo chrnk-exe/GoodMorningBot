@@ -1,7 +1,8 @@
 import {Sequelize, DataTypes} from 'sequelize'
+import { UserModel } from '../../databaseTypes';
 
 export default (sequelize: Sequelize) => {
-  const User = sequelize.define('users', {
+  const User = sequelize.define<UserModel>('users', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -14,7 +15,7 @@ export default (sequelize: Sequelize) => {
     last_vizit: DataTypes.DATE,
     added_videos: DataTypes.TEXT,
     isAdmin: DataTypes.BOOLEAN,
-    activated: DataTypes.BOOLEAN
+    activated: DataTypes.BOOLEAN,
   }, {
     modelName: 'users',
     tableName: 'users',

@@ -21,16 +21,15 @@ module.exports = {
       day: {
         type: DataTypes.INTEGER
       },
-      date_of_creation: {
-        type: DataTypes.DATE
-      },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
       }
     });
   },

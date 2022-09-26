@@ -9,18 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const models_1 = require("./models");
+const models_1 = require("../models");
 exports.default = (login, password) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield models_1.User.findOne({
         where: {
             email: login,
             password: password
-        }
+        },
+        raw: true
     });
-    if (user === null) {
-        return user;
-    }
-    else {
-        return user;
-    }
+    return user;
 });
