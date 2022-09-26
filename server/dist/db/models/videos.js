@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 exports.default = (sequelize) => {
-    // class Videos extends Model {}
     const Videos = sequelize.define('videos', {
         id: {
             type: sequelize_1.DataTypes.INTEGER,

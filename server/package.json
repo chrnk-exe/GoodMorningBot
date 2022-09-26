@@ -11,7 +11,7 @@
     "build": "cd src && npx tsc",
     "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "unseeds": "npx sequelize-cli db:seed:undo:all",
-    "unmigrate": "npx sequelize-cli db:migrate:undo",
+    "unmigrate": "npm run unseeds && npx sequelize-cli db:migrate:undo:all",
     "re-migrate": "npm run unmigrate && npm run migrate",
     "startpm2": "npm run build && cd server && pm2 start index.js"
   },

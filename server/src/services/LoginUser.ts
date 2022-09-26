@@ -1,4 +1,4 @@
-import { User } from "../models"
+import { User } from "../db/models/index"
 
 export default async (login: string, password: string) => {
     const user = await User.findOne({

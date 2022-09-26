@@ -3,6 +3,10 @@ import { Sequelize } from 'sequelize';
 import process from 'process';
 import conf from '../../config/db.config'
 
+import mailingUser from './mailinguser'
+import user from './user';
+import videos from './videos';
+
 const node_env: DBConfigIndex = process.env['NODE_ENV'] as DBConfigIndex || 'development';
 const config = conf[node_env];
 
@@ -23,5 +27,14 @@ const test = async () => {
 }
 
 test()
+
+
+// import sequelize from './db';
+
+export const User = user(sequelize)
+export const MailingUser = mailingUser(sequelize)
+export const Videos = videos(sequelize)
+
+sequelize.sync()
 
 export default sequelize

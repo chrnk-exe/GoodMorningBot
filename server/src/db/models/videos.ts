@@ -2,7 +2,6 @@ import {Sequelize, DataTypes, Model} from 'sequelize'
 import { VideoModel } from '../../databaseTypes';
 
 export default (sequelize: Sequelize) => {
-  // class Videos extends Model {}
   const Videos = sequelize.define<VideoModel>('videos', {
     id: {
       type: DataTypes.INTEGER,
