@@ -9,7 +9,7 @@ const process_1 = require("process");
 const mypath = path_1.default.resolve(__dirname, '../../.env');
 dotenv_1.default.config({ path: mypath });
 // console.log(process.env.DB_PORT, mypath)
-exports.default = {
+const config = {
     development: {
         database: process_1.env.DB_DATABASE,
         username: process_1.env.DB_USERNAME,
@@ -17,7 +17,6 @@ exports.default = {
         host: process_1.env.DB_HOST,
         port: process_1.env.DB_PORT,
         dialect: 'postgres',
-        use_env_variable: true,
         define: {
             charset: 'utf8',
             collate: 'utf8_general_ci',
@@ -35,7 +34,6 @@ exports.default = {
         host: process_1.env.DB_HOST,
         port: process_1.env.DB_PORT,
         dialect: 'postgres',
-        use_env_variable: true,
         define: {
             charset: 'utf8',
             collate: 'utf8_general_ci',
@@ -52,7 +50,6 @@ exports.default = {
         password: process_1.env.DB_PASSWORD,
         host: process_1.env.DB_HOST,
         port: process_1.env.DB_PORT,
-        use_env_variable: true,
         dialect: 'postgres',
         define: {
             charset: 'utf8',
@@ -65,3 +62,5 @@ exports.default = {
         logging: false,
     },
 };
+module.exports = config;
+exports.default = config;

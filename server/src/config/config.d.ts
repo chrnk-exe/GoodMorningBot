@@ -6,7 +6,6 @@ declare interface DBConfig{
         host: string,
         port: string,
         dialect:string,
-        use_env_variable: boolean,
         define: {
           charset: string,
           collate: utf8_general_ci,
@@ -21,7 +20,6 @@ declare interface DBConfig{
         host: string,
         port: string,
         dialect:string,
-        use_env_variable: boolean,
         define: {
           charset: string,
           collate: utf8_general_ci,
@@ -36,7 +34,6 @@ declare interface DBConfig{
         host: string,
         port: string,
         dialect:string,
-        use_env_variable: boolean,
         define: {
           charset: string,
           collate: utf8_general_ci,

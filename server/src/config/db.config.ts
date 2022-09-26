@@ -7,8 +7,7 @@ const mypath = path.resolve(__dirname, '../../.env')
 dotenv.config({path: mypath})
 
 // console.log(process.env.DB_PORT, mypath)
-
-export default {
+const config = {
   development: {
     database: env.DB_DATABASE,
     username: env.DB_USERNAME,
@@ -16,7 +15,6 @@ export default {
     host: env.DB_HOST,
     port: env.DB_PORT,
     dialect: 'postgres',
-    use_env_variable: true,
     define: {
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -34,7 +32,6 @@ export default {
     host: env.DB_HOST,
     port: env.DB_PORT,
     dialect: 'postgres',
-    use_env_variable: true,
     define: {
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -51,7 +48,6 @@ export default {
     password: env.DB_PASSWORD,
     host: env.DB_HOST,
     port: env.DB_PORT,
-    use_env_variable: true,
     dialect: 'postgres',
     define: {
       charset: 'utf8',
@@ -64,3 +60,6 @@ export default {
     logging: false,
   },
 } as DBConfig
+
+module.exports = config
+export default config
