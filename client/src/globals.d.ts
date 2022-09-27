@@ -1,5 +1,5 @@
 declare module '*.css'
-declare module "*.scss";
+declare module '*.scss';
 
 declare interface User {
     name: string

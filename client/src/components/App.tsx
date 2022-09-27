@@ -1,14 +1,12 @@
-import React from 'react'
-import classes from '../styles/App.module.scss'
+import React from 'react';
+import classes from '../styles/App.module.scss';
 
-type Props = {}
-
-const App = (props: Props) => {
-  return (
-    <div className={classes.App}>
+const App = () => {
+	return (
+		<div className={classes.App}>
       MainApp
-    </div>
-  )
-}
+		</div>
+	);
+};
 
-export default App
+export default App;

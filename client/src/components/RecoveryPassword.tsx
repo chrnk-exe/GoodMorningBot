@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+const RecoveryPassword = () => {
+	return (
+		<div>RecoveryPassword</div>
+	);
+};
 
-const RecoveryPassword = (props: Props) => {
-  return (
-    <div>RecoveryPassword</div>
-  )
-}
-
-export default RecoveryPassword
+export default RecoveryPassword;
