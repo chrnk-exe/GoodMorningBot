@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
-import classes from '../styles/LoginPage.module.scss';
-import { TextField, Button } from '@mui/material';
-import TextFieldPassword from '../UI/TextFieldPassword';
-import vkicon from '../assets/vk-icon.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { TextField, Button } from '@mui/material';
+import TextFieldPassword from '../../UI/TextFieldPassword';
+import classes from '../../styles/LoginPage.module.scss';
+import vkicon from '../../assets/vk-icon.svg';
+import { useLoginUserMutation } from '../../services/userApi';
+import { isResponse } from '../../typeguards/isResponse';
 
 enum loginPageState {
     LOGIN = 'Вход',
     REGISTRATION = 'Регистрация'
 }
 
-const LoginPage = () => {
+const Login = () => {
 	const [pageState, setPageState] = useState(loginPageState.LOGIN);
 	const [userState, setUserState] = useState({
 		login: '',
 		password: ''
 	});
-
+	const [loginUser] = useLoginUserMutation();
 	const navigator = useNavigate();
 
 	const oauthWithVk = () => {
@@ -25,32 +26,19 @@ const LoginPage = () => {
 	};
 
 	const authWithLogin = async () => {
-		console.log(userState);
-		const response: AxiosResponse<LoginResponse> = await axios.post('http://localhost:5000/login', {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			data: {
-				login: userState.login,
-				password: userState.password
+		const response = await loginUser(userState);
+		if( isResponse<ILoginResponse>(response) ){
+			if(response.data.auth && response.data.activated){
+				navigator('/app', {replace: true});
 			}
-		});
-		if(response.data.auth && response.data.activated){
-			navigator('/app', {replace: true});
+		} else {
+			console.log(response.error);
 		}
+		console.log(response);
 	};
 
 	const registerNewUser = async () => {
-		const response: AxiosResponse<RegistrationResponse> = await axios.post('http://localhost:5000/api/register', {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			data: {
-				login: userState.login,
-				password: userState.password    
-			}
-		});
-		console.log(response.data);
+		return;
 	};
 
 	return (
@@ -94,4 +82,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default Login;

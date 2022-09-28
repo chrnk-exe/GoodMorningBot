@@ -5,7 +5,7 @@ import {TypedRequestBody} from '../expressTypes';
 const router: Router = express.Router();
 
 router.post('/login', async (req: TypedRequestBody<LoginRequest>, res: Response) => {
-	const { login, password } = req.body.data;
+	const { login, password } = req.body;
 	const user = await LoginUser(login, password);
 	if(user){
 		res.json({

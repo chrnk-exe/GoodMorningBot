@@ -1,20 +1,23 @@
-import { createReducer, createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: User = {
-	name: '',
-	avatarURL: '',
-	userID: -1,
-	vkID: -1
+	vkID: -1,
+	name: null,
+	Role: 'user',
+	avatarURL: null,
+	userID: -1
 };
 
-const setUser = createAction<User>('setUser');
-
-export const userReducer = createReducer(initialState, (builder) => {
-	builder.addCase(setUser, (state, action) => {
-		const payload = action.payload;
-		return {
-			...state,
-			...payload
-		};
-	});
+export const userSlice = createSlice({
+	name: 'user',
+	initialState,
+	reducers: {
+		setUser: (state, action: PayloadAction<User>) => {
+			return action.payload;
+		}
+	}
 });
+
+export const { setUser } = userSlice.actions;
+export default userSlice.reducer;

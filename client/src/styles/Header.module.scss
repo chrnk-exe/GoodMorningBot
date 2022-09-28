@@ -1,0 +1,17 @@
+@mixin flex() {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    @include flex();
+    justify-content: space-evenly;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+
+    background-color: blueviolet;
+    width: 100%;
+}

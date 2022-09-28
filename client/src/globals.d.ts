@@ -2,10 +2,11 @@ declare module '*.css'
 declare module '*.scss';
 
 declare interface User {
-    name: string
-    avatarURL: string
+    name: string | null
+    avatarURL: string | null
     userID: number
     vkID: number
+    Role: 'admin' | 'user'
 }
 
 declare interface AxiosResponse<T = never>  {
@@ -26,7 +27,12 @@ declare interface AxiosRequestConfig<T = any> {
     params?: any;
 }
 
-declare interface LoginResponse {
+declare interface ILoginRequest {
+    login: string;
+    password: string;
+}
+
+declare interface ILoginResponse {
     auth: boolean
     id: number
     vklink: string
@@ -41,6 +47,7 @@ declare interface RegistrationResponse {
     username: string
     user_rules: number
 }
+
 // declare interface LoginResponse extends RegistrationResponse {
 //     user_vkid: number
 //     user_vk_avatar: number
