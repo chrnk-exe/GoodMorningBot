@@ -1,8 +1,9 @@
 import express, { Express, NextFunction, Response } from 'express';
-import privateRoutes from './routes/api';
-import publicRoutes from './routes/public';
+import apiRoutes from './routes/api';
+import authRoutes from './routes/auth';
 import cors from 'cors';
 import { expressjwt, Request as JWTRequest } from 'express-jwt';
+import config from './config';
 
 const app: Express = express();
 const port = 5000;
@@ -14,8 +15,26 @@ app.use((req: JWTRequest, res: Response, next: NextFunction) => {
 	next();
 });
 
-app.use('/api', expressjwt({ secret: 'secret', algorithms: ['HS256']} ), privateRoutes);
-app.use(publicRoutes);
+
+app.use('/auth', authRoutes);
+
+app.use(expressjwt({ 
+	secret: config.secret, 
+	algorithms: ['HS256'],
+	getToken: (req: JWTRequest) => {
+		if (
+			req.headers.authorization &&
+			req.headers.authorization.split(' ')[0] === 'Bearer'
+		) {
+			return req.headers.authorization.split(' ')[1];
+		} else if (req.query.token) {
+			return req.query.token as string;
+		}
+		return undefined;
+	}
+}));
+
+app.use('/api', apiRoutes);
 
 // static ver.
 // app.get('*', (req: Request, res: Response) => {

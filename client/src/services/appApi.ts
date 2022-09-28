@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store/store';
 
-export const userApi = createApi({
-	reducerPath: 'userApi',
+export const appApi = createApi({
+	reducerPath: 'applicationApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'http://localhost:5000/auth',
+		baseUrl: 'http://localhost:5000/api',
 		prepareHeaders:  (headers, { getState }) => {
 			const token = (getState() as RootState).auth;
 		
@@ -17,24 +17,12 @@ export const userApi = createApi({
 		},
 	}),
 	endpoints: (build) => ({
-		loginUser: build.mutation<ILoginResponse, Pick<ILoginRequest, 'login' | 'password'>>({
-			query: (payload) => ({
-				url: '/login',
-				method: 'POST',
-				body: payload,
-			})
-		}),
-		newUser: build.mutation<IRegResponse, {email: string, password: string}>({
-			query: (payload) => ({
-				url: '/register',
-				method: 'POST',
-				body: payload,
-			})
+		getVideos: build.query<IVideos[], number>({
+			query: (page) => `/videos?page=${page}`
 		})
 	}),
 });
 
 export const { 
-	useLoginUserMutation,
-	useNewUserMutation,
-} = userApi;
+	useGetVideosQuery
+} = appApi;

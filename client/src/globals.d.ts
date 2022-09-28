@@ -6,7 +6,7 @@ declare interface User {
     avatarURL: string | null
     userID: number
     vkID: number
-    Role: 'admin' | 'user'
+    Role: Roles
 }
 
 declare interface AxiosResponse<T = never>  {
@@ -40,12 +40,23 @@ declare interface ILoginResponse {
     added_videos: number
     isAdmin: boolean
     activated: boolean
+    token: string
 }
 
-declare interface RegistrationResponse {
+declare interface IRegResponse {
     user_id: number
     username: string
     user_rules: number
+}
+
+declare enum Roles {
+    slave,
+    user,
+    admin
+}
+
+declare interface IVideos {
+    vkcontent: string
 }
 
 // declare interface LoginResponse extends RegistrationResponse {

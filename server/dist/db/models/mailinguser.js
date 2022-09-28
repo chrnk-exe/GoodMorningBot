@@ -12,8 +12,8 @@ exports.default = (sequelize) => {
         vklink: sequelize_1.DataTypes.STRING,
         customVideos: sequelize_1.DataTypes.TEXT,
     }, {
-        modelName: "mailing_list",
-        tableName: "mailing_list",
+        modelName: 'mailing_list',
+        tableName: 'mailing_list',
         timestamps: true,
     });
     return MailingUser;

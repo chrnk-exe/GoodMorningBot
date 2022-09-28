@@ -13,15 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const config_1 = __importDefault(require("../../config"));
 const mypath = path_1.default.resolve(process.cwd(), '.env');
-require('dotenv').config({ path: mypath });
+dotenv_1.default.config({ path: mypath });
 module.exports = {
-    up(queryInterface, Sequelize) {
+    up(queryInterface) {
         return __awaiter(this, void 0, void 0, function* () {
+            process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD : '123';
             yield queryInterface.bulkInsert('users', [{
                     id: '184915743',
                     email: 'ivan_kot2001@mail.ru',
-                    password: process.env.ADMIN_PASSWORD,
+                    password: bcrypt_1.default.hashSync(process.env.ADMIN_PASSWORD, config_1.default.saltRounds),
                     vklink: 'vk.com/id184915743',
                     last_vizit: new Date(),
                     added_videos: '[]',
@@ -32,7 +36,7 @@ module.exports = {
                 }], {});
         });
     },
-    down(queryInterface, Sequelize) {
+    down(queryInterface) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryInterface.bulkDelete('users', {});
         });

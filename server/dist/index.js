@@ -5,8 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const api_1 = __importDefault(require("./routes/api"));
-const public_1 = __importDefault(require("./routes/public"));
+const auth_1 = __importDefault(require("./routes/auth"));
 const cors_1 = __importDefault(require("cors"));
+// import { expressjwt, Request as JWTRequest } from 'express-jwt';
 const app = (0, express_1.default)();
 const port = 5000;
 app.use((0, cors_1.default)({ origin: true, credentials: true }));
@@ -16,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api', api_1.default);
-app.use(public_1.default);
+app.use('/auth', auth_1.default);
 // static ver.
 // app.get('*', (req: Request, res: Response) => {
 //   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));

@@ -8,15 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../db/models/index");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 exports.default = (login, password) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield index_1.User.findOne({
         where: {
             email: login,
-            password: password
         },
         raw: true
     });
+    if (user) {
+        return bcrypt_1.default.compareSync(password, user.password) ? user : null;
+    }
     return user;
 });

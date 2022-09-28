@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 const initialState: User = {
 	vkID: -1,
 	name: null,
-	Role: 'user',
+	Role: 0,
 	avatarURL: null,
 	userID: -1
 };

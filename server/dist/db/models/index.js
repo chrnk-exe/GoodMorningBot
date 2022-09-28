@@ -21,7 +21,7 @@ const user_1 = __importDefault(require("./user"));
 const videos_1 = __importDefault(require("./videos"));
 const node_env = process_1.default.env['NODE_ENV'] || 'development';
 const config = db_config_1.default[node_env];
-let sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, {
+const sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, {
     host: config.host,
     port: +config.port,
     dialect: 'postgres',

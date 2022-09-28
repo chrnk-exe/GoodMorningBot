@@ -13,12 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const mypath = path_1.default.resolve(process.cwd(), '.env');
-require('dotenv').config({ path: mypath });
+dotenv_1.default.config({ path: mypath });
 module.exports = {
-    up(queryInterface, Sequelize) {
+    up(queryInterface) {
         return __awaiter(this, void 0, void 0, function* () {
-            let arr = [];
+            const arr = [];
             for (let i = 456239942; i <= 456239953; i++) {
                 arr.push({
                     ownerid: 184915743,
@@ -32,7 +33,7 @@ module.exports = {
             yield queryInterface.bulkInsert('videos', arr, {});
         });
     },
-    down(queryInterface, Sequelize) {
+    down(queryInterface) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryInterface.bulkDelete('users', {});
         });

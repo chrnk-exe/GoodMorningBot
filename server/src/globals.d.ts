@@ -1,7 +1,12 @@
 declare module 'path';
 
-declare interface LoginRequest {
+declare interface ILoginRequest {
     login: string
+    password: string
+}
+
+declare interface IRegisterRequest {
+    email: string
     password: string
 }
 
@@ -20,4 +25,10 @@ declare enum dayOfTheWeek {
     Friday,
     Saturday,
     Sunday
+}
+
+declare enum Roles {
+    slave,
+    user,
+    admin
 }
