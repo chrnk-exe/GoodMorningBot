@@ -20,7 +20,7 @@ export const appApi = createApi({
 		getVideos: build.query<IVideos[], number>({
 			query: (page) => `/videos?page=${page}`
 		}),
-		authorize: build.query<User, string>({
+		authorize: build.query<ILoginResponse, string>({
 			query: (token) => `/authorize?token=${token}`
 		})
 
