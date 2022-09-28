@@ -32,3 +32,12 @@ declare enum Roles {
     user,
     admin
 }
+
+declare interface IToken {
+    Role: number,
+    email: string,
+    vk: boolean,
+    uid: number,
+    // iat: number,
+    // exp: number
+}

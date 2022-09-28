@@ -2,10 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {userApi} from '../services/userApi';
 
-
 export const tokenSlice = createSlice({
 	name: 'jwt-token',
-	initialState: '',
+	initialState: window.localStorage.getItem('token') ,
 	reducers: {
 		setToken: (state, action: PayloadAction<string>): string => {
 			return action.payload;
@@ -16,6 +15,7 @@ export const tokenSlice = createSlice({
 			.addMatcher(userApi.endpoints.loginUser.matchFulfilled, (state, action) => {
 				console.log('userApi fullfilled');
 				// state = action.payload.token;
+				window.localStorage.setItem('token', action.payload.token);
 				return action.payload.token;
 			});
 	}

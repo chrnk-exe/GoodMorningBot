@@ -13,7 +13,8 @@ router.post('/login', async (req: TypedRequestBody<ILoginRequest>, res: Response
 	const token = jwt.sign({
 		Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
 		email: user?.email,
-		vk: user?.vklink ? true : false
+		vk: user?.vklink ? true : false,
+		uid: user?.id
 	}, 
 	config.secret, {
 		expiresIn: '1d',

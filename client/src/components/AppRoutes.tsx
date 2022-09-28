@@ -5,8 +5,15 @@ import AppPage from '../pages/AppPage';
 import NotFound from './NotFound';
 import { Routes, Route, Navigate } from 'react-router';
 import RecoveryPasswordPage from '../pages/RecoveryPasswordPage';
+import { useAuthorizeQuery } from '../services/appApi';
+import { useAppSelector } from '../hooks/useAppSelector';
+import Loader from '../UI/Loader';
 
 const AppRoutes: React.FC = ():JSX.Element => {
+	const token = useAppSelector(state => state.auth);
+	const {isLoading} = useAuthorizeQuery(token ? token : '');
+	if(isLoading) return (<Loader />);
+
 	return (
 		<div className={classes.App}>
 			<Routes>
