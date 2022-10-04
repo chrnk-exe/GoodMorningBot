@@ -59,8 +59,8 @@ const Login = () => {
 				<div className={[classes.loginPageItem, classes.passwordRecoveryPage].join(' ')}><Link className={classes.recoveryButton} to={'/recovery'} replace>Забыли пароль?</Link></div>
 				<div className={classes.loginPageItem} >
 					<Button 
+						fullWidth
 						size="large"
-						style={{width:'100%'}}
 						variant="contained" 
 						color={'secondary'}
 						onClick={pageState === loginPageState.LOGIN ? authWithLogin : registerNewUser}>
@@ -69,7 +69,7 @@ const Login = () => {
 				</div>
 				<div className={classes.loginPageItem} >
 					<Button 
-						style={{width:'100%'}}
+						fullWidth
 						size="large"
 						onClick={() => setPageState(pageState === loginPageState.LOGIN ? loginPageState.REGISTRATION : loginPageState.LOGIN)}
 					>

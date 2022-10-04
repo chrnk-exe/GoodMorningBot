@@ -28,8 +28,9 @@ router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Re
 	}
 });
 
-router.get('/videos', (req: JWTRequest, res: Response) => {
-	res.send('Hello bro!');
+router.get('/videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
+	console.log(req.query.page);
+	res.send('Videos get!');
 });
 
 router.post('/videos', (req: JWTRequest, res: Response) => {

@@ -42,6 +42,11 @@ declare interface IVideos {
     vkcontent: string
 }
 
+declare interface IVideoState {
+    all: IVideos[],
+    user: IVideos[]
+}
+
 // declare interface LoginResponse extends RegistrationResponse {
 //     user_vkid: number
 //     user_vk_avatar: number

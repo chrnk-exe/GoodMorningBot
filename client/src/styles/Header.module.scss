@@ -5,13 +5,14 @@
 
 .header {
     @include flex();
-    justify-content: space-evenly;
+    justify-content: space-around;
 
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 75px;
 
-    background-color: blueviolet;
+    background-color: #1A1A1D;
     width: 100%;
+    color: #FFFFF1;
 }

@@ -1,3 +1,26 @@
+@mixin fullScreen() {
+    height: 100%;
+    width: 100%;
+}
+
+.AppWrapper {
+    @include fullScreen();
+    margin-top: 75px;
+    background-color: #4e4e50;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
 .App {
-    margin-top: 60px;
+    @include fullScreen();
+}
+
+.Main {
+    @include fullScreen();
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
+    border: 1px solid #1a1a1d;
+    border-radius: 15px;
+    background-color: #7c7c80;
 }

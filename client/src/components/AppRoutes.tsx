@@ -11,7 +11,7 @@ import Loader from '../UI/Loader';
 
 const AppRoutes: React.FC = ():JSX.Element => {
 	const token = useAppSelector(state => state.auth);
-	const {isLoading} = useAuthorizeQuery(token ? token : '');
+	const {isLoading} = useAuthorizeQuery(token ? token : '', {skip: token ? false: true});
 	if(isLoading) return (<Loader />);
 
 	return (
@@ -20,7 +20,7 @@ const AppRoutes: React.FC = ():JSX.Element => {
 				<Route path='/' element={<Navigate to={'/login'}/>} />
 				<Route path={'/login'} element={<LoginPage />}/>
 				<Route path={'/recovery'} element={<RecoveryPasswordPage/>} />
-				<Route path={'/app'} element={<AppPage />} />
+				<Route path={'/app'} element={token ? <AppPage /> : <Navigate to={'/login'}/>} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>

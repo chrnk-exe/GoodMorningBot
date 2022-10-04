@@ -17,17 +17,21 @@ export const appApi = createApi({
 		},
 	}),
 	endpoints: (build) => ({
-		getVideos: build.query<IVideos[], number>({
+		getAllVideos: build.query<IVideos[], number>({
 			query: (page) => `/videos?page=${page}`
 		}),
 		authorize: build.query<ILoginResponse, string>({
 			query: (token) => `/authorize?token=${token}`
+		}),
+		getUserVideos: build.query<IVideos[], number>({
+			query: (page) => `/user_videos?page=${page}`
 		})
 
 	}),
 });
 
 export const { 
-	useGetVideosQuery,
-	useAuthorizeQuery
+	useGetAllVideosQuery,
+	useAuthorizeQuery,
+	useGetUserVideosQuery
 } = appApi;
