@@ -38,6 +38,7 @@ declare interface IToken {
     email: string,
     vk: boolean,
     uid: number,
+    activated: boolean
     // iat: number,
     // exp: number
 }

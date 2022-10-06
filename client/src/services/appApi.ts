@@ -25,6 +25,13 @@ export const appApi = createApi({
 		}),
 		getUserVideos: build.query<IVideos[], number>({
 			query: (page) => `/user_videos?page=${page}`
+		}),
+		confirmMail: build.mutation<void, {token: string}>({
+			query: (payload) => ({
+				url: '/confirm_email',
+				method: 'POST',
+				body: payload
+			})
 		})
 
 	}),
@@ -33,5 +40,6 @@ export const appApi = createApi({
 export const { 
 	useGetAllVideosQuery,
 	useAuthorizeQuery,
-	useGetUserVideosQuery
+	useGetUserVideosQuery,
+	useConfirmMailMutation
 } = appApi;

@@ -1,9 +1,11 @@
 import express, { Response, Router } from 'express';
 import LoginUser from '../services/LoginUser';
 import createUser from '../services/createUser';
-import {TypedRequestBody} from '../expressTypes';
+import {TypedRequestBody, TypedRequestQuery} from '../expressTypes';
 import jwt from 'jsonwebtoken';
 import config from '../config';
+import activateUser from '../services/activateUser';
+import isToken from '../typeguards/isToken';
 
 const router: Router = express.Router();
 
@@ -20,7 +22,6 @@ router.post('/login', async (req: TypedRequestBody<ILoginRequest>, res: Response
 	config.secret, {
 		expiresIn: '1d',
 	});
-	// res.setHeader('Authorization', 'Bearer ' + token);
 	if(user){
 		res.json({
 			auth: true,
@@ -35,6 +36,21 @@ router.post('/login', async (req: TypedRequestBody<ILoginRequest>, res: Response
 			auth: false,
 			info: 'Incorrect login/password'
 		});
+	}
+});
+
+router.get('/confirm_email', async (req: TypedRequestQuery<{token: string}>, res: Response) => {
+	const {token} = req.query;
+	const info = jwt.decode(token);
+	if(isToken(info)){
+		await activateUser(info.uid);
+		if(process.env.NODE_ENV === 'production'){
+			res.redirect(`http://${config.host}`);
+		} else {
+			res.redirect('http://localhost:3000');
+		}
+	} else {
+		res.end();
 	}
 });
 
@@ -60,11 +76,5 @@ router.post('/register', async (req: TypedRequestBody<ILoginRequest>, res: Respo
 		token
 	});
 });
-
-// router.get('/user', async (req : TypedRequestQuery<{id: string}>, res: Response) => {
-//     const { id } = req.query
-// })
-
-
 
 export default router;

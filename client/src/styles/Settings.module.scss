@@ -10,16 +10,29 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
-        padding: 5px 10px;
-        .settingContainerChild {
+        padding: 35px 40px;
+        .settingContainerChild { 
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
         }
+        .settingContainerChild:first-child{
+            border-right: 1px solid lightgray;
+            padding-right: 20px;
+        }
         p {
             width: 100%;
             text-align: center;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+        img {
+            // height: 250px;
+            width: 100%;
+            object-fit:cover;
         }
     }
 }
