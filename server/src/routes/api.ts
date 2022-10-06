@@ -1,5 +1,5 @@
 import express, { Response, Router } from 'express';
-import { Request as JWTRequest } from 'express-jwt';
+// import { Request as JWTRequest } from 'express-jwt';
 import { TypedRequestQuery } from '../expressTypes';
 import getUser from '../services/getUser';
 import jwt from 'jsonwebtoken';
@@ -28,13 +28,19 @@ router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Re
 	}
 });
 
-router.get('/videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
-	console.log(req.query.page);
-	res.send('Videos get!');
+router.get('/confirm_email', (req: TypedRequestQuery<{token: string}>, res: Response) => {
+	
+	res.send('Account activated!');
 });
 
-router.post('/videos', (req: JWTRequest, res: Response) => {
-	res.send('videos post!');
+router.get('/videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
+	console.log(req.query.page);
+	res.send('All videos! get!');
+});
+
+router.get('/user_videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
+	console.log(req.query.page);
+	res.send('User videos!');
 });
 
 

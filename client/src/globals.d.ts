@@ -7,6 +7,8 @@ declare interface User {
     userID: number
     vkID: number
     Role: Roles
+    activated: boolean
+    vkNAME?: string
 }
 
 declare interface ILoginRequest {
@@ -16,6 +18,7 @@ declare interface ILoginRequest {
 
 declare interface ILoginResponse {
     auth: boolean
+    info: string
     id: number
     email: string
     vklink: string
@@ -24,12 +27,6 @@ declare interface ILoginResponse {
     isAdmin: boolean
     activated: boolean
     token: string
-}
-
-declare interface IRegResponse {
-    user_id: number
-    username: string
-    user_rules: number
 }
 
 declare enum Roles {

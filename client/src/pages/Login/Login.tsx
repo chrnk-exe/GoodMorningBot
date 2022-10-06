@@ -4,7 +4,7 @@ import { TextField, Button } from '@mui/material';
 import TextFieldPassword from '../../UI/TextFieldPassword';
 import classes from '../../styles/LoginPage.module.scss';
 import vkicon from '../../assets/vk-icon.svg';
-import { useLoginUserMutation } from '../../services/userApi';
+import { useLoginUserMutation, useNewUserMutation } from '../../services/userApi';
 import { isResponse } from '../../typeguards/isResponse';
 
 enum loginPageState {
@@ -19,6 +19,7 @@ const Login = () => {
 		password: ''
 	});
 	const [loginUser] = useLoginUserMutation();
+	const [registerUser] = useNewUserMutation();
 	const navigator = useNavigate();
 
 	const oauthWithVk = () => {
@@ -28,16 +29,36 @@ const Login = () => {
 	const authWithLogin = async () => {
 		const response = await loginUser(userState);
 		if( isResponse<ILoginResponse>(response) ){
-			if(response.data.auth && response.data.activated){
+			if(response.data.auth){
+				console.log('redir');
 				navigator('/app', {replace: true});
+			}
+			else {
+				if(!response.data.auth){
+					alert(response.data.info);
+				}
 			}
 		} else {
 			console.log(response.error);
 		}
-		console.log(response);
 	};
 
 	const registerNewUser = async () => {
+		const response = await registerUser(userState);
+		if( isResponse<ILoginResponse>(response) ){
+			if(response.data.auth){
+				navigator('/app', {replace: true});
+			}
+			else {
+				console.log(response.data);
+				if(!response.data.auth){
+					alert(response.data.info);
+				}
+			}
+		} else {
+			console.log(response.error);
+		}
+		console.log(response, isResponse<ILoginResponse>(response));
 		return;
 	};
 

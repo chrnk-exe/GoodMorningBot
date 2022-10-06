@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router';
 import classes from '../styles/UserDropDownMenu.module.scss';
 import anonJPG from '../assets/anon.jpg';
 import { Button, ButtonGroup, Paper, Divider } from '@mui/material';
@@ -7,6 +8,7 @@ import { ClickAwayListener } from '@mui/material';
 
 const UserDropDownMenu = ({name, Role, avatarURL}: {name: string | null, Role: number, avatarURL: string | null}) => {
 	const [dropDown, setDropDown] = useState(false);
+	const navigate = useNavigate();
 
 	const RoleHandler = (Role: number) => {
 		if(Role === 0) return 'Необходимо подтверждение почты!';
@@ -24,7 +26,7 @@ const UserDropDownMenu = ({name, Role, avatarURL}: {name: string | null, Role: n
 					<div className={classes.dropDownMenu}>
 						<Paper className={classes.Paper} elevation={10}>
 							<ButtonGroup variant='text' orientation="vertical">
-								<Button>Settings</Button>
+								<Button onClick={() => navigate('/settings')}>Settings</Button>
 								<Button>Bug report</Button>
 								<Divider />
 								<Button>Log out</Button>

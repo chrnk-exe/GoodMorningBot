@@ -16,7 +16,6 @@ const App: FC = ():JSX.Element => {
 	// 	skip: user.name ? false : true
 	// });
 
-	console.log(data, isLoading, isError, setPage);
 	return (
 		<div style={{
 			height: '100%',

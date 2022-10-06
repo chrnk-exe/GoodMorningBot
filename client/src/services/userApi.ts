@@ -13,7 +13,7 @@ export const userApi = createApi({
 				body: payload,
 			})
 		}),
-		newUser: build.mutation<IRegResponse, {email: string, password: string}>({
+		newUser: build.mutation<ILoginResponse, Pick<ILoginRequest, 'login' | 'password'>>({
 			query: (payload) => ({
 				url: '/register',
 				method: 'POST',

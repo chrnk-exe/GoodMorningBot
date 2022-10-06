@@ -14,7 +14,8 @@ router.post('/login', async (req: TypedRequestBody<ILoginRequest>, res: Response
 		Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
 		email: user?.email,
 		vk: user?.vklink ? true : false,
-		uid: user?.id
+		uid: user?.id,
+		activated: user?.activated
 	}, 
 	config.secret, {
 		expiresIn: '1d',
@@ -37,15 +38,26 @@ router.post('/login', async (req: TypedRequestBody<ILoginRequest>, res: Response
 	}
 });
 
-router.post('/register', async (req: TypedRequestBody<IRegisterRequest>, res: Response) => {
-	const {email, password} = req.body;
-	const user = await createUser(email, password);
+router.post('/register', async (req: TypedRequestBody<ILoginRequest>, res: Response) => {
+	const {login, password} = req.body;
+	const user = await createUser(login, password);
+	const token = jwt.sign({
+		Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
+		email: user?.email,
+		vk: user?.vklink ? true : false,
+		uid: user?.id,
+		activated: user?.activated
+	}, 
+	config.secret, {
+		expiresIn: '1d',
+	});
 	res.json({
 		auth: false,
 		info: 'New user!',
 		...user,
 		createdAt: undefined,
-		updatedAt: undefined
+		updatedAt: undefined,
+		token
 	});
 });
 
