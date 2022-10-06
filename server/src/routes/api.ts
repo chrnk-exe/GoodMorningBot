@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import isToken from '../typeguards/isToken';
 import config from '../config';
 import { mailer } from '../transporter';
+import getVideos from '../services/getVideos';
 
 const router: Router = express.Router();
 
@@ -53,13 +54,13 @@ router.post('/confirm_email', (req: TypedRequestBody<{token: string}>, res: Resp
 	res.json('Account activated!');
 });
 
-router.get('/videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
-	console.log(req.query.page);
+router.get('/videos', async (req: TypedRequestQuery<{page: string}>, res: Response) => {
+	const {page} = req.query;
+	const result = await getVideos(+page);
 	res.send('All videos! get!');
 });
 
 router.get('/user_videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
-	console.log(req.query.page);
 	res.send('User videos!');
 });
 

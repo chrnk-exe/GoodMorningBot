@@ -36,7 +36,10 @@ declare enum Roles {
 }
 
 declare interface IVideos {
+    id: number
     vkcontent: string
+    day: number
+    content?: ArrayBuffer 
 }
 
 declare interface IVideoState {
