@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import TextFieldPassword from '../../UI/TextFieldPassword';
-import classes from '../../styles/LoginPage.module.scss';
+import classes from '../../styles/LoginPage.module.sass';
 import vkicon from '../../assets/vk-icon.svg';
 import {
 	useLoginUserMutation,
 	useNewUserMutation,
-} from '../../services/userApi';
+} from '../../store/services/userApi';
 import { isResponse } from '../../typeguards/isResponse';
 
 enum loginPageState {

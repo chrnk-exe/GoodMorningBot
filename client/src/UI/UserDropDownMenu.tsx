@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
-import classes from '../styles/UserDropDownMenu.module.scss';
+import classes from '../styles/UserDropDownMenu.module.sass';
 import anonJPG from '../assets/anon.jpg';
 import { Button, ButtonGroup, Paper, Divider } from '@mui/material';
 import { ClickAwayListener } from '@mui/material';

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import Button from '@mui/material/Button';
 import Header from '../../UI/Header';
-import classes from '../../styles/Settings.module.scss';
+import classes from '../../styles/Settings.module.sass';
 import { Paper, TextField } from '@mui/material';
 import anon from '../../assets/anon.jpg';
-import { useConfirmMailMutation } from '../../services/appApi';
+import { useConfirmMailMutation } from '../../store/services/appApi';
 
 const Settings = () => {
 	const user = useAppSelector(state => state.user);

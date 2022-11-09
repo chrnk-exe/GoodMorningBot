@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import classes from '../../styles/App.module.scss';
+import classes from '../../styles/App.module.sass';
 import Header from '../../UI/Header';
 import AllWrapper from './AllWrapper';
 import UserWrapper from './UserWrapper';

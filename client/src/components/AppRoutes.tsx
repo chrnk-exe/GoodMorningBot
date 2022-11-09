@@ -1,12 +1,12 @@
 import React from 'react';
-import classes from '../styles/AppRoutes.module.scss';
+import classes from '../styles/AppRoutes.module.sass';
 import LoginPage from '../pages/LoginPage';
 import AppPage from '../pages/AppPage';
 import SettingsPage from '../pages/SettingsPage';
 import NotFound from './NotFound';
 import { Routes, Route, Navigate } from 'react-router';
 import RecoveryPasswordPage from '../pages/RecoveryPasswordPage';
-import { useAuthorizeQuery } from '../services/appApi';
+import { useAuthorizeQuery } from '../store/services/appApi';
 import { useAppSelector } from '../hooks/useAppSelector';
 import Loader from '../UI/Loader';
 

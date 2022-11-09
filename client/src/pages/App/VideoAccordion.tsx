@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper } from '@mui/material';
-import classes from '../../styles/VideoAccordion.module.scss';
+import classes from '../../styles/VideoAccordion.module.sass';
 import VideoItem from './VideoItem';
 
 const VideoAccordion = ({videos} : {videos: IVideos[] | undefined}) => {

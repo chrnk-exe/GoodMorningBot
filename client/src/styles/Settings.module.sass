@@ -1,0 +1,36 @@
+.settingsApp 
+    // margin-top: 75px;
+    height: 100%
+    width: 100%
+    background-color: #e6e6e6
+    display: flex
+    justify-content: center
+    align-items: center
+    
+    .settingsContainer 
+        display: grid
+        grid-template-columns: 1fr 1fr
+        gap: 20px
+        padding: 35px 40px
+        .settingContainerChild 
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            align-items: flex-start
+
+        .settingContainerChild:first-child
+            border-right: 1px solid lightgray
+            padding-right: 20px
+        
+        p 
+            width: 100%
+            text-align: center
+        
+
+        button 
+            margin-top: 10px
+        
+        img 
+            // height: 250px
+            width: 100%
+            object-fit:cover

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './components/AppRoutes';
-import './styles/index.scss';
+import './styles/index.sass';
 import { ThemeProvider } from '@mui/material';
 import appTheme from './styles/theme';
 

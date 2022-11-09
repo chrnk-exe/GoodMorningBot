@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../styles/Header.module.scss';
+import classes from '../styles/Header.module.sass';
 import { Button } from '@mui/material';
 import { useAppSelector } from '../hooks/useAppSelector';
 import UserDropDownMenu from './UserDropDownMenu';

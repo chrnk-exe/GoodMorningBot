@@ -1,0 +1,35 @@
+@mixin fullScreen() 
+    height: 100%
+    width: 100%
+
+
+.AppWrapper 
+    @include fullScreen()
+    margin-top: 75px
+    background-color: #e6e6e6
+    // padding: 5%
+    box-sizing: border-box
+
+
+.App 
+    @include fullScreen()
+
+
+.Main 
+    @include fullScreen()
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    box-sizing: border-box
+    // border: 1px solid #1a1a1d
+    // border-radius: 15px
+    background-color: #FFFFF1
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+
+
+    .divider 
+        height: 100%
+        background-color: lightcoral
+        width: 1px
+    
+
