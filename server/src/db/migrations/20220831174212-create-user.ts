@@ -11,13 +11,16 @@ module.exports = {
 				type: DataTypes.INTEGER
 			},
 			email: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: true
 			},
 			password: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: true
 			},
 			vklink: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: true
 			},
 			last_vizit: {
 				type: DataTypes.DATE
@@ -30,6 +33,10 @@ module.exports = {
 			},
 			activated: {
 				type: DataTypes.BOOLEAN
+			},
+			vk_access_token: {
+				type: DataTypes.STRING,
+				allowNull: true
 			},
 			createdAt: {
 				allowNull: false,

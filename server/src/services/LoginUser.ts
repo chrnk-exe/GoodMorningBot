@@ -8,7 +8,7 @@ export default async (login: string, password: string) => {
 		},
 		raw: true
 	});
-	if(user){
+	if(user && user.password){
 		return bcrypt.compareSync(password, user.password) ? user : null;
 	}
 	return user;

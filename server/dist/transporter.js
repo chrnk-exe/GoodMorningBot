@@ -12,17 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../db/models/index");
-const bcrypt_1 = __importDefault(require("bcrypt"));
-exports.default = (login, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield index_1.User.findOne({
-        where: {
-            email: login,
-        },
-        raw: true
-    });
-    if (user && user.password) {
-        return bcrypt_1.default.compareSync(password, user.password) ? user : null;
-    }
-    return user;
+exports.mailer = void 0;
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const config_1 = __importDefault(require("./config"));
+const transporter = nodemailer_1.default.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'goodmorningbot.app@gmail.com',
+        pass: config_1.default.mailGooglePassword,
+    },
+}, {
+    from: 'goodmorningbot.app@gmail.com'
 });
+const mailer = (message, email) => __awaiter(void 0, void 0, void 0, function* () {
+    yield transporter.sendMail({
+        from: 'goodmorningbot.app@gmail.com',
+        to: email,
+        subject: 'Bot app account confirming',
+        text: message
+    });
+});
+exports.mailer = mailer;

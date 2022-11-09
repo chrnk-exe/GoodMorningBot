@@ -12,10 +12,10 @@ module.exports = {
 	async up (queryInterface: QueryInterface) {
 		process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD : '123';
 		await queryInterface.bulkInsert('users', [{
-			id: '184915743',
+			id: '1849157431',
 			email: 'ivan_kot2001@mail.ru',
 			password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, config.saltRounds),
-			vklink: 'vk.com/id184915743',
+			vklink: '',
 			last_vizit: new Date(),
 			added_videos: '[]',
 			isAdmin: true,

@@ -20,10 +20,14 @@ export const userApi = createApi({
 				body: payload,
 			})
 		}),
+		getUserByVk: build.query<ILoginResponse, string>({
+			query: (code) =>  `/get_access_token?code=${code}`
+		})
 	}),
 });
 
 export const { 
 	useLoginUserMutation,
 	useNewUserMutation,
+	useGetUserByVkQuery,
 } = userApi;

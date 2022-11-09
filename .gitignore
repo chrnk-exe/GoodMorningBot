@@ -4,6 +4,7 @@ venv/
 testVideos/
 
 .vscode
+.env
 
 .eslintrc
 .prettierrc

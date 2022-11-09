@@ -2,10 +2,11 @@ import {InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 export interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
     id: number;
-    email: string;
-    password: string;
-    vklink: string;
+    email?: string;
+    password?: string;
+    vklink?: string;
     last_vizit: Date;
+    vk_access_token?: string
     added_videos: string;
     isAdmin: boolean;
     activated: boolean;

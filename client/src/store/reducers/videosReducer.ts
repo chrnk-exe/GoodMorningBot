@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from '../services/userApi';
+import { userApi } from '../services/authApi';
 import { appApi } from '../services/appApi';
 
 const initialState: IVideoState = {

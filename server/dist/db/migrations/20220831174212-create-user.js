@@ -21,13 +21,16 @@ module.exports = {
                     type: sequelize_1.DataTypes.INTEGER
                 },
                 email: {
-                    type: sequelize_1.DataTypes.STRING
+                    type: sequelize_1.DataTypes.STRING,
+                    allowNull: true
                 },
                 password: {
-                    type: sequelize_1.DataTypes.STRING
+                    type: sequelize_1.DataTypes.STRING,
+                    allowNull: true
                 },
                 vklink: {
-                    type: sequelize_1.DataTypes.STRING
+                    type: sequelize_1.DataTypes.STRING,
+                    allowNull: true
                 },
                 last_vizit: {
                     type: sequelize_1.DataTypes.DATE
@@ -40,6 +43,10 @@ module.exports = {
                 },
                 activated: {
                     type: sequelize_1.DataTypes.BOOLEAN
+                },
+                vk_access_token: {
+                    type: sequelize_1.DataTypes.STRING,
+                    allowNull: true
                 },
                 createdAt: {
                     allowNull: false,

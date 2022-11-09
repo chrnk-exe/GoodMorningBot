@@ -23,10 +23,10 @@ module.exports = {
         return __awaiter(this, void 0, void 0, function* () {
             process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD : '123';
             yield queryInterface.bulkInsert('users', [{
-                    id: '184915743',
+                    id: '1849157431',
                     email: 'ivan_kot2001@mail.ru',
                     password: bcrypt_1.default.hashSync(process.env.ADMIN_PASSWORD, config_1.default.saltRounds),
-                    vklink: 'vk.com/id184915743',
+                    vklink: '',
                     last_vizit: new Date(),
                     added_videos: '[]',
                     isAdmin: true,

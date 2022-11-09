@@ -19,14 +19,19 @@ declare interface ILoginRequest {
 declare interface ILoginResponse {
     auth: boolean
     info: string
-    id: number
+    
+    id: number //user id
     email: string
     vklink: string
     last_vizit: Date
     added_videos: number
+
     isAdmin: boolean
     activated: boolean
     token: string
+
+    clientKey: string
+    access_key?: string
 }
 
 declare enum Roles {

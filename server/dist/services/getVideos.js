@@ -10,16 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../db/models/index");
-exports.default = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield index_1.User.findOne({
-        where: {
-            id
-        }
+exports.default = (page) => __awaiter(void 0, void 0, void 0, function* () {
+    const videos = yield index_1.Videos.findAll({
+        order: [['createdAt', 'DESC']],
+        raw: true
     });
-    if (user) {
-        user.activated = true;
-        user.save();
-        return true;
+    const count = videos.length;
+    const arr = [];
+    for (let i = count - (page - 1) * 10; i >= count - (page - 1) * 10 - 9; i--) {
+        arr.push(i);
     }
-    return false;
+    const result = [];
+    for (const numb of arr) {
+        result.push(videos[numb - 1]);
+    }
+    return result;
 });

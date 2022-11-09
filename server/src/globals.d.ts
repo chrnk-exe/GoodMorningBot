@@ -42,3 +42,10 @@ declare interface IToken {
     // iat: number,
     // exp: number
 }
+
+declare interface AccessTokenResponse {
+    access_token: string,
+    expires_in: number,
+    user_id: number,
+    email?: string
+}

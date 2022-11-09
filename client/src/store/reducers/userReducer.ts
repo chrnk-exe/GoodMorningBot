@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from '../services/userApi';
+import { userApi } from '../services/authApi';
 import { appApi } from '../services/appApi';
 
 const initialState: User = {
@@ -24,7 +24,7 @@ export const userSlice = createSlice({
 		builder
 			.addMatcher(userApi.endpoints.loginUser.matchFulfilled, (state, action) => {
 				// console.log('consolelog from userreducer');
-				const {id, email, isAdmin, activated } = action.payload;
+				const { id, email, isAdmin, activated } = action.payload;
 				return {
 					vkID: id,
 					name: email,

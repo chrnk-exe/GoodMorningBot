@@ -6,7 +6,7 @@ export const appApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: 'http://localhost:5000/api',
 		prepareHeaders:  (headers, { getState }) => {
-			const token = (getState() as RootState).auth;
+			const { token } = (getState() as RootState).auth;
 		
 			if (token) {
 				headers.set('authorization', `Bearer ${token}`);
@@ -31,8 +31,7 @@ export const appApi = createApi({
 				method: 'POST',
 				body: payload
 			})
-		})
-
+		}),
 	}),
 });
 

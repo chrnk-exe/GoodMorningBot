@@ -7,22 +7,33 @@ import NotFound from './NotFound';
 import { Routes, Route, Navigate } from 'react-router';
 import RecoveryPasswordPage from '../pages/RecoveryPasswordPage';
 import { useAuthorizeQuery } from '../store/services/appApi';
+import {useGetClientKeyQuery} from '../store/services/vkApi';
 import { useAppSelector } from '../hooks/useAppSelector';
 import Loader from '../UI/Loader';
 
-const AppRoutes: React.FC = ():JSX.Element => {
-	const token = useAppSelector(state => state.auth);
-	const {isLoading} = useAuthorizeQuery(token ? token : '', {skip: token ? false: true});
-	if(isLoading) return (<Loader />);
+const AppRoutes: React.FC = (): JSX.Element => {
+	const token = useAppSelector(state => state.auth.token);
+	const { isLoading } = useAuthorizeQuery(token ? token : '', {
+		skip: token ? false : true,
+	});
+
+	
+
+	useGetClientKeyQuery();
+
+	if (isLoading) return <Loader />;
 
 	return (
 		<div className={classes.App}>
 			<Routes>
-				<Route path='/' element={<Navigate to={'/login'}/>} />
-				<Route path={'/login'} element={<LoginPage />}/>
-				<Route path={'/recovery'} element={<RecoveryPasswordPage/>} />
-				<Route path={'/settings'} element={<SettingsPage/>} />
-				<Route path={'/app'} element={token ? <AppPage /> : <Navigate to={'/login'}/>} />
+				<Route path="/" element={<Navigate to={'/login'} />} />
+				<Route path={'/login'} element={<LoginPage />} />
+				<Route path={'/recovery'} element={<RecoveryPasswordPage />} />
+				<Route path={'/settings'} element={<SettingsPage />} />
+				<Route
+					path={'/app'}
+					element={token ? <AppPage /> : <Navigate to={'/login'} />}
+				/>
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>

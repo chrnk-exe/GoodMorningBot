@@ -14,6 +14,7 @@ export default (sequelize: Sequelize) => {
 		vklink: DataTypes.STRING,
 		last_vizit: DataTypes.DATE,
 		added_videos: DataTypes.TEXT,
+		vk_access_token: DataTypes.STRING,
 		isAdmin: DataTypes.BOOLEAN,
 		activated: DataTypes.BOOLEAN,
 	}, {

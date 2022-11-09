@@ -19,6 +19,7 @@ router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Re
 			auth: true,
 			info: 'Success!',
 			...user,
+			clientKey: config.appID,
 			password: undefined,
 			createdAt: undefined,
 			updatedAt: undefined

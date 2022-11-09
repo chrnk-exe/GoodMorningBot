@@ -14,7 +14,7 @@ const Settings = () => {
 		password1: '',
 		password2: '',
 	});
-	const token = useAppSelector(state => state.auth);
+	const { token } = useAppSelector(state => state.auth);
 
 	const [confirmLink] = useConfirmMailMutation();
 

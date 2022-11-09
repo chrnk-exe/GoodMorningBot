@@ -10,16 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../db/models/index");
-exports.default = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield index_1.User.findOne({
-        where: {
-            id
-        }
+// import bcrypt from 'bcrypt';
+// import config from '../config';
+exports.default = (access_token, id, email) => __awaiter(void 0, void 0, void 0, function* () {
+    // const hashedToken = bcrypt.hashSync(access_token, config.saltRounds);
+    const user = yield index_1.User.create({
+        id,
+        email,
+        vklink: `vk.com/id${id}`,
+        vk_access_token: access_token,
+        last_vizit: new Date(),
+        added_videos: '[]',
+        isAdmin: false,
+        activated: true,
+    }, {
+        raw: true
     });
-    if (user) {
-        user.activated = true;
-        user.save();
-        return true;
-    }
-    return false;
+    return user;
 });
