@@ -14,17 +14,31 @@ const index_1 = require("../db/models/index");
 // import config from '../config';
 exports.default = (access_token, id, email) => __awaiter(void 0, void 0, void 0, function* () {
     // const hashedToken = bcrypt.hashSync(access_token, config.saltRounds);
-    const user = yield index_1.User.create({
-        id,
-        email,
-        vklink: `vk.com/id${id}`,
-        vk_access_token: access_token,
-        last_vizit: new Date(),
-        added_videos: '[]',
-        isAdmin: false,
-        activated: true,
-    }, {
-        raw: true
+    const isAdmin = yield index_1.Admins.findOne({
+        where: {
+            id,
+        },
+        raw: true,
     });
-    return user;
+    const check = yield index_1.User.findOne({
+        where: {
+            id,
+        },
+        raw: true,
+    });
+    if (!check) {
+        const user = yield index_1.User.create({
+            id,
+            email,
+            vklink: `vk.com/id${id}`,
+            vk_access_token: access_token,
+            last_vizit: new Date(),
+            added_videos: '[]',
+            activated: true,
+        }, {
+            raw: true,
+        });
+        return Object.assign(Object.assign({}, user), { isAdmin: isAdmin ? true : false });
+    }
+    return Object.assign(Object.assign({}, check), { isAdmin: isAdmin ? true : false });
 });

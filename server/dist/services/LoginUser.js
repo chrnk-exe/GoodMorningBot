@@ -21,8 +21,17 @@ exports.default = (login, password) => __awaiter(void 0, void 0, void 0, functio
         },
         raw: true
     });
-    if (user && user.password) {
-        return bcrypt_1.default.compareSync(password, user.password) ? user : null;
+    if (user) {
+        const isAdmin = yield index_1.Admins.findOne({
+            where: {
+                id: user.id
+            }
+        });
+        const returning_user = Object.assign(Object.assign({}, user), { isAdmin: isAdmin ? true : false });
+        if (user && user.password) {
+            return bcrypt_1.default.compareSync(password, user.password) ? returning_user : null;
+        }
+        return null;
     }
-    return user;
+    return null;
 });

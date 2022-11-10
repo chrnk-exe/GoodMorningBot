@@ -6,6 +6,7 @@ import conf from '../../config/db.config';
 import mailingUser from './mailinguser';
 import user from './user';
 import videos from './videos';
+import admins from './admins';
 
 const node_env: DBConfigIndex = process.env['NODE_ENV'] as DBConfigIndex || 'development';
 const config = conf[node_env];
@@ -34,6 +35,7 @@ test();
 export const User = user(sequelize);
 export const MailingUser = mailingUser(sequelize);
 export const Videos = videos(sequelize);
+export const Admins = admins(sequelize);
 
 sequelize.sync();
 

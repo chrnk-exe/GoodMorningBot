@@ -1,10 +1,7 @@
-from models import session, User, Videos, MailingUser, Column
+from models import session, User, Videos, MailingUser, Column, Admins
 import datetime, json
 
 def is_admin(id):
-    user = session.query(User).filter_by(id=id).first()
+    id = session.query(Admins).filter_by(id=id).first()
     session.commit()
-    try:
-        return user.isAdmin
-    except:
-        return False
+    return True if id is not None else False

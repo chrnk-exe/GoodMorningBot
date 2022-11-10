@@ -21,19 +21,20 @@ class User(Base):
     vklink = Column(String)
     last_vizit = Column(Date)
     added_videos = Column(Text, nullable=False)
-    isAdmin = Column(Boolean)
+    vk_access_token = Column(String)
     activated = Column(Boolean)
     createdAt = Column(DateTime, default=datetime.datetime.utcnow)
     updatedAt = Column(DateTime, default=datetime.datetime.utcnow)
 
-    def __init__(self, id, email, password, vklink, last_vizit, added_videos, isAdmin, activated = False):
+    def __init__(self, id, email, password, vklink, last_vizit, added_videos, activated = False):
         self.id = id
         self.email = email
         self.password = password
         self.vklink = vklink
         self.last_vizit = last_vizit
         self.added_videos = added_videos
-        self.isAdmin = isAdmin
+        # self.isAdmin = isAdmin
+        # self.vk_access_token = vk_access_token
         self.activated = activated
 
 
@@ -44,7 +45,8 @@ class Videos(Base):
     content = Column(BYTEA)
     vkcontent = Column(String)
     day = Column(Integer)
-    date_of_creation = Column(Date)
+    
+    # date_of_creation = Column(Date)
     createdAt = Column(DateTime, default=datetime.datetime.utcnow)
     updatedAt = Column(DateTime, default=datetime.datetime.utcnow)
     
@@ -67,6 +69,13 @@ class MailingUser(Base):
         self.id = vkid
         self.vklink = vklink
         self.customVideos = customVideos
+        
+class Admins(Base):
+    __tablename__ = 'admins'
+    id = Column(Integer, primary_key=True)
+    
+    def __init__(self, id):
+        self.id = id
 
 Base.metadata.create_all(engine)
 

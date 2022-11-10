@@ -54,6 +54,9 @@ export const tokenSlice = createSlice({
 				if(action.payload.clientKey){
 					state.clientKey = action.payload.clientKey;
 				}
+			})
+			.addMatcher(userApi.endpoints.getUserByVk.matchFulfilled, (state, action) => {
+				console.log(action.payload);
 			});
 	}
 });

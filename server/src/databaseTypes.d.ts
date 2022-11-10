@@ -8,7 +8,7 @@ export interface UserModel extends Model<InferAttributes<UserModel>, InferCreati
     last_vizit: Date;
     vk_access_token?: string
     added_videos: string;
-    isAdmin: boolean;
+    // isAdmin: boolean;
     activated: boolean;
 }
 
@@ -26,3 +26,6 @@ export interface VideoModel extends Model<InferAttributes<VideoModel>, InferCrea
     day: dayOfTheWeek;
 }
 
+export interface Admins extends Model<InferAttributes<Admins>, InferCreationAttributes<Admins>> {
+    id: number
+}

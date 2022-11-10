@@ -18,7 +18,6 @@ module.exports = {
 			vklink: '',
 			last_vizit: new Date(),
 			added_videos: '[]',
-			isAdmin: true,
 			activated: true,
 			createdAt: new Date(),
 			updatedAt: new Date()

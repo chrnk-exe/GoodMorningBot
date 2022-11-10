@@ -12,13 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Videos = exports.MailingUser = exports.User = void 0;
+exports.Admins = exports.Videos = exports.MailingUser = exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const process_1 = __importDefault(require("process"));
 const db_config_1 = __importDefault(require("../../config/db.config"));
 const mailinguser_1 = __importDefault(require("./mailinguser"));
 const user_1 = __importDefault(require("./user"));
 const videos_1 = __importDefault(require("./videos"));
+const admins_1 = __importDefault(require("./admins"));
 const node_env = process_1.default.env['NODE_ENV'] || 'development';
 const config = db_config_1.default[node_env];
 const sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, {
@@ -41,5 +42,6 @@ test();
 exports.User = (0, user_1.default)(sequelize);
 exports.MailingUser = (0, mailinguser_1.default)(sequelize);
 exports.Videos = (0, videos_1.default)(sequelize);
+exports.Admins = (0, admins_1.default)(sequelize);
 sequelize.sync();
 exports.default = sequelize;

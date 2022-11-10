@@ -8,6 +8,7 @@ import config from '../config';
 import activateUser from '../services/activateUser';
 import isToken from '../typeguards/isToken';
 import axios from 'axios';
+import { type AxiosResponse } from 'axios';
 
 const router: Router = express.Router();
 
@@ -114,51 +115,62 @@ router.get(
 		req: TypedRequestQuery<{ code?: string; access_token?: string }>,
 		res: Response
 	) => {
-		const { code, access_token } = req.query;
+		const { code } = req.query;
 		if (code) {
-			const resp = await axios.get<AccessTokenResponse>(
-				`https://oauth.vk.com/access_token?client_id=${
-					config.appID
-				}&client_secret=${
-					config.secretID
-				}&redirect_uri=${'http://localhost:3000'}/login&code=${code}`
-			);
-			const {access_token, user_id, email} = resp.data;
-			const user = await createVkUser(access_token, user_id, email);
-			if(user){
-				const token = jwt.sign(
-					{
-						Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
-						email: user?.email,
-						vk: user?.vklink ? true : false,
-						access_token: user?.vk_access_token,
-						uid: user?.id,
-						activated: user?.activated,
-					},
-					config.secret,
-					{
-						expiresIn: '1d',
-					}
-				);
+			let resp: AxiosResponse<AccessTokenResponse> | undefined;
+			try {
+				resp = await axios.get<AccessTokenResponse>(
+					`https://oauth.vk.com/access_token?client_id=${
+						config.appID
+					}&client_secret=${
+						config.secretID
+					}&redirect_uri=${'http://localhost:3000'}/login&code=${code}`
+				); 
+			} catch {
 				res.json({
-					auth: true,
-					info: 'Success!',
-					...user,
-					createdAt: undefined,
-					updatedAt: undefined,
-					token,
-					access_token: user.vk_access_token,
-					clientKey: config.appID,
+					info: 'Code is invalid or expired'
 				});
 			}
-			// console.log(resp.data.access_token);
+			
+			if(resp){
+				const {access_token, user_id, email} = resp.data;
+
+				const user = await createVkUser(access_token, user_id, email);
+				
+				if(user){
+					const token = jwt.sign(
+						{
+							Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
+							email: user?.email,
+							vk: user?.vklink ? true : false,
+							access_token: user?.vk_access_token,
+							uid: user?.id,
+							activated: user?.activated,
+						},
+						config.secret,
+						{
+							expiresIn: '1d',
+						}
+					);
+					res.json({
+						auth: true,
+						info: 'Success!',
+						...user,
+						createdAt: undefined,
+						updatedAt: undefined,
+						token,
+						access_token: user.vk_access_token,
+						clientKey: config.appID,
+					});
+				}
+			}
 		} else {
 			res.json({
 				auth: false,
-				info: 'user doesnt exist'
+				info: 'No code'
 			});
 		}
-	}
+	}	
 );
 
 router.get('/login_vk', (req: TypedRequestQuery<Record<string, never>>, res: Response) => {

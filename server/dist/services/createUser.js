@@ -31,10 +31,9 @@ exports.default = (email, password) => __awaiter(void 0, void 0, void 0, functio
         vklink: '',
         last_vizit: new Date(),
         added_videos: '[]',
-        isAdmin: false,
         activated: false,
     }, {
-        raw: true
+        raw: true,
     });
-    return user;
+    return Object.assign(Object.assign({}, user), { isAdmin: false });
 });

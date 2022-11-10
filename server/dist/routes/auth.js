@@ -81,18 +81,45 @@ router.get('/get_client_key', (req, res) => {
         clientKey: config_1.default.appID,
     });
 });
-router.get('/vk_login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { code, access_token } = req.query;
+router.get('/get_access_token', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { code } = req.query;
     if (code) {
-        const resp = yield axios_1.default.get(`https://oauth.vk.com/access_token?client_id=${config_1.default.appID}&client_secret=${config_1.default.secretID}&redirect_uri=${'http://localhost:5000'}/auth/vk_login&code=${code}`);
-        const { access_token, user_id, email } = resp.data;
-        const newUser = yield (0, createVkUser_1.default)(access_token, user_id, email);
-        console.log(newUser);
-        // console.log(resp.data.access_token);
+        let resp;
+        try {
+            resp = yield axios_1.default.get(`https://oauth.vk.com/access_token?client_id=${config_1.default.appID}&client_secret=${config_1.default.secretID}&redirect_uri=${'http://localhost:3000'}/login&code=${code}`);
+        }
+        catch (_a) {
+            res.json({
+                info: 'Code is invalid or expired'
+            });
+        }
+        if (resp) {
+            const { access_token, user_id, email } = resp.data;
+            const user = yield (0, createVkUser_1.default)(access_token, user_id, email);
+            if (user) {
+                const token = jsonwebtoken_1.default.sign({
+                    Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : (user === null || user === void 0 ? void 0 : user.activated) ? 1 : 0,
+                    email: user === null || user === void 0 ? void 0 : user.email,
+                    vk: (user === null || user === void 0 ? void 0 : user.vklink) ? true : false,
+                    access_token: user === null || user === void 0 ? void 0 : user.vk_access_token,
+                    uid: user === null || user === void 0 ? void 0 : user.id,
+                    activated: user === null || user === void 0 ? void 0 : user.activated,
+                }, config_1.default.secret, {
+                    expiresIn: '1d',
+                });
+                res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { createdAt: undefined, updatedAt: undefined, token, access_token: user.vk_access_token, clientKey: config_1.default.appID }));
+            }
+        }
     }
     else {
-        console.log(access_token);
+        res.json({
+            auth: false,
+            info: 'No code'
+        });
     }
-    res.redirect('http://localhost:3000');
 }));
+router.get('/login_vk', (req, res) => {
+    console.log(req.url);
+    res.json({ 'aaa': 'bbb' });
+});
 exports.default = router;
