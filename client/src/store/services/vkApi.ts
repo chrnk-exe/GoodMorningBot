@@ -3,13 +3,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const vkApi = createApi({
 	reducerPath: 'vkApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '',
+		baseUrl: 'https://api.vk.com/method/',
 	}),
 	endpoints: build => ({
-		getClientKey: build.query<{clientKey: string}, void>({
-			query: () => 'http://localhost:5000/auth/get_client_key',
+		getUser: build.query<unknown, void>({
+			query: () => 'users.get',
 		})
 	}),
 });
 
-export const { useGetClientKeyQuery } = vkApi;
+// export const { useGetClientKeyQuery } = vkApi;

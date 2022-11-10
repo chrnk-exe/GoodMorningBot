@@ -22,6 +22,9 @@ export const userApi = createApi({
 		}),
 		getUserByVk: build.query<ILoginResponse, string>({
 			query: (code) =>  `/get_access_token?code=${code}`
+		}),
+		getClientKey: build.query<{clientKey: string}, void>({
+			query: () => 'http://localhost:5000/auth/get_client_key',
 		})
 	}),
 });
@@ -30,4 +33,5 @@ export const {
 	useLoginUserMutation,
 	useNewUserMutation,
 	useGetUserByVkQuery,
+	useGetClientKeyQuery
 } = userApi;

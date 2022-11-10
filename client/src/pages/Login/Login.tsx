@@ -47,7 +47,7 @@ const Login = () => {
 
 	const oauthWithVk = async () => {
 		if(clientKey){
-			window.location.href = `https://oauth.vk.com/authorize?client_id=${clientKey}&display=popup&redirect_uri=http://localhost:3000/login&scope=65552&response_type=code&v=5.52`;
+			window.location.href = `https://oauth.vk.com/authorize?client_id=${clientKey}&display=popup&redirect_uri=http://localhost:3000/login&scope=videos,email,offline&response_type=code&v=5.52`;
 		}	
 	};
 

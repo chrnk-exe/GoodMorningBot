@@ -2,18 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {userApi} from '../services/authApi';
 import { appApi } from '../services/appApi';
-import { vkApi } from '../services/vkApi';
 
 const initialState: {
 	token: string,
-	clientKey: string | null
+	clientKey: string | null,
+	access_token: string | null
 } = {
 	token: window.localStorage.getItem('token') || '',
-	clientKey: null
+	clientKey: null,
+	access_token: null
 };
 
 export const tokenSlice = createSlice({
-	name: 'jwt-token',
+	name: 'tokens',
 	initialState,
 	reducers: {
 		setToken: (state, action: PayloadAction<string>): void => {
@@ -50,13 +51,20 @@ export const tokenSlice = createSlice({
 					state.clientKey = clientKey;
 				}
 			})
-			.addMatcher(vkApi.endpoints.getClientKey.matchFulfilled, (state, action) => {
+			.addMatcher(userApi.endpoints.getClientKey.matchFulfilled, (state, action) => {
 				if(action.payload.clientKey){
 					state.clientKey = action.payload.clientKey;
 				}
 			})
 			.addMatcher(userApi.endpoints.getUserByVk.matchFulfilled, (state, action) => {
-				console.log(action.payload);
+				const { token, access_token } = action.payload;
+				if(token){
+					window.localStorage.setItem('token', token);
+					state.token = token;
+				}
+				if(access_token){
+					state.access_token = access_token;
+				}
 			});
 	}
 });

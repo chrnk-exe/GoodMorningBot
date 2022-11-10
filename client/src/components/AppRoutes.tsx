@@ -7,7 +7,7 @@ import NotFound from './NotFound';
 import { Routes, Route, Navigate } from 'react-router';
 import RecoveryPasswordPage from '../pages/RecoveryPasswordPage';
 import { useAuthorizeQuery } from '../store/services/appApi';
-import {useGetClientKeyQuery} from '../store/services/vkApi';
+import {useGetClientKeyQuery} from '../store/services/authApi';
 import { useAppSelector } from '../hooks/useAppSelector';
 import Loader from '../UI/Loader';
 

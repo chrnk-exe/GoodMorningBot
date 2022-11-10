@@ -32,6 +32,7 @@ declare interface ILoginResponse {
 
     clientKey: string
     access_key?: string
+    access_token?: string
 }
 
 declare enum Roles {

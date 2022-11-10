@@ -158,6 +158,7 @@ router.get(
 						...user,
 						createdAt: undefined,
 						updatedAt: undefined,
+						vk_access_token: undefined,
 						token,
 						access_token: user.vk_access_token,
 						clientKey: config.appID,
