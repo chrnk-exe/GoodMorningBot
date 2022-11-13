@@ -10,7 +10,7 @@ import { useConfirmMailMutation } from '../../store/services/appApi';
 const Settings = () => {
 	const user = useAppSelector(state => state.user);
 	const [settings, setSettings] = useState({
-		email: user.name || '',
+		email: user.email || '',
 		password1: '',
 		password2: '',
 	});
@@ -41,12 +41,12 @@ const Settings = () => {
 							<Button
 								variant="contained"
 								fullWidth
-								disabled={user.vkID === -1}>
+								disabled={user.userID === -1}>
 								Change Avatar
 							</Button>
 							<p>
 								User ID:
-								{user.vkID === -1 ? user.userID : user.vkID}
+								{user.userID}
 							</p>
 						</section>
 						<section className={classes.settingContainerChild}>

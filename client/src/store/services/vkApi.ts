@@ -6,10 +6,12 @@ export const vkApi = createApi({
 		baseUrl: 'https://api.vk.com/method/',
 	}),
 	endpoints: build => ({
-		getUser: build.query<unknown, void>({
-			query: () => 'users.get',
-		})
+		getUser: build.query<Record<string, string>, Record<string, string | number>>({
+			query: params => ({ url: 'users.get', params }),
+		}),
 	}),
 });
+
+export const { useGetUserQuery } = vkApi;
 
 // export const { useGetClientKeyQuery } = vkApi;

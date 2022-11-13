@@ -6,6 +6,7 @@ import UserDropDownMenu from './UserDropDownMenu';
 
 const Header = () => {
 	const user = useAppSelector(state => state.user);
+	
 	const logout = () => {
 		window.localStorage.clear();
 		window.location.reload();	
@@ -14,7 +15,7 @@ const Header = () => {
 	return (
 		<div className={classes.header}>
 			<section>
-				<UserDropDownMenu name={user.name} Role={user.Role} avatarURL={user.avatarURL}/>
+				<UserDropDownMenu name={user.email} Role={user.Role} avatarURL={user.avatarURL}/>
 			</section>
 			<section>
 				<Button variant='contained' onClick={logout} size="large">

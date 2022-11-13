@@ -15,7 +15,7 @@ const App: FC = (): JSX.Element => {
 			<div className={classes.App}>
 				<div className={classes.AppWrapper}>
 					<main className={classes.Main}>
-						<UserWrapper/>
+						<UserWrapper />
 						<div className={classes.divider} />
 						<AllWrapper />
 					</main>

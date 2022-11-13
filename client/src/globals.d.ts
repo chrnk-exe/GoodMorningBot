@@ -2,13 +2,14 @@ declare module '*.css'
 declare module '*.scss';
 
 declare interface User {
-    name: string | null
-    avatarURL: string | null
     userID: number
-    vkID: number
     Role: Roles
     activated: boolean
-    vkNAME?: string
+    email?: string
+    avatarURL?: string 
+    userName?: string
+	firstName?: string
+	secondName?: string
 }
 
 declare interface ILoginRequest {
@@ -25,6 +26,7 @@ declare interface ILoginResponse {
     vklink: string
     last_vizit: Date
     added_videos: number
+    avatarURL?: string
 
     isAdmin: boolean
     activated: boolean
@@ -52,6 +54,7 @@ declare interface IVideoState {
     all: IVideos[],
     user: IVideos[]
 }
+
 
 // declare interface LoginResponse extends RegistrationResponse {
 //     user_vkid: number

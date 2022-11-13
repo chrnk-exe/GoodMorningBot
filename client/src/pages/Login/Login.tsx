@@ -7,13 +7,12 @@ import vkicon from '../../assets/vk-icon.svg';
 import {
 	useLoginUserMutation,
 	useNewUserMutation,
-	useGetUserByVkQuery
+	useGetUserByVkQuery,
 } from '../../store/services/authApi';
 
 import { isResponse } from '../../typeguards/isResponse';
 import { useAppSelector } from '../../hooks/useAppSelector';
-
-
+import useAppGetUserQuery from '../../hooks/vkApi/useAppGetUserQuery';
 
 enum loginPageState {
 	LOGIN = 'Вход',
@@ -27,28 +26,30 @@ const Login = () => {
 		password: '',
 	});
 	const [validatePassword, setValidatePassword] = useState('');
-
+	
 	const clientKey = useAppSelector(state => state.auth.clientKey);
 	const code = window.location.search.split('=')[1];
 
 	const [loginUser] = useLoginUserMutation();
 	const [registerUser] = useNewUserMutation();
-
-	const { data } = useGetUserByVkQuery(code, {
-		skip: code ? false : true
-	});
-
-	if(code){
-		console.log(code);
-		console.log(data);
-	}
-
 	const navigator = useNavigate();
 
+	const { data } = useGetUserByVkQuery(code, {
+		skip: code ? false : true,
+	});
+
+	const result = useAppGetUserQuery(code ? false : true, {user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id', name_case: 'nom'});
+
+	if (data) {
+		console.log(result);
+		console.log(data);
+		// navigator('/app');
+	}
+
 	const oauthWithVk = async () => {
-		if(clientKey){
+		if (clientKey) {
 			window.location.href = `https://oauth.vk.com/authorize?client_id=${clientKey}&display=popup&redirect_uri=http://localhost:3000/login&scope=videos,email,offline&response_type=code&v=5.52`;
-		}	
+		}
 	};
 
 	const authWithLogin = async () => {
