@@ -3,7 +3,7 @@ import { type RootState, store } from '../../store/store';
 
 export default (
 	params: { user_ids: number; fields: string; name_case: string },
-	skip: boolean,
+	skip?: boolean,
 ) => {
 	const access_token =
 		(store.getState() as RootState).auth.access_token || '';

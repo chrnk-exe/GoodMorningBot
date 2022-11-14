@@ -10,6 +10,7 @@ import { useAuthorizeQuery } from '../store/services/appApi';
 import {useGetClientKeyQuery} from '../store/services/authApi';
 import { useAppSelector } from '../hooks/useAppSelector';
 import Loader from '../UI/Loader';
+import useAppGetUserQuery from '../hooks/vkApi/useAppGetUserQuery';
 
 const AppRoutes: React.FC = (): JSX.Element => {
 	const token = useAppSelector(state => state.auth.token);
@@ -17,9 +18,13 @@ const AppRoutes: React.FC = (): JSX.Element => {
 		skip: token ? false : true,
 	});
 
+	const user = useAppSelector(state => state.user);
 	const clientKeyQueryResult = useGetClientKeyQuery();
+
+	const getUserByVkApi = useAppGetUserQuery({user_ids: user?.userID || 0, fields: 'photo_50,nickname,first_name,last_name,id,email', name_case: 'nom'});
+
 	
-	if (isLoading || clientKeyQueryResult.isLoading) return <Loader />;
+	if (isLoading || clientKeyQueryResult.isLoading || getUserByVkApi.isLoading) return <Loader />;
 
 	return (
 		<div className={classes.App}>

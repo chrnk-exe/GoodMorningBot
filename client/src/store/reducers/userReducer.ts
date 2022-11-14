@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { userApi } from '../services/authApi';
 import { appApi } from '../services/appApi';
+import { vkApi } from '../services/vkApi';
 
 const initialState: User = {
 	userID: -1,
@@ -43,7 +44,7 @@ export const userSlice = createSlice({
 					const { id, email, isAdmin, activated, avatarURL } = action.payload;
 					return {
 						email: email,
-						Role: isAdmin ? 2 : activated ? 1 : 0,
+						Role: +isAdmin + +activated,
 						avatarURL,
 						userID: id,
 						activated,
@@ -76,6 +77,21 @@ export const userSlice = createSlice({
 						activated,
 					};
 				},
+			)
+			.addMatcher(
+				vkApi.endpoints.getUser.matchFulfilled,
+				(state, action) => {
+					const {id, first_name, last_name, photo_50, nickname} = action.payload;
+					console.log(action.payload);
+					return {
+						...state,
+						userID: id,
+						firstName: first_name,
+						secondName: last_name,
+						userName: nickname,
+						avatarURL: photo_50
+					};
+				}
 			);
 	},
 });

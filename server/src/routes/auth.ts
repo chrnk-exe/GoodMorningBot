@@ -30,7 +30,6 @@ router.post(
 				expiresIn: '1d',
 			}
 		);
-		console.log(token);
 		if (user) {
 			res.json({
 				auth: true,

@@ -45,10 +45,13 @@ export const tokenSlice = createSlice({
 				}
 			})
 			.addMatcher(appApi.endpoints.authorize.matchFulfilled, (state, action) => {
-				const {clientKey} = action.payload;
+				const {clientKey, access_token} = action.payload;
 				if(clientKey){
 					// window.localStorage.setItem('clientKey', clientKey);
 					state.clientKey = clientKey;
+				}
+				if(access_token){
+					state.access_token = access_token;
 				}
 			})
 			.addMatcher(userApi.endpoints.getClientKey.matchFulfilled, (state, action) => {

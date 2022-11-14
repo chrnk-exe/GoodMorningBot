@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import TextFieldPassword from '../../UI/TextFieldPassword';
 import classes from '../../styles/LoginPage.module.sass';
@@ -40,11 +40,7 @@ const Login = () => {
 		skip: code ? false : true,
 	});
 
-	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id', name_case: 'nom'}, code ? false : true);
-
-	console.log(result.data);
-
-
+	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id,email', name_case: 'nom'}, code ? false : true);
 
 	const oauthWithVk = async () => {
 		if (clientKey) {
@@ -84,6 +80,8 @@ const Login = () => {
 		console.log(response, isResponse<ILoginResponse>(response));
 		return;
 	};
+
+	if(result.isSuccess) return (<Navigate to="/app"/>);
 
 	return (
 		<div className={classes.loginPage}>

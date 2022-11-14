@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Navigate} from 'react-router';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import Button from '@mui/material/Button';
 import Header from '../../UI/Header';
@@ -21,6 +22,8 @@ const Settings = () => {
 	const sendConfirmMessage = async () => {
 		confirmLink({token});
 	};
+
+	if(user.userID < 0) return (<Navigate to='/login' />);
 
 	return (
 		<div

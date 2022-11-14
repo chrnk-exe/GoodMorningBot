@@ -47,7 +47,10 @@ export default
 				referrerPolicy,
 				charset,
 			}).then(response => response.json());
-			return { data: result };
+			if(Array.isArray(result.response) && result.response.length == 1){
+				return {data: result.response[0]};
+			}
+			return { data: result.response };
 		} catch (fetchError) {
 			const err = fetchError as FetchBaseQueryError;
 			return {

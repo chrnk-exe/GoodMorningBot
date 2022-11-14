@@ -38,7 +38,8 @@ declare interface IToken {
     email: string,
     vk: boolean,
     uid: number,
-    activated: boolean
+    activated: boolean,
+    access_token?: string
     // iat: number,
     // exp: number
 }

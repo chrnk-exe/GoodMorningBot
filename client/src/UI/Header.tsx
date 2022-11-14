@@ -6,19 +6,31 @@ import UserDropDownMenu from './UserDropDownMenu';
 
 const Header = () => {
 	const user = useAppSelector(state => state.user);
-	
+	console.log(user);
 	const logout = () => {
 		window.localStorage.clear();
-		window.location.reload();	
+		window.location.reload();
+	};
+
+	const userNameHandler = (user: User) => {
+		if (user.firstName && user.firstName !== '')
+			return user.firstName + ' ' + user.secondName;
+		if (user.userName && user.userName !== '')
+			return user.userName;
+		else return user.email;
 	};
 
 	return (
 		<div className={classes.header}>
 			<section>
-				<UserDropDownMenu name={user.email} Role={user.Role} avatarURL={user.avatarURL}/>
+				<UserDropDownMenu
+					name={userNameHandler(user)}
+					Role={user.Role}
+					avatarURL={user.avatarURL}
+				/>
 			</section>
 			<section>
-				<Button variant='contained' onClick={logout} size="large">
+				<Button variant="contained" onClick={logout} size="large">
 					Log out
 				</Button>
 			</section>
