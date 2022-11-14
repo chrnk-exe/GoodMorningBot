@@ -4,20 +4,9 @@
 Included libs: 
 - React (TS);
 - MaterialUI;
-- Redux;
+- Redux Toolkit;
 - Express (TS);
 - Sequelize (TS);
-- vk-api;
 - SQLalchemy;
 
-dev Deps: 
-- Types:
--- cors
--- express
--- node 
--- pg
-
-Tasks:
-- [Python BOT]
-- [Site with OAuth with VK]
-- [Server via Express and PostgreSQL]
+Сайт будет расположен на домене http://zxchrnk.com
