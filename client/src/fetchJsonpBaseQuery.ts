@@ -1,12 +1,22 @@
 import type { BaseQueryFn, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import fetchJsonp from 'fetch-jsonp';
 
+const getParams = (params?: Record<string, string | number>): string => {
+	let result = '?';
+	if(typeof params === 'undefined') return '';
+	for(const entry of Object.entries(params)){
+		result = result + entry[0] + '=' + entry[1] + '&';
+	}
+	return result.slice(0, result.length-1);
+};
+
 export default
 (
 	{ baseUrl }: { baseUrl: string } = { baseUrl: '' },
 ): BaseQueryFn<
 		{
 			url: string;
+			params?: Record<string, string | number>;
 			timeout?: number;
 			jsonpCallback?: string;
 			jsonpCallbackFunction?: string;
@@ -19,6 +29,7 @@ export default
 	> =>
 	async ({
 		url,
+		params,
 		timeout,
 		jsonpCallback,
 		jsonpCallbackFunction,
@@ -27,7 +38,8 @@ export default
 		charset,
 	}) => {
 		try {
-			const result = await fetchJsonp(baseUrl + url, {
+
+			const result = await fetchJsonp(baseUrl + url + getParams(params), {
 				timeout,
 				jsonpCallback,
 				jsonpCallbackFunction,
@@ -35,7 +47,7 @@ export default
 				referrerPolicy,
 				charset,
 			}).then(response => response.json());
-			return { data: result.data };
+			return { data: result };
 		} catch (fetchError) {
 			const err = fetchError as FetchBaseQueryError;
 			return {

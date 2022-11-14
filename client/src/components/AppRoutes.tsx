@@ -17,11 +17,9 @@ const AppRoutes: React.FC = (): JSX.Element => {
 		skip: token ? false : true,
 	});
 
+	const clientKeyQueryResult = useGetClientKeyQuery();
 	
-
-	useGetClientKeyQuery();
-
-	if (isLoading) return <Loader />;
+	if (isLoading || clientKeyQueryResult.isLoading) return <Loader />;
 
 	return (
 		<div className={classes.App}>

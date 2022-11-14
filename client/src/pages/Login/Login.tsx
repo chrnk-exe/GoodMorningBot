@@ -25,26 +25,26 @@ const Login = () => {
 		login: '',
 		password: '',
 	});
+
 	const [validatePassword, setValidatePassword] = useState('');
+	const navigator = useNavigate();
+
 	
 	const clientKey = useAppSelector(state => state.auth.clientKey);
 	const code = window.location.search.split('=')[1];
 
 	const [loginUser] = useLoginUserMutation();
 	const [registerUser] = useNewUserMutation();
-	const navigator = useNavigate();
 
 	const { data } = useGetUserByVkQuery(code, {
 		skip: code ? false : true,
 	});
 
-	const result = useAppGetUserQuery(code ? false : true, {user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id', name_case: 'nom'});
+	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id', name_case: 'nom'}, code ? false : true);
 
-	if (data) {
-		console.log(result);
-		console.log(data);
-		// navigator('/app');
-	}
+	console.log(result.data);
+
+
 
 	const oauthWithVk = async () => {
 		if (clientKey) {
