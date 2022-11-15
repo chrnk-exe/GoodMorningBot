@@ -1,17 +1,38 @@
 import React from 'react';
-import { Paper } from '@mui/material';
-import classes from '../../styles/VideoAccordion.module.sass';
+import { Paper, Box } from '@mui/material';
+// import classes from '../../styles/VideoAccordion.module.sass';
 import VideoItem from './VideoItem';
 
-const VideoAccordion = ({videos} : {videos: IVideos[] | undefined}) => {
+const VideoAccordion = ({
+	videos,
+}: {
+	videos: IVideosResponse | undefined;
+}) => {
 	return (
-		<Paper className={classes.content} elevation={10}>
-			{
-				videos
-					? videos.map(video => <VideoItem key={video.id} content={video.vkcontent} id={video.id}/>)
-					: <div>List is empty</div>
-			}
-		</Paper>
+		<Box
+			component={Paper}
+			sx={{
+				height: '100%',
+				overflowY: 'hidden',
+				gap: '10px',
+				margin: '10px',
+				padding: '10px',
+			}}
+			display="flex"
+			justifyContent="space-evenly"
+			alignItems="flex-start"
+			flexWrap="wrap">
+			{videos ? (
+				videos.response.map(video => (
+					<VideoItem
+						key={videos.response.indexOf(video)}
+						content={video}
+					/>
+				))
+			) : (
+				<div>List is empty</div>
+			)}
+		</Box>
 	);
 };
 

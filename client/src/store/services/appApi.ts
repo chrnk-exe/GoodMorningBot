@@ -16,13 +16,13 @@ export const appApi = createApi({
 		},
 	}),
 	endpoints: (build) => ({
-		getAllVideos: build.query<IVideos[], number>({
-			query: (page) => `/videos?page=${page}`
+		getAllVideos: build.query<IVideosResponse, number>({
+			query: (page) => `/all_videos?page=${page}`
 		}),
 		authorize: build.query<ILoginResponse, string>({
 			query: (token) => `/authorize?token=${token}`
 		}),
-		getUserVideos: build.query<IVideos[], number>({
+		getUserVideos: build.query<IVideosResponse, number>({
 			query: (page) => `/user_videos?page=${page}`
 		}),
 		confirmMail: build.mutation<void, {token: string}>({

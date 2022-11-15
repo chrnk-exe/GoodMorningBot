@@ -40,7 +40,7 @@ const Login = () => {
 		skip: code ? false : true,
 	});
 
-	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_50,nickname,first_name,last_name,id,email', name_case: 'nom'}, code ? false : true);
+	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_200,nickname,first_name,last_name,id,email', name_case: 'nom'}, code ? false : true);
 
 	const oauthWithVk = async () => {
 		if (clientKey) {

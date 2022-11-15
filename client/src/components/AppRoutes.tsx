@@ -21,7 +21,7 @@ const AppRoutes: React.FC = (): JSX.Element => {
 	const user = useAppSelector(state => state.user);
 	const clientKeyQueryResult = useGetClientKeyQuery();
 
-	const getUserByVkApi = useAppGetUserQuery({user_ids: user?.userID || 0, fields: 'photo_50,nickname,first_name,last_name,id,email', name_case: 'nom'});
+	const getUserByVkApi = useAppGetUserQuery({user_ids: user?.userID || 0, fields: 'photo_200,nickname,first_name,last_name,id,email', name_case: 'nom'});
 
 	
 	if (isLoading || clientKeyQueryResult.isLoading || getUserByVkApi.isLoading) return <Loader />;

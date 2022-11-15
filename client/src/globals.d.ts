@@ -43,11 +43,8 @@ declare enum Roles {
     admin
 }
 
-declare interface IVideos {
-    id: number
-    vkcontent: string
-    day: number
-    content?: ArrayBuffer 
+declare interface IVideosResponse {
+    response: string[]
 }
 
 declare interface IVideoState {

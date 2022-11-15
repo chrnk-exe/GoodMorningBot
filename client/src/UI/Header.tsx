@@ -6,7 +6,7 @@ import UserDropDownMenu from './UserDropDownMenu';
 
 const Header = () => {
 	const user = useAppSelector(state => state.user);
-	console.log(user);
+	// console.log(user);
 	const logout = () => {
 		window.localStorage.clear();
 		window.location.reload();

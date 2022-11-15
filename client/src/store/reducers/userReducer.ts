@@ -31,7 +31,7 @@ export const userSlice = createSlice({
 					return {
 						userID: id,
 						email: email,
-						Role: isAdmin ? 2 : activated ? 1 : 0,
+						Role: +isAdmin + +activated,
 						avatarURL,
 						activated,
 					};
@@ -72,7 +72,7 @@ export const userSlice = createSlice({
 					return {
 						userID: id,
 						name: email,
-						Role: isAdmin ? 2 : activated ? 1 : 0,
+						Role: +isAdmin + +activated,
 						avatarURL,
 						activated,
 					};
@@ -81,15 +81,15 @@ export const userSlice = createSlice({
 			.addMatcher(
 				vkApi.endpoints.getUser.matchFulfilled,
 				(state, action) => {
-					const {id, first_name, last_name, photo_50, nickname} = action.payload;
-					console.log(action.payload);
+					const {id, first_name, last_name, photo_200, nickname} = action.payload;
+					// console.log(action.payload);
 					return {
 						...state,
 						userID: id,
 						firstName: first_name,
 						secondName: last_name,
 						userName: nickname,
-						avatarURL: photo_50
+						avatarURL: photo_200
 					};
 				}
 			);

@@ -1,5 +1,6 @@
 import React, { type FC } from 'react';
 import classes from '../../styles/App.module.sass';
+import { Box } from '@mui/material';
 import Header from '../../UI/Header';
 import AllWrapper from './AllWrapper';
 import UserWrapper from './UserWrapper';
@@ -15,11 +16,11 @@ const App: FC = (): JSX.Element => {
 			<Header />
 			<div className={classes.App}>
 				<div className={classes.AppWrapper}>
-					<main className={classes.Main}>
+					<Box display="grid" gridTemplateColumns='1fr 1fr'>
 						<UserWrapper />
-						<div className={classes.divider} />
+						{/* <div className={classes.divider} /> */}
 						<AllWrapper />
-					</main>
+					</Box>
 				</div>
 			</div>
 		</div>

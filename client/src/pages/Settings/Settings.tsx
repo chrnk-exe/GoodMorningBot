@@ -48,7 +48,7 @@ const Settings = () => {
 								Change Avatar
 							</Button>
 							<p>
-								User ID:
+								User ID:{' '}
 								{user.userID}
 							</p>
 						</section>

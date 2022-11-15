@@ -5,5 +5,7 @@ declare interface GetUserResponse {
     first_name: string
     last_name: string
     nickname: string
-    photo_50: string 
+    photo_50?: string 
+    photo_100?: string
+    photo_200?: string
 }
