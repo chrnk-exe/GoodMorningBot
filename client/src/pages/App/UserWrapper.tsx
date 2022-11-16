@@ -15,10 +15,11 @@ const UserWrapper = () => {
 		<div
 			style={{
 				width: '100%',
-				height: '100%',
+				height: 'max-content',
+				minHeight: '100%'
 			}}>
 			<h2 className={classes.header}>Your videos</h2>
-			<VideoAccordion videos={data} />
+			<VideoAccordion page={page} setPage={setPage}/>
 		</div>
 	);
 };

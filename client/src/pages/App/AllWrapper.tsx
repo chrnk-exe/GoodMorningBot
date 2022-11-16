@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useGetAllVideosQuery } from '../../store/services/appApi';
 import useAppGetVideosQuery from '../../hooks/vkApi/useAppGetVideosQuery';
 import VideoAccordion from './VideoAccordion';
-import { Pagination } from '@mui/material';
 import Loader from '../../UI/Loader';
 import classes from '../../styles/wrappers.module.sass';
 
@@ -12,18 +11,20 @@ const AllWrapper = () => {
 	const { data, isLoading } = useGetAllVideosQuery(page);
 
 	const Videos = useAppGetVideosQuery(data?.response);
-	console.log(Videos.data, Videos.error);
+	console.log(Videos.data);
 
 	if (isLoading) return <Loader />;
 
 	return (
 		<div
+
 			style={{
 				width: '100%',
-				height: '100%',
+				height: 'max-content',
+				minHeight: '100%'
 			}}>
 			<h2 className={classes.header}>All videos</h2>
-			<VideoAccordion videos={data} />
+			<VideoAccordion videos={Videos.data} page={page} setPage={setPage}/>
 		</div>
 	);
 };

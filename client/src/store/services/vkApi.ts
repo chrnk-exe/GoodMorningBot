@@ -65,6 +65,7 @@ export const vkApi = createApi({
 					reposts: item.reposts.count,
 					author: createAuthor(item.owner_id, profiles, groups),
 					id: item.id,
+					title: item.title
 				}));
 				return result;
 				// if (isGetVideoResponse(response)) {

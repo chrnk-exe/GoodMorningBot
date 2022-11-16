@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import Header from '../../UI/Header';
 import AllWrapper from './AllWrapper';
 import UserWrapper from './UserWrapper';
+import Navigation from '../../UI/Navigation';
 
 const App: FC = (): JSX.Element => {
 
@@ -16,8 +17,8 @@ const App: FC = (): JSX.Element => {
 			<Header />
 			<div className={classes.App}>
 				<div className={classes.AppWrapper}>
-					<Box display="grid" gridTemplateColumns='1fr 1fr'>
-						<UserWrapper />
+					<Box display="flex" >
+						<Navigation />
 						{/* <div className={classes.divider} /> */}
 						<AllWrapper />
 					</Box>

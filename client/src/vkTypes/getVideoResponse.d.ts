@@ -146,8 +146,9 @@ declare namespace GetVideoResponse {
         views: number;
         likes: number;
         reposts: number;
-        author?: ProfileAuthor | GroupAuthor;
+        author: ProfileAuthor | GroupAuthor;
         id: number;
+        title: string;
     }
 
     export interface Error extends Record<string, unknown> {
