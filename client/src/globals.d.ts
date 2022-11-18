@@ -44,7 +44,7 @@ declare enum Roles {
 }
 
 declare interface IVideosResponse {
-    response: string[]
+    response: {data: string, day: 0 | 1 | 2 | 3 | 4 | 5 | 6}[]
 }
 
 declare interface IVideoState {

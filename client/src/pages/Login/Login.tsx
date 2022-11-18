@@ -29,7 +29,6 @@ const Login = () => {
 	const [validatePassword, setValidatePassword] = useState('');
 	const navigator = useNavigate();
 
-	
 	const clientKey = useAppSelector(state => state.auth.clientKey);
 	const code = window.location.search.split('=')[1];
 
@@ -40,7 +39,14 @@ const Login = () => {
 		skip: code ? false : true,
 	});
 
-	const result = useAppGetUserQuery({user_ids: data?.id || 0, fields: 'photo_200,nickname,first_name,last_name,id,email', name_case: 'nom'}, code ? false : true);
+	const result = useAppGetUserQuery(
+		{
+			user_ids: data?.id || 0,
+			fields: 'photo_200,nickname,first_name,last_name,id,email',
+			name_case: 'nom',
+		},
+		code ? false : true,
+	);
 
 	const oauthWithVk = async () => {
 		if (clientKey) {
@@ -77,11 +83,11 @@ const Login = () => {
 		} else {
 			console.log(response.error);
 		}
-		console.log(response, isResponse<ILoginResponse>(response));
+		// console.log(response, isResponse<ILoginResponse>(response));
 		return;
 	};
 
-	if(result.isSuccess) return (<Navigate to="/app"/>);
+	if (result.isSuccess) return <Navigate to="/app" />;
 
 	return (
 		<div className={classes.loginPage}>

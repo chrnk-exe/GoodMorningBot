@@ -18,5 +18,5 @@ export default async (page: number) => {
 	for(const numb of arr){
 		result.push(videos[numb-1]);
 	}
-	return result.map(video => video.vkcontent);
+	return result.map(video => ({data: video.vkcontent, day: video.day}));
 };

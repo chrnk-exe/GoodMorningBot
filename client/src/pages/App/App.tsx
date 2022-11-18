@@ -3,7 +3,6 @@ import classes from '../../styles/App.module.sass';
 import { Box } from '@mui/material';
 import Header from '../../UI/Header';
 import AllWrapper from './AllWrapper';
-import UserWrapper from './UserWrapper';
 import Navigation from '../../UI/Navigation';
 
 const App: FC = (): JSX.Element => {

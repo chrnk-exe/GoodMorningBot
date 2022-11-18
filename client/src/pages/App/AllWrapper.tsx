@@ -10,7 +10,7 @@ const AllWrapper = () => {
 	const [page, setPage] = useState(1);
 	const { data, isLoading } = useGetAllVideosQuery(page);
 
-	const Videos = useAppGetVideosQuery(data?.response);
+	const Videos = useAppGetVideosQuery(data?.response.map(item => item.data));
 	console.log(Videos.data);
 
 	if (isLoading) return <Loader />;
