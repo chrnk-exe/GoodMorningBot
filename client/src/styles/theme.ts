@@ -2,11 +2,15 @@ import { createTheme } from '@mui/material';
 
 export default createTheme({
 	palette: {
+		// type: 'light',
 		primary: {
-			main: '#f35c89',
+			main: '#7e1daa',
 		},
 		secondary: {
-			main: '#950740',
+			main: '#f50057',
+		},
+		error: {
+			main: '#ff1000',
 		},
 	},
 });

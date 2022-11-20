@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {Navigate} from 'react-router';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import Button from '@mui/material/Button';
-import Header from '../../UI/Header';
 import classes from '../../styles/Settings.module.sass';
 import { Paper, TextField } from '@mui/material';
 import anon from '../../assets/anon.jpg';
@@ -31,7 +30,6 @@ const Settings = () => {
 				height: '100%',
 				width: '100%',
 			}}>
-			<Header />
 			<div className={classes.settingsApp}>
 				<Paper elevation={10}>
 					<div className={classes.settingsContainer}>

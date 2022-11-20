@@ -1,9 +1,8 @@
 import React, { type FC } from 'react';
 import classes from '../../styles/App.module.sass';
 import { Box } from '@mui/material';
-import Header from '../../UI/Header';
+// import Header from '../../UI/Header';
 import AllWrapper from './AllWrapper';
-import Navigation from '../../UI/Navigation';
 
 const App: FC = (): JSX.Element => {
 
@@ -13,12 +12,10 @@ const App: FC = (): JSX.Element => {
 				height: '100%',
 				width: '100%',
 			}}>
-			<Header />
+			{/* <Header /> */}
 			<div className={classes.App}>
 				<div className={classes.AppWrapper}>
 					<Box display="flex" >
-						<Navigation />
-						{/* <div className={classes.divider} /> */}
 						<AllWrapper />
 					</Box>
 				</div>
