@@ -37,6 +37,7 @@ declare interface ILoginResponse {
     access_token?: string
 }
 
+
 declare enum Roles {
     slave,
     user,

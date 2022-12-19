@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
 import MuiDrawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import NavigationBar from './NavigationBar';
 import Button from '@mui/material/Button';
 import logo from '../assets/logo.png';
-import TextField from '@mui/material/TextField';
 import SearchBar from './SearchBar';
+import LogoutIcon from '@mui/icons-material/Logout';
 // import { Link } from 'react-router-dom';
 
 interface AppBarProps extends MuiAppBarProps {
@@ -62,7 +60,7 @@ const Drawer = styled(MuiDrawer, {
 			}),
 			width: theme.spacing(7),
 			[theme.breakpoints.up('sm')]: {
-				width: theme.spacing(0),
+				width: theme.spacing(7),
 			},
 		}),
 	},
@@ -74,9 +72,8 @@ export default function PrimarySearchAppBar({
 	children: React.ReactNode;
 }) {
 	const [open, setOpen] = useState<boolean>(true);
-	const drawerToggler = () => setOpen(prev => !prev);
+	const drawerToggle = () => setOpen(prev => !prev);
 
-	const navigate = useNavigate();
 
 	const logOutHandler = () => {
 		window.localStorage.clear();
@@ -97,7 +94,7 @@ export default function PrimarySearchAppBar({
 								edge="start"
 								color="inherit"
 								// aria-label="open drawer"
-								onClick={drawerToggler}
+								onClick={drawerToggle}
 								sx={{ mr: 2 }}>
 								{open ? (
 									<ChevronLeftIcon />
@@ -109,7 +106,7 @@ export default function PrimarySearchAppBar({
 								variant="h5"
 								noWrap
 								component="div">
-								zxchrnk admin panel
+								Admin panel
 							</Typography>
 						</Box>
 
@@ -120,7 +117,8 @@ export default function PrimarySearchAppBar({
 								variant="contained"
 								size="large"
 								sx={{ color: '#FFFFF1' }}
-								onClick={logOutHandler}>
+								onClick={logOutHandler}
+								startIcon={<LogoutIcon/>}>
 								<Typography
 									variant="body1"
 									noWrap
@@ -142,7 +140,7 @@ export default function PrimarySearchAppBar({
 				sx={{
 					height: '100vh',
 				}}
-				onClose={drawerToggler}>
+				onClose={drawerToggle}>
 				<Toolbar
 					sx={{
 						display: 'flex',
@@ -151,11 +149,11 @@ export default function PrimarySearchAppBar({
 						// borderBottom: '1px solid lightgrey',
 						px: [1],
 					}}>
-					<IconButton disableRipple onClick={drawerToggler}>
+					<IconButton disableRipple onClick={drawerToggle}>
 						<img src={logo} height={40} alt="" />
 					</IconButton>
 				</Toolbar>
-				<NavigationBar />
+				<NavigationBar open={open}/>
 			</Drawer>
 			<Box
 				component="main"

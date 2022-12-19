@@ -6,6 +6,7 @@ import { env } from 'process';
 const mypath = path.resolve(__dirname, '../../.env');
 dotenv.config({path: mypath});
 
+
 // console.log(process.env.DB_PORT, mypath)
 const config = {
 	development: {

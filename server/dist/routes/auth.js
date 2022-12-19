@@ -34,7 +34,6 @@ router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }, config_1.default.secret, {
         expiresIn: '1d',
     });
-    console.log(token);
     if (user) {
         res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { createdAt: undefined, updatedAt: undefined, token, access_token: user.vk_access_token, clientKey: config_1.default.appID }));
     }
@@ -107,7 +106,7 @@ router.get('/get_access_token', (req, res) => __awaiter(void 0, void 0, void 0, 
                 }, config_1.default.secret, {
                     expiresIn: '1d',
                 });
-                res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { createdAt: undefined, updatedAt: undefined, token, access_token: user.vk_access_token, clientKey: config_1.default.appID }));
+                res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { createdAt: undefined, updatedAt: undefined, vk_access_token: undefined, token, access_token: user.vk_access_token, clientKey: config_1.default.appID }));
             }
         }
     }

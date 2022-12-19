@@ -5,6 +5,7 @@ declare interface ILoginRequest {
     password: string
 }
 
+
 declare interface IRegisterRequest {
     email: string
     password: string

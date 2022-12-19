@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {type FC} from 'react';
 import { Paper, Box } from '@mui/material';
 import classes from '../../styles/VideoItem.module.sass';
 import useAppGetVideoQuery from '../../hooks/vkApi/useAppGetVideoQuery';
@@ -6,11 +6,10 @@ import Loader from '../../UI/Loader';
 import isGroup from '../../typeguards/isGroup';
 
 
-const VideoItem = ({
-	videoItem,
-}: {
-	videoItem: GetVideoResponse.AppResponse;
-}) => {
+interface Props {
+	videoItem: GetVideoResponse.AppResponse
+}
+const VideoItem: FC<Props> = ({videoItem}) => {
 	const {
 		duration,
 		image,

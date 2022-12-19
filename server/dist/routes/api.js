@@ -25,7 +25,7 @@ router.get('/authorize', (req, res) => __awaiter(void 0, void 0, void 0, functio
     const info = jsonwebtoken_1.default.decode(token);
     if ((0, isToken_1.default)(info)) {
         const user = yield (0, getUser_1.default)(info.uid);
-        res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { clientKey: config_1.default.appID, password: undefined, createdAt: undefined, updatedAt: undefined }));
+        res.json(Object.assign(Object.assign({ auth: true, info: 'Success!' }, user), { clientKey: config_1.default.appID, access_token: info.access_token, vk_access_token: undefined, password: undefined, createdAt: undefined, updatedAt: undefined }));
     }
     else {
         res.json({
@@ -54,10 +54,10 @@ router.post('/confirm_email', (req, res) => {
     }
     res.json('Account activated!');
 });
-router.get('/videos', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/all_videos', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.query;
-    const result = yield (0, getVideos_1.default)(+page);
-    res.send('All videos! get!');
+    const vkcontentArray = yield (0, getVideos_1.default)(+page);
+    res.json({ response: vkcontentArray });
 }));
 router.get('/user_videos', (req, res) => {
     res.send('User videos!');

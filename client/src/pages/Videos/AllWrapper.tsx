@@ -6,6 +6,7 @@ import Loader from '../../UI/Loader';
 import classes from '../../styles/wrappers.module.sass';
 
 
+
 const AllWrapper = () => {
 	const [page, setPage] = useState(1);
 	const { data, isLoading } = useGetAllVideosQuery(page);

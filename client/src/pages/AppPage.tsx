@@ -1,7 +1,6 @@
-import React, {FC} from 'react';
+import React from 'react';
 import App from './App/App';
 
-
-const AppPage: FC = (): JSX.Element => <App />;
+const AppPage: React.FC = () => <App />;
 
 export default AppPage;

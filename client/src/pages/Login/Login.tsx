@@ -10,6 +10,7 @@ import {
 	useGetUserByVkQuery,
 } from '../../store/services/authApi';
 
+
 import { isResponse } from '../../typeguards/isResponse';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import useAppGetUserQuery from '../../hooks/vkApi/useAppGetUserQuery';
@@ -36,7 +37,7 @@ const Login = () => {
 	const [registerUser] = useNewUserMutation();
 
 	const { data } = useGetUserByVkQuery(code, {
-		skip: code ? false : true,
+		skip: !code,
 	});
 
 	const result = useAppGetUserQuery(
@@ -45,7 +46,7 @@ const Login = () => {
 			fields: 'photo_200,nickname,first_name,last_name,id,email',
 			name_case: 'nom',
 		},
-		code ? false : true,
+		!code,
 	);
 
 	const oauthWithVk = async () => {

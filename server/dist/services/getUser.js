@@ -11,11 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../db/models/index");
 exports.default = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const isAdmin = yield index_1.Admins.findOne({
+        where: {
+            id,
+        },
+        raw: true,
+    });
     const user = yield index_1.User.findOne({
         where: {
-            id
+            id,
         },
-        raw: true
+        raw: true,
     });
-    return user;
+    return Object.assign(Object.assign({}, user), { isAdmin: isAdmin ? true : false });
 });

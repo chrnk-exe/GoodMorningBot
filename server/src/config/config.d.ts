@@ -27,6 +27,7 @@ declare interface DBConfig{
         dialectOptions?: object
         logging: boolean, 
       },
+    
       test: {
         database: string,
         username: string,
