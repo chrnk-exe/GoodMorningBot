@@ -12,6 +12,7 @@ import appTheme from './styles/theme';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+
 root.render(
 	<ThemeProvider theme={appTheme}>
 		<Provider store={store}>

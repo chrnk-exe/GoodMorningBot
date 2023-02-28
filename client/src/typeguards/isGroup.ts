@@ -3,3 +3,4 @@ export default (
 ): author is GetVideoResponse.GroupAuthor => {
 	return 'name' in author ? true : false;
 };
+

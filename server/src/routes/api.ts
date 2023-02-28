@@ -1,4 +1,4 @@
-import express, { Response, Router } from 'express';
+import express, {NextFunction, Response, Router} from 'express';
 // import { Request as JWTRequest } from 'express-jwt';
 import { TypedRequestBody, TypedRequestQuery } from '../expressTypes';
 import getUser from '../services/getUser';
@@ -7,8 +7,12 @@ import isToken from '../typeguards/isToken';
 import config from '../config';
 import { mailer } from '../transporter';
 import getVideos from '../services/getVideos';
+import userRoutes from './private/user';
+import adminController from '../controllers/adminController';
 
 const router: Router = express.Router();
+
+router.use(adminController, userRoutes);
 
 router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Response) => {
 	const { token } = req.query;
@@ -59,9 +63,9 @@ router.post('/confirm_email', (req: TypedRequestBody<{token: string}>, res: Resp
 
 router.get('/all_videos', async (req: TypedRequestQuery<{page: string}>, res: Response) => {
 	const {page} = req.query;
-	const vkcontentArray = await getVideos(+page);
+	const [vkcontentArray, len] = await getVideos(+page);
 
-	res.json({response: vkcontentArray});
+	res.json({response: vkcontentArray, length: len});
 });
 
 router.get('/user_videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {

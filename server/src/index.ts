@@ -8,6 +8,7 @@ import config from './config';
 const app: Express = express();
 const port = 5000;
 
+
 app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 app.use((req: JWTRequest, res: Response, next: NextFunction) => {

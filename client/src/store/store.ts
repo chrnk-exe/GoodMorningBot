@@ -5,6 +5,7 @@ import { userApi } from './services/authApi';
 import { appApi } from './services/appApi';
 import { vkApi } from './services/vkApi';
 
+
 export const store = configureStore({
 	reducer: {
 		user: userReducer,

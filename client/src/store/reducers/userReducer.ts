@@ -10,6 +10,7 @@ const initialState: User = {
 	activated: false,
 };
 
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,

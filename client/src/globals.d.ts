@@ -38,6 +38,7 @@ declare interface ILoginResponse {
 }
 
 
+
 declare enum Roles {
     slave,
     user,
@@ -46,6 +47,7 @@ declare enum Roles {
 
 declare interface IVideosResponse {
     response: {data: string, day: 0 | 1 | 2 | 3 | 4 | 5 | 6}[]
+    length: number
 }
 
 declare interface IVideoState {

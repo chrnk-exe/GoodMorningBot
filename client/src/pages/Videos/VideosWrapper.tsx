@@ -5,27 +5,24 @@ import VideoAccordion from './VideoAccordion';
 import Loader from '../../UI/Loader';
 import classes from '../../styles/wrappers.module.sass';
 
-
-
 const AllWrapper = () => {
 	const [page, setPage] = useState(1);
 	const { data, isLoading } = useGetAllVideosQuery(page);
 
 	const Videos = useAppGetVideosQuery(data?.response.map(item => item.data));
-	console.log(Videos.data);
+	console.log(Videos);
 
 	if (isLoading) return <Loader />;
 
 	return (
 		<div
-
 			style={{
 				width: '100%',
 				height: 'max-content',
 				minHeight: '100%'
 			}}>
 			<h2 className={classes.header}>All videos</h2>
-			<VideoAccordion videos={Videos.data} page={page} setPage={setPage}/>
+			<VideoAccordion videos={Videos.data} page={page} setPage={setPage} maxPages={Videos.data?.length}/>
 		</div>
 	);
 };

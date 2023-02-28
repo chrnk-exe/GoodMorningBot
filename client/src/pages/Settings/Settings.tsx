@@ -7,6 +7,7 @@ import { Paper, TextField } from '@mui/material';
 import anon from '../../assets/anon.jpg';
 import { useConfirmMailMutation } from '../../store/services/appApi';
 
+
 const Settings = () => {
 	const user = useAppSelector(state => state.user);
 	const [settings, setSettings] = useState({

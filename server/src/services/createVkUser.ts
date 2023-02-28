@@ -16,7 +16,7 @@ export default async (access_token: string, id: number, email?: string) => {
 		where: {
 			id,
 		},
-		raw: true,
+		// raw: true,
 	});
 
 	if (!check) {
@@ -38,6 +38,17 @@ export default async (access_token: string, id: number, email?: string) => {
 			...user,
 			isAdmin: isAdmin ? true : false,
 		};
+	} else {
+		const data = await check.update({vk_access_token: access_token}, {raw: true});
+		const user = {
+			id: data.getDataValue('id'),
+			email: data.getDataValue('email'),
+			vklink: data.getDataValue('vklink'),
+			vk_access_token: access_token,
+			last_vizit: new Date(),
+			added_videos: data.getDataValue('added_videos'),
+			activated: data.getDataValue('activated')
+		};
+		return { ...user, isAdmin: !!isAdmin };
 	}
-	return { ...check, isAdmin: isAdmin ? true : false };
 };

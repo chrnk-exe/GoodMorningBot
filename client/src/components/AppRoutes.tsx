@@ -18,6 +18,7 @@ import UsersPage from '../pages/UsersPage';
 
 
 
+
 const AppRoutes: React.FC = (): JSX.Element => {
 	const token = useAppSelector(state => state.auth.token);
 	const {isLoading} = useAuthorizeQuery(token ? token : '', {
@@ -36,7 +37,7 @@ const AppRoutes: React.FC = (): JSX.Element => {
 	if (isLoading || clientKeyQueryResult.isLoading || getUserByVkApi.isLoading)
 		return <Loader/>;
 
-	console.log(user);
+	// console.log(user);
 
 	return (
 		<Routes>

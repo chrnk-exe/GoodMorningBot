@@ -10,6 +10,7 @@ const getParams = (params?: Record<string, string | number>): string => {
 	return result.slice(0, result.length - 1);
 };
 
+
 export default (
 	{ baseUrl }: { baseUrl: string } = { baseUrl: '' },
 ): BaseQueryFn<

@@ -51,3 +51,12 @@ declare interface AccessTokenResponse {
     user_id: number,
     email?: string
 }
+
+declare interface NewUser {
+    // access_token: string,
+    // user_id: number,
+    email?: string
+    name: string
+    Role: number
+    password: string
+}

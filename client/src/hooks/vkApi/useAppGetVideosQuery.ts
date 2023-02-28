@@ -1,6 +1,7 @@
 import { useGetVideoQuery } from '../../store/services/vkApi';
 import { type RootState, store } from '../../store/store';
 
+
 export default
 (
 	content: string[] | undefined,
@@ -8,7 +9,8 @@ export default
 ) => {
 	const access_token =
             (store.getState() as RootState).auth.access_token || '';
-    
+
+
 	return useGetVideoQuery(
 		{
 			access_token,

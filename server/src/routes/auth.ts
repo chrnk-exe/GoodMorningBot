@@ -124,7 +124,7 @@ router.get(
 					}&client_secret=${
 						config.secretID
 					}&redirect_uri=${'http://localhost:3000'}/login&code=${code}`
-				); 
+				);
 			} catch {
 				res.json({
 					info: 'Code is invalid or expired'
@@ -133,7 +133,6 @@ router.get(
 			
 			if(resp){
 				const {access_token, user_id, email} = resp.data;
-
 				const user = await createVkUser(access_token, user_id, email);
 				
 				if(user){
@@ -141,7 +140,7 @@ router.get(
 						{
 							Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
 							email: user?.email,
-							vk: user?.vklink ? true : false,
+							vk: !!user?.vklink,
 							access_token: user?.vk_access_token,
 							uid: user?.id,
 							activated: user?.activated,

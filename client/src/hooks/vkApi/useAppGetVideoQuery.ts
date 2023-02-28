@@ -1,6 +1,7 @@
 import { useGetVideoQuery } from '../../store/services/vkApi';
 import { type RootState, store } from '../../store/store';
 
+
 export default
 (
 	content: string,

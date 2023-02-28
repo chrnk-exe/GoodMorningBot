@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 
+
 const SearchBar = () => {
 	const [searchText, setSearch] = useState<string>('');
 
@@ -50,3 +51,4 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+

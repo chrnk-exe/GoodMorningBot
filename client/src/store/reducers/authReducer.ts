@@ -13,6 +13,7 @@ const initialState: {
 	access_token: null
 };
 
+
 export const tokenSlice = createSlice({
 	name: 'tokens',
 	initialState,
@@ -68,6 +69,7 @@ export const tokenSlice = createSlice({
 				if(access_token){
 					state.access_token = access_token;
 				}
+				console.log(action.payload);
 			});
 	}
 });

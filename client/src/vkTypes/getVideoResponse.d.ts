@@ -9,6 +9,7 @@ declare namespace GetVideoResponse {
         allowed: any[];
         excluded: any[];
     }
+    
 
     export type categories= 'nobody' | 'all' | 'friends' | 'friends_of_friends' | 'users';
 

@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import fetchJsonpBaseQuery from '../../fetchJsonpBaseQuery';
 
+
 const createAuthor = (
 	ownerID: number,
 	profiles?: GetVideoResponse.Profile[],
@@ -53,8 +54,9 @@ export const vkApi = createApi({
 		>({
 			query: params => ({ url: 'video.get', params }),
 			transformResponse: (response: GetVideoResponse.Response) => {
+				console.log(response);
 				const { items, profiles, groups } = response;
-				const result = items.map(item => ({
+				return items.map(item => ({
 					duration: item.duration,
 					image: item.image[item.image.length - 1].url,
 					first_frame:
@@ -67,49 +69,6 @@ export const vkApi = createApi({
 					id: item.id,
 					title: item.title
 				}));
-				return result;
-				// if (isGetVideoResponse(response)) {
-				// 	if (response.items[0].privacy_view.category !== 'all') {
-				// 		return {
-				// 			error_code: -1,
-				// 			error_msg: 'Video unavailable',
-				// 		};
-				// 	}
-				// 	const result: GetVideoResponse.AppResponse = {
-				// 		duration: response.items[0].duration,
-				// 		image: response.items[0].image[
-				// 			response.items[0].image.length - 1
-				// 		].url,
-				// 		first_frane:
-				// 			response.items[0].first_frame[
-				// 				response.items[0].first_frame.length - 1
-				// 			].url,
-				// 		video: response.items[0].player,
-				// 		views: response.items[0].views,
-				// 		likes: response.items[0].likes.count,
-				// 		reposts: response.items[0].reposts.count,
-				// 	};
-				// 	if (withProfile(response)) {
-				// 		result.author = {
-				// 			firstName: response.profiles[0].first_name,
-				// 			secondName: response.profiles[0].last_name,
-				// 			url: `vk.com/id${response.profiles[0].id}`,
-				// 		} as GetVideoResponse.ProfileAuthor;
-				// 	} else if (withGroup(response)) {
-				// 		result.author = {
-				// 			name: response.groups[0].name,
-				// 			photo_200: response.groups[0].photo_200,
-				// 			url: `vk.com/id${response.groups[0].id}`,
-				// 		};
-				// 	}
-				// 	return result;
-				// } else {
-				// 	if(response) return response;
-				// 	else return {
-				// 		error_code: -1,
-				// 		error_msg: 'Response is undefined'
-				// 	};
-				// }
 			},
 		}),
 	}),
