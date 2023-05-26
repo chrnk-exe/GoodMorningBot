@@ -1,6 +1,5 @@
-from models import session, User, Videos, MailingUser, Column
-import datetime, json
-from service_logger import logger
+from models import session, Videos
+from services.service_logger import logger
 
 
 # Доделать прикручивание видео к определённому юзеру

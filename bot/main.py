@@ -6,6 +6,7 @@ from services.services import *
 import logging
 from dotenv import load_dotenv
 load_dotenv()
+
 isProduction = os.getenv('APP_MODE') == 'production'
 
 main_logger = logging.getLogger(__name__)

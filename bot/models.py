@@ -17,7 +17,7 @@ database_name = os.getenv('DB_DATABASE')
 
 isProduction = os.getenv('APP_MODE') == 'production'
 logging.basicConfig(level=logging.DEBUG if isProduction else logging.INFO,
-                    filename=f'{os.getcwd()}/../logs/{__name__}.log', filemode='a',
+                    filename=f'{os.getcwd()}/logs/{__name__}.log', filemode='a',
                     format="%(name)s %(asctime)s %(levelname)s %(message)s")
 
 

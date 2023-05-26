@@ -1,6 +1,6 @@
 from models import session, Videos
 import random
-from service_logger import logger
+from services.service_logger import logger
 
 
 @logger

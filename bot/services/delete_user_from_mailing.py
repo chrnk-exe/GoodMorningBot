@@ -1,5 +1,5 @@
 from models import session, MailingUser
-from service_logger import logger, service_logger
+from services.service_logger import logger, service_logger
 
 
 @logger

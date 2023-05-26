@@ -1,6 +1,5 @@
-from models import session, User, Videos, MailingUser, Column, Admins
-import datetime, json
-from service_logger import logger
+from models import session, Admins
+from services.service_logger import logger
 
 
 @logger
