@@ -1,17 +1,24 @@
 import datetime
-from enum import unique
-from time import timezone
+import os
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, Text, Date, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import BYTEA
-from sqlalchemy.sql import func
 
-engine = create_engine('postgresql://postgres:qwerty@localhost:5432/BotDB', echo=False)
+from dotenv import load_dotenv
+database_username = os.getenv('DB_USERNAME')
+database_password = os.getenv('DB_PASSWORD')
+database_host = os.getenv('DB_HOST')
+database_port = os.getenv('DB_PORT')
+database_name = os.getenv('DB_DATABASE')
+
+engine = create_engine(f'postgresql://{database_username}:{database_password}@{database_host}:{database_port}/'
+                       f'{database_name}', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -69,7 +76,8 @@ class MailingUser(Base):
         self.id = vkid
         self.vklink = vklink
         self.customVideos = customVideos
-        
+
+
 class Admins(Base):
     __tablename__ = 'admins'
     id = Column(Integer, primary_key=True)
@@ -77,10 +85,5 @@ class Admins(Base):
     def __init__(self, id):
         self.id = id
 
+
 Base.metadata.create_all(engine)
-
-# user = User(184915743, 'ivan_kot2001@mail.ru', 'iqw184915743', 'vk.com/id184915743', datetime.date(2022, 1, 1).today(), '[]', True)
-# session.add(user)
-# session.commit()
-
-# print(session.query(User).filter_by(name='Вася').first().email)

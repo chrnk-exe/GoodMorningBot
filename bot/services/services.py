@@ -8,3 +8,4 @@ from services.delete_user_from_mailing import *
 from services.is_admin import *
 from services.mailing_users_ids import *
 from services.is_subscribed import *
+from services.get_random_video import *

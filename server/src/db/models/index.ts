@@ -8,6 +8,7 @@ import user from './user';
 import videos from './videos';
 import admins from './admins';
 
+
 const node_env: DBConfigIndex = process.env['NODE_ENV'] as DBConfigIndex || 'development';
 const config = conf[node_env];
 

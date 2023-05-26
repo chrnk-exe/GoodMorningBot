@@ -1,20 +1,23 @@
-import imp
 from vk_api.longpoll import VkLongPoll, VkEventType
-
-from apifuncs import write_msg, configure_keyboard, get_attach_content_user, get_random_video
+from lib import write_msg, configure_keyboard, get_attach_content_user
 from vk_session import vk_session
 # from db import *
 from services.services import *
 
+# attachment
 VIDEO = 'video'
 
-buttons = { 'sub':'Подписаться на рассылку', 
-            'unsub': 'Отписаться от рассылки', 
-            'about': 'Об авторе', 
-            'add': 'Добавить своё видео',
-            'send': 'Разослать!'}
+# Название кнопок
+buttons = {
+    'sub':'Подписаться на рассылку',
+    'unsub': 'Отписаться от рассылки',
+    'about': 'Об авторе',
+    'add': 'Добавить своё видео',
+    'send': 'Разослать!'
+}
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
+
     longpoll = VkLongPoll(vk_session)
     # Работа с сообщениями
     # Основной цикл
@@ -31,9 +34,9 @@ if __name__ == '__main__':
                     continue
 
                 if request == buttons['unsub']:
-                    write_msg(user_id, delete_user_from_mailing(user_id), configure_keyboard(user_id))
+                    message = 'Вы и не были подписаны!' if delete_user_from_mailing(user_id) == -1 else 'За что...'
+                    write_msg(user_id, message, configure_keyboard(user_id))
                     continue
-
 
                 if request == buttons['about']:
                     write_msg(user_id, 'https://vk.com/no_one_hears_u', configure_keyboard(user_id))
@@ -44,26 +47,33 @@ if __name__ == '__main__':
                     continue
 
                 if request.find('добавить админа') != -1 and is_admin(user_id):
-                    id = [int(s) for s in request.split(' ') if s.isdigit()]
-                    write_msg(user_id, add_admin(id[0]), configure_keyboard(user_id))
+                    id_list = [int(s) for s in request.split(' ') if s.isdigit()]
+                    write_msg(user_id, add_admin(id_list[0]), configure_keyboard(user_id))
                     continue
 
                 if request.find('удалить админа') != -1 and is_admin(user_id):
-                    id = [int(s) for s in request.split(' ') if s.isdigit()]
-                    write_msg(user_id, delete_admin(id[0]), configure_keyboard(user_id))
+                    id_list = [int(s) for s in request.split(' ') if s.isdigit()]
+                    write_msg(user_id, delete_admin(id_list[0]), configure_keyboard(user_id))
                     continue
 
                 if request == buttons['send'] and is_admin(user_id):
-                    for id in mailing_users_ids():
-                        write_msg(id, 'С добрым утром!', configure_keyboard(id), get_random_video())
+                    for mailing_user_id in mailing_users_ids():
+                        write_msg(mailing_user_id, 'С добрым утром!', configure_keyboard(mailing_user_id),
+                                  get_random_video())
                     continue
 
                 contents = get_attach_content_user(attachments, VIDEO)
                 if len(contents) and is_admin(user_id):
                     add_video_to_mailing(user_id, contents)
+                    continue
+
                 if request == '1000-7':
                     write_msg(user_id, '993', configure_keyboard(user_id))
+                    continue
+
                 if request == 'test':
                     write_msg(user_id, 'test video', configure_keyboard(user_id), contents[0])
                     print(contents[0])
-                write_msg(user_id, 'ну привет!', configure_keyboard(user_id))
+                    continue
+
+                write_msg(user_id, 'Прости, я не знаю что тебе ответить(', configure_keyboard(user_id))

@@ -50,6 +50,14 @@ declare interface IVideosResponse {
     length: number
 }
 
+
+declare interface BaseQueryApi {
+    getState: () => unknown
+    extra: unknown
+    endpoint: string
+    type: 'query' | 'mutation'
+    forced: boolean | undefined
+}
 declare interface IVideoState {
     all: IVideos[],
     user: IVideos[]
