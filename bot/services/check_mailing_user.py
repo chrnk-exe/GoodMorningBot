@@ -1,7 +1,9 @@
-from models import session, User, Videos, MailingUser, Column
-import datetime, json
+from models import session, MailingUser
+from service_logger import logger
 
-def check_mailing_user(id):
-    user = session.query(MailingUser).filter_by(id=id).first()
+
+@logger
+def check_mailing_user(user_id):
+    user = session.query(MailingUser).filter_by(id=user_id).first()
     session.commit()
-    return user
+    return user if user is None else True

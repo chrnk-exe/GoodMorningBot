@@ -1,7 +1,9 @@
-from models import session, User, Videos, MailingUser, Column, Admins
-import datetime, json
+from models import session, Admins
+from service_logger import logger
 
-def is_admin(id):
-    id = session.query(Admins).filter_by(id=id).first()
+
+@logger
+def is_admin(user_id):
+    user = session.query(Admins).filter_by(id=user_id).first()
     session.commit()
-    return True if id is not None else False
+    return user is not None

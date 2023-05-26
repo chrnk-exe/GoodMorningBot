@@ -2,7 +2,8 @@ node_modules/
 *.mp4
 venv/
 testVideos/
-
+logs/
+/logs
 .vscode
 .env
 

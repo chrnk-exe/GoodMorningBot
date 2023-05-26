@@ -1,7 +1,9 @@
 from models import session, Videos
 import random
+from service_logger import logger
 
 
+@logger
 def get_random_video():
     videos = list(map(lambda x: x.vkcontent, session.query(Videos).all()))
     session.commit()

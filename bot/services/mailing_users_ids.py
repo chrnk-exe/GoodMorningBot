@@ -1,10 +1,9 @@
-from models import session, User, Videos, MailingUser, Column
-import datetime, json
+from models import session, MailingUser
+from service_logger import logger
 
+
+@logger
 def mailing_users_ids():
     mailing_users = session.query(MailingUser).all()
     session.commit()
-    # ids = []
-    # for user in mailing_users:
-    #     ids.append(user.id)
     return [user.id for user in mailing_users]

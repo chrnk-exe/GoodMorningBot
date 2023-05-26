@@ -1,8 +1,10 @@
-from models import session, User, Videos, MailingUser, Column
-import datetime, json
+from models import session, MailingUser
+from service_logger import logger
 
-def is_subscribed(id):
-    user = session.query(MailingUser).filter_by(id=id).first()
+
+@logger
+def is_subscribed(user_id):
+    user = session.query(MailingUser).filter_by(id=user_id).first()
     session.commit()
     try:
         return user.id

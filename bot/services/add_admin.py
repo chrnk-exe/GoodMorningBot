@@ -1,16 +1,20 @@
-from models import session, User, Videos, MailingUser, Column, Admins
-import datetime, json
+from models import session, Admins
+from service_logger import logger
 
-def add_admin(id):
-    id = session.query(Admins).filter_by(id=id).first()
-    if id == None:
-        user = Admins(id)
-        try: 
+
+@logger
+def add_admin(user_id):
+    user_is_admin = session.query(Admins).filter_by(id=user_id).first()
+    if not user_is_admin:
+        user = Admins(user_id)
+        try:
             session.add(user)
             session.commit()
-            return 'vk.com/id' + str(id) + ' теперь админ!'
+            return 0
         except:
-            return 'vk.com/id' + str(id) + ' и так админ!'
+            session.rollback()
+            return 1
     else:
         session.commit()
-        return 'vk.com/id' + str(id) + ' теперь админ!'
+        return 1
+
