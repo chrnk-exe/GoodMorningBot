@@ -7,11 +7,6 @@ import classes from '../styles/NotFound.module.sass';
 const NotFound = () => {
 
 	const [timer, setTime] = useState(5);
-	// const user = useAppSelector(state => state.user);
-    
-	// if(user.userID !== -1){
-
-	// }
 
 	const startTimer = () => {
 		let timeout = timer;

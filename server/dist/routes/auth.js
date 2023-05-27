@@ -26,11 +26,10 @@ router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const { login, password } = req.body;
     const user = yield (0, LoginUser_1.default)(login, password);
     const token = jsonwebtoken_1.default.sign({
-        Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : (user === null || user === void 0 ? void 0 : user.activated) ? 1 : 0,
+        Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : 1,
         email: user === null || user === void 0 ? void 0 : user.email,
-        vk: (user === null || user === void 0 ? void 0 : user.vklink) ? true : false,
-        uid: user === null || user === void 0 ? void 0 : user.id,
-        activated: user === null || user === void 0 ? void 0 : user.activated,
+        vk: !!(user === null || user === void 0 ? void 0 : user.vklink),
+        uid: user === null || user === void 0 ? void 0 : user.id
     }, config_1.default.secret, {
         expiresIn: '1d',
     });
@@ -64,12 +63,11 @@ router.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, functio
     const { login, password } = req.body;
     const user = yield (0, createUser_1.default)(login, password);
     const token = jsonwebtoken_1.default.sign({
-        Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : (user === null || user === void 0 ? void 0 : user.activated) ? 1 : 0,
+        Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : 1,
         email: user === null || user === void 0 ? void 0 : user.email,
-        vk: (user === null || user === void 0 ? void 0 : user.vklink) ? true : false,
+        vk: !!(user === null || user === void 0 ? void 0 : user.vklink),
         access_token: user.vk_access_token,
-        uid: user === null || user === void 0 ? void 0 : user.id,
-        activated: user === null || user === void 0 ? void 0 : user.activated,
+        uid: user === null || user === void 0 ? void 0 : user.id
     }, config_1.default.secret, {
         expiresIn: '1d',
     });
@@ -97,12 +95,11 @@ router.get('/get_access_token', (req, res) => __awaiter(void 0, void 0, void 0, 
             const user = yield (0, createVkUser_1.default)(access_token, user_id, email);
             if (user) {
                 const token = jsonwebtoken_1.default.sign({
-                    Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : (user === null || user === void 0 ? void 0 : user.activated) ? 1 : 0,
+                    Role: (user === null || user === void 0 ? void 0 : user.isAdmin) ? 2 : 1,
                     email: user === null || user === void 0 ? void 0 : user.email,
-                    vk: (user === null || user === void 0 ? void 0 : user.vklink) ? true : false,
+                    vk: !!(user === null || user === void 0 ? void 0 : user.vklink),
                     access_token: user === null || user === void 0 ? void 0 : user.vk_access_token,
-                    uid: user === null || user === void 0 ? void 0 : user.id,
-                    activated: user === null || user === void 0 ? void 0 : user.activated,
+                    uid: user === null || user === void 0 ? void 0 : user.id
                 }, config_1.default.secret, {
                     expiresIn: '1d',
                 });
@@ -117,8 +114,4 @@ router.get('/get_access_token', (req, res) => __awaiter(void 0, void 0, void 0, 
         });
     }
 }));
-router.get('/login_vk', (req, res) => {
-    console.log(req.url);
-    res.json({ 'aaa': 'bbb' });
-});
 exports.default = router;

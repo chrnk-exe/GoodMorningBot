@@ -24,7 +24,7 @@ exports.default = (access_token, id, email) => __awaiter(void 0, void 0, void 0,
         where: {
             id,
         },
-        raw: true,
+        // raw: true,
     });
     if (!check) {
         const user = yield index_1.User.create({
@@ -34,11 +34,21 @@ exports.default = (access_token, id, email) => __awaiter(void 0, void 0, void 0,
             vk_access_token: access_token,
             last_vizit: new Date(),
             added_videos: '[]',
-            activated: true,
         }, {
             raw: true,
         });
-        return Object.assign(Object.assign({}, user), { isAdmin: isAdmin ? true : false });
+        return Object.assign(Object.assign({}, user), { isAdmin: !!isAdmin });
     }
-    return Object.assign(Object.assign({}, check), { isAdmin: isAdmin ? true : false });
+    else {
+        const data = yield check.update({ vk_access_token: access_token }, { raw: true });
+        const user = {
+            id: data.getDataValue('id'),
+            email: data.getDataValue('email'),
+            vklink: data.getDataValue('vklink'),
+            vk_access_token: access_token,
+            last_vizit: new Date(),
+            added_videos: data.getDataValue('added_videos'),
+        };
+        return Object.assign(Object.assign({}, user), { isAdmin: !!isAdmin });
+    }
 });

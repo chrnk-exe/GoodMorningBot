@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userReducer from './reducers/userReducer';
 import authReducer from './reducers/authReducer';
-import { userApi } from './services/authApi';
+import { authApi } from './services/authApi';
 import { appApi } from './services/appApi';
 import { vkApi } from './services/vkApi';
 
@@ -10,13 +10,13 @@ export const store = configureStore({
 	reducer: {
 		user: userReducer,
 		auth: authReducer,
-		[userApi.reducerPath]: userApi.reducer,
+		[authApi.reducerPath]: authApi.reducer,
 		[appApi.reducerPath]: appApi.reducer,
 		[vkApi.reducerPath]: vkApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
-			.concat(userApi.middleware)
+			.concat(authApi.middleware)
 			.concat(appApi.middleware)
 			.concat(vkApi.middleware),
 });

@@ -19,11 +19,10 @@ router.post(
 		const user = await LoginUser(login, password);
 		const token = jwt.sign(
 			{
-				Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
+				Role: user?.isAdmin ? 2 : 1,
 				email: user?.email,
-				vk: user?.vklink ? true : false,
-				uid: user?.id,
-				activated: user?.activated,
+				vk: !!user?.vklink,
+				uid: user?.id
 			},
 			config.secret,
 			{
@@ -75,12 +74,11 @@ router.post(
 		const user = await createUser(login, password);
 		const token = jwt.sign(
 			{
-				Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
+				Role: user?.isAdmin ? 2 : 1,
 				email: user?.email,
-				vk: user?.vklink ? true : false,
+				vk: !!user?.vklink,
 				access_token: user.vk_access_token,
-				uid: user?.id,
-				activated: user?.activated,
+				uid: user?.id
 			},
 			config.secret,
 			{
@@ -138,12 +136,11 @@ router.get(
 				if(user){
 					const token = jwt.sign(
 						{
-							Role: user?.isAdmin ? 2 : user?.activated ? 1 : 0,
+							Role: user?.isAdmin ? 2 : 1 ,
 							email: user?.email,
 							vk: !!user?.vklink,
 							access_token: user?.vk_access_token,
-							uid: user?.id,
-							activated: user?.activated,
+							uid: user?.id
 						},
 						config.secret,
 						{
@@ -171,11 +168,5 @@ router.get(
 		}
 	}	
 );
-
-router.get('/login_vk', (req: TypedRequestQuery<Record<string, never>>, res: Response) => {
-	console.log(req.url);
-
-	res.json({'aaa': 'bbb'});
-});
 
 export default router;

@@ -19,7 +19,10 @@ const isToken_1 = __importDefault(require("../typeguards/isToken"));
 const config_1 = __importDefault(require("../config"));
 const transporter_1 = require("../transporter");
 const getVideos_1 = __importDefault(require("../services/getVideos"));
+const user_1 = __importDefault(require("./private/user"));
+const adminController_1 = __importDefault(require("../controllers/adminController"));
 const router = express_1.default.Router();
+router.use(adminController_1.default, user_1.default);
 router.get('/authorize', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { token } = req.query;
     const info = jsonwebtoken_1.default.decode(token);
@@ -56,8 +59,8 @@ router.post('/confirm_email', (req, res) => {
 });
 router.get('/all_videos', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.query;
-    const vkcontentArray = yield (0, getVideos_1.default)(+page);
-    res.json({ response: vkcontentArray });
+    const [vkcontentArray, len] = yield (0, getVideos_1.default)(+page);
+    res.json({ response: vkcontentArray, length: len });
 }));
 router.get('/user_videos', (req, res) => {
     res.send('User videos!');

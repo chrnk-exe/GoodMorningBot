@@ -4,6 +4,6 @@ exports.default = (token) => {
     if (typeof token === 'string')
         return false;
     if (token)
-        return 'uid' in token ? true : false;
+        return 'uid' in token;
     return false;
 };

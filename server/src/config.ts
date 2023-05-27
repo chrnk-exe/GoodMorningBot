@@ -10,7 +10,8 @@ const config = {
 	mailGooglePassword: process.env.MAIL_GOOGLE_PASSWORD,
 	host: process.env.DOMAIN,
 	appID: process.env.VK_APP_ID,
-	secretID: process.env.SECRET_VK_APP_ID
+	secretID: process.env.SECRET_VK_APP_ID,
+	vkGroupToken: process.env.VK_APP_TOKEN
 };
 
 export default config;

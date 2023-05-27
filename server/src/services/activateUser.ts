@@ -7,8 +7,7 @@ export default async (id: number) => {
 		}
 	});
 	if(user){
-		user.activated = true;
-		user.save();
+		await user.save();
 		return true;
 	}
 	return false;

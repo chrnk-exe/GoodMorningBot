@@ -28,7 +28,6 @@ export default async (access_token: string, id: number, email?: string) => {
 				vk_access_token: access_token,
 				last_vizit: new Date(),
 				added_videos: '[]',
-				activated: true,
 			},
 			{
 				raw: true,
@@ -36,7 +35,7 @@ export default async (access_token: string, id: number, email?: string) => {
 		);
 		return {
 			...user,
-			isAdmin: isAdmin ? true : false,
+			isAdmin: !!isAdmin,
 		};
 	} else {
 		const data = await check.update({vk_access_token: access_token}, {raw: true});
@@ -47,7 +46,6 @@ export default async (access_token: string, id: number, email?: string) => {
 			vk_access_token: access_token,
 			last_vizit: new Date(),
 			added_videos: data.getDataValue('added_videos'),
-			activated: data.getDataValue('activated')
 		};
 		return { ...user, isAdmin: !!isAdmin };
 	}

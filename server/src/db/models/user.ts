@@ -14,8 +14,7 @@ export default (sequelize: Sequelize) => {
 		vklink: DataTypes.STRING,
 		last_vizit: DataTypes.DATE,
 		added_videos: DataTypes.TEXT,
-		vk_access_token: DataTypes.STRING,
-		activated: DataTypes.BOOLEAN,
+		vk_access_token: DataTypes.STRING
 	}, {
 		modelName: 'users',
 		tableName: 'users',

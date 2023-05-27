@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import {userApi} from '../services/authApi';
+import {authApi} from '../services/authApi';
 import { appApi } from '../services/appApi';
 
 const initialState: {
@@ -25,7 +25,7 @@ export const tokenSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addMatcher(userApi.endpoints.loginUser.matchFulfilled, (state, action): void => {
+			.addMatcher(authApi.endpoints.loginUser.matchFulfilled, (state, action): void => {
 				const {token, clientKey} = action.payload;
 				console.log(action.payload);
 				if(token){
@@ -35,16 +35,16 @@ export const tokenSlice = createSlice({
 					state.clientKey = clientKey;
 				}
 			})
-			.addMatcher(userApi.endpoints.newUser.matchFulfilled, (state, action): void => {
-				const {token, clientKey} = action.payload;
-				console.log(action.payload);
-				if(token){
-					// window.localStorage.setItem('clientKey', clientKey);
-					window.localStorage.setItem('token', token);
-					state.token = token;
-					state.clientKey = clientKey;
-				}
-			})
+			// .addMatcher(authApi.endpoints.newUser.matchFulfilled, (state, action): void => {
+			// 	const {token, clientKey} = action.payload;
+			// 	console.log(action.payload);
+			// 	if(token){
+			// 		// window.localStorage.setItem('clientKey', clientKey);
+			// 		window.localStorage.setItem('token', token);
+			// 		state.token = token;
+			// 		state.clientKey = clientKey;
+			// 	}
+			// })
 			.addMatcher(appApi.endpoints.authorize.matchFulfilled, (state, action) => {
 				const {clientKey, access_token} = action.payload;
 				if(clientKey){
@@ -55,12 +55,12 @@ export const tokenSlice = createSlice({
 					state.access_token = access_token;
 				}
 			})
-			.addMatcher(userApi.endpoints.getClientKey.matchFulfilled, (state, action) => {
+			.addMatcher(authApi.endpoints.getClientKey.matchFulfilled, (state, action) => {
 				if(action.payload.clientKey){
 					state.clientKey = action.payload.clientKey;
 				}
 			})
-			.addMatcher(userApi.endpoints.getUserByVk.matchFulfilled, (state, action) => {
+			.addMatcher(authApi.endpoints.getUserByVk.matchFulfilled, (state, action) => {
 				const { token, access_token } = action.payload;
 				if(token){
 					window.localStorage.setItem('token', token);

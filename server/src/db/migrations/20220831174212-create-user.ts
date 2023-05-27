@@ -1,6 +1,7 @@
 'use strict';
 import {QueryInterface, DataTypes } from 'sequelize';
 
+
 module.exports = {
 	async up(queryInterface: QueryInterface ) {
 		await queryInterface.createTable('users', {
@@ -29,9 +30,6 @@ module.exports = {
 				type: DataTypes.TEXT
 			},
 			isAdmin: {
-				type: DataTypes.BOOLEAN
-			},
-			activated: {
 				type: DataTypes.BOOLEAN
 			},
 			vk_access_token: {

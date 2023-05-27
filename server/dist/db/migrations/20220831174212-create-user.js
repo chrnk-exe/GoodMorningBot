@@ -41,9 +41,6 @@ module.exports = {
                 isAdmin: {
                     type: sequelize_1.DataTypes.BOOLEAN
                 },
-                activated: {
-                    type: sequelize_1.DataTypes.BOOLEAN
-                },
                 vk_access_token: {
                     type: sequelize_1.DataTypes.STRING,
                     allowNull: true

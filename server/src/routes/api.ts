@@ -1,19 +1,16 @@
-import express, {NextFunction, Response, Router} from 'express';
+import express, {Response, Router} from 'express';
 // import { Request as JWTRequest } from 'express-jwt';
 import { TypedRequestBody, TypedRequestQuery } from '../expressTypes';
 import getUser from '../services/getUser';
 import jwt from 'jsonwebtoken';
 import isToken from '../typeguards/isToken';
-import config from '../config';
-import { mailer } from '../transporter';
 import getVideos from '../services/getVideos';
+import config from '../config';
 import userRoutes from './private/user';
+import botRoutes from './private/interactive';
 import adminController from '../controllers/adminController';
 
 const router: Router = express.Router();
-
-router.use(adminController, userRoutes);
-
 router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Response) => {
 	const { token } = req.query;
 	const info = jwt.decode(token);
@@ -38,29 +35,6 @@ router.get('/authorize', async (req: TypedRequestQuery<{token: string}>, res: Re
 	}
 });
 
-
-
-router.post('/confirm_email', (req: TypedRequestBody<{token: string}>, res: Response) => {
-	const { token }= req.body;
-	const info = jwt.decode(token);
-	if(isToken(info)){
-		//generate token
-		const {uid,  Role, email, vk} = info;
-		const generated_token = jwt.sign({
-			uid,
-			activated: true,
-			Role: Role+1,
-			email,
-			vk
-		}, config.secret, {
-			expiresIn: '1h'
-		});
-		//send message
-		mailer(`Click this link to confirm your account: http://${config.host}/auth/confirm_email?token=${generated_token}`, email);
-	}
-	res.json('Account activated!');
-});
-
 router.get('/all_videos', async (req: TypedRequestQuery<{page: string}>, res: Response) => {
 	const {page} = req.query;
 	const [vkcontentArray, len] = await getVideos(+page);
@@ -68,9 +42,8 @@ router.get('/all_videos', async (req: TypedRequestQuery<{page: string}>, res: Re
 	res.json({response: vkcontentArray, length: len});
 });
 
-router.get('/user_videos', (req: TypedRequestQuery<{page: string}>, res: Response) => {
-	res.send('User videos!');
-});
+router.use('/interactive', botRoutes);
 
+router.use(adminController, userRoutes);
 
 export default router;

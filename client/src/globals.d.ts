@@ -4,7 +4,6 @@ declare module '*.scss';
 declare interface User {
     userID: number
     Role: Roles
-    activated: boolean
     email?: string
     avatarURL?: string 
     userName?: string
@@ -17,6 +16,10 @@ declare interface ILoginRequest {
     password: string;
 }
 
+/**
+ * @interface ILoginResponse
+ * @type ILoginResponse
+ */
 declare interface ILoginResponse {
     auth: boolean
     info: string

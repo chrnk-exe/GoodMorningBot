@@ -19,9 +19,9 @@ app.use((req: JWTRequest, res: Response, next: NextFunction) => {
 
 app.use('/auth', authRoutes);
 
-app.use(expressjwt({ 
-	secret: config.secret, 
-	algorithms: ['HS256'],
+app.use(expressjwt({
+	secret: config.secret,
+	algorithms: ['HS256', 'RS512'],
 	getToken: (req: JWTRequest) => {
 		if (
 			req.headers.authorization &&

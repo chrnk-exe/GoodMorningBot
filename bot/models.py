@@ -40,11 +40,10 @@ class User(Base):
     last_vizit = Column(Date)
     added_videos = Column(Text, nullable=False)
     vk_access_token = Column(String)
-    activated = Column(Boolean)
     createdAt = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.now)
     updatedAt = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.now)
 
-    def __init__(self, id, email, password, vklink, last_vizit, added_videos, activated = False):
+    def __init__(self, id, email, password, vklink, last_vizit, added_videos):
         self.id = id
         self.email = email
         self.password = password
@@ -53,7 +52,7 @@ class User(Base):
         self.added_videos = added_videos
         # self.isAdmin = isAdmin
         # self.vk_access_token = vk_access_token
-        self.activated = activated
+        # self.activated = activated
 
 
 class Videos(Base):

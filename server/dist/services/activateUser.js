@@ -17,8 +17,7 @@ exports.default = (id) => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     if (user) {
-        user.activated = true;
-        user.save();
+        yield user.save();
         return true;
     }
     return false;

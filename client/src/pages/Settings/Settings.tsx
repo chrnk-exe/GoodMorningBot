@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import classes from '../../styles/Settings.module.sass';
 import { Paper, TextField } from '@mui/material';
 import anon from '../../assets/anon.jpg';
-import { useConfirmMailMutation } from '../../store/services/appApi';
 
 
 const Settings = () => {
@@ -15,13 +14,6 @@ const Settings = () => {
 		password1: '',
 		password2: '',
 	});
-	const { token } = useAppSelector(state => state.auth);
-
-	const [confirmLink] = useConfirmMailMutation();
-
-	const sendConfirmMessage = async () => {
-		confirmLink({token});
-	};
 
 	if(user.userID < 0) return (<Navigate to='/login' />);
 
@@ -54,9 +46,6 @@ const Settings = () => {
 						<section className={classes.settingContainerChild}>
 							<TextField
 								label={'Email'}
-								helperText={
-									user.activated ? '' : 'Confirm email!'
-								}
 								value={settings.email}
 								onChange={e =>
 									setSettings(prev => ({
@@ -65,9 +54,6 @@ const Settings = () => {
 									}))
 								}
 							/>
-							<Button disabled={user.activated} onClick={sendConfirmMessage} variant="contained" fullWidth>
-								Send confirm link!
-							</Button>
 						</section>
 					</div>
 				</Paper>

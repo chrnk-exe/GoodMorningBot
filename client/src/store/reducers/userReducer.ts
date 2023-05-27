@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from '../services/authApi';
+import { authApi } from '../services/authApi';
 import { appApi } from '../services/appApi';
 import { vkApi } from '../services/vkApi';
 
 const initialState: User = {
 	userID: -1,
-	Role: 0,
-	activated: false,
+	Role: 0
 };
 
 
@@ -25,16 +24,15 @@ export const userSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addMatcher(
-				userApi.endpoints.loginUser.matchFulfilled,
+				authApi.endpoints.loginUser.matchFulfilled,
 				(state, action) => {
 					// console.log('consolelog from userreducer');
-					const { id, email, isAdmin, activated, avatarURL} = action.payload;
+					const { id, email, isAdmin, avatarURL} = action.payload;
 					return {
 						userID: id,
 						email: email,
-						Role: +isAdmin + +activated,
+						Role: +isAdmin + 1,
 						avatarURL,
-						activated,
 					};
 				},
 			)
@@ -42,40 +40,38 @@ export const userSlice = createSlice({
 				appApi.endpoints.authorize.matchFulfilled,
 				(state, action) => {
 					// console.log('consolelog from userreducer');
-					const { id, email, isAdmin, activated, avatarURL } = action.payload;
+					const { id, email, isAdmin, avatarURL } = action.payload;
 					return {
 						email: email,
-						Role: +isAdmin + +activated,
+						Role: +isAdmin + 1,
 						avatarURL,
 						userID: id,
-						activated,
 					};
 				},
 			)
+			// .addMatcher(
+			// 	authApi.endpoints.newUser.matchFulfilled,
+			// 	(state, action) => {
+			// 		// console.log('consolelog from userreducer');
+			// 		const { id, email, isAdmin, activated, avatarURL } = action.payload;
+			// 		return {
+			// 			userID: id,
+			// 			email: email,
+			// 			Role: +isAdmin + +activated,
+			// 			avatarURL,
+			// 			activated,
+			// 		};
+			// 	},
+			// )
 			.addMatcher(
-				userApi.endpoints.newUser.matchFulfilled,
+				authApi.endpoints.getUserByVk.matchFulfilled,
 				(state, action) => {
-					// console.log('consolelog from userreducer');
-					const { id, email, isAdmin, activated, avatarURL } = action.payload;
-					return {
-						userID: id,
-						email: email,
-						Role: +isAdmin + +activated,
-						avatarURL,
-						activated,
-					};
-				},
-			)
-			.addMatcher(
-				userApi.endpoints.getUserByVk.matchFulfilled,
-				(state, action) => {
-					const { id, email, isAdmin, activated, avatarURL } = action.payload;
+					const { id, email, isAdmin, avatarURL } = action.payload;
 					return {
 						userID: id,
 						name: email,
-						Role: +isAdmin + +activated,
+						Role: +isAdmin + 1,
 						avatarURL,
-						activated,
 					};
 				},
 			)

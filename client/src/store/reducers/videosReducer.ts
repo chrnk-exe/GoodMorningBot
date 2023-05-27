@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from '../services/authApi';
+import { authApi } from '../services/authApi';
 import { appApi } from '../services/appApi';
 
 const initialState: IVideoState = {
@@ -19,7 +19,7 @@ export const videoSlice = createSlice({
 	}, 
 	extraReducers: (builder) => {
 		builder
-			.addMatcher(userApi.endpoints.loginUser.matchFulfilled, (state, action) => {
+			.addMatcher(authApi.endpoints.loginUser.matchFulfilled, (state, action) => {
 				console.log('consolelog from videoreducer');
 				console.log(action.payload);
 			})

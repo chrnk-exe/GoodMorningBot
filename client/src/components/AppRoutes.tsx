@@ -37,7 +37,7 @@ const AppRoutes: React.FC = (): JSX.Element => {
 	if (isLoading || clientKeyQueryResult.isLoading || getUserByVkApi.isLoading)
 		return <Loader/>;
 
-	// console.log(user);
+
 
 	return (
 		<Routes>

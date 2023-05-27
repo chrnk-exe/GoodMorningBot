@@ -16,8 +16,8 @@ const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../../config"));
-const mypath = path_1.default.resolve(process.cwd(), '.env');
-dotenv_1.default.config({ path: mypath });
+const myPath = path_1.default.resolve(process.cwd(), '.env');
+dotenv_1.default.config({ path: myPath });
 module.exports = {
     up(queryInterface) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -29,7 +29,6 @@ module.exports = {
                     vklink: '',
                     last_vizit: new Date(),
                     added_videos: '[]',
-                    activated: true,
                     createdAt: new Date(),
                     updatedAt: new Date()
                 }], {});

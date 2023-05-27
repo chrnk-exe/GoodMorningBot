@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-export const userApi = createApi({
-	reducerPath: 'userApi',
+export const authApi = createApi({
+	reducerPath: 'authApi',
 	baseQuery: fetchBaseQuery({
 		baseUrl: 'http://localhost:5000/auth',
 	}),
@@ -14,13 +14,13 @@ export const userApi = createApi({
 				body: payload,
 			})
 		}),
-		newUser: build.mutation<ILoginResponse, Pick<ILoginRequest, 'login' | 'password'>>({
-			query: (payload) => ({
-				url: '/register',
-				method: 'POST',
-				body: payload,
-			})
-		}),
+		// newUser: build.mutation<ILoginResponse, Pick<ILoginRequest, 'login' | 'password'>>({
+		// 	query: (payload) => ({
+		// 		url: '/register',
+		// 		method: 'POST',
+		// 		body: payload,
+		// 	})
+		// }),
 		getUserByVk: build.query<ILoginResponse, string>({
 			query: (code) =>  `/get_access_token?code=${code}`
 		}),
@@ -32,7 +32,7 @@ export const userApi = createApi({
 
 export const { 
 	useLoginUserMutation,
-	useNewUserMutation,
+	// useNewUserMutation,
 	useGetUserByVkQuery,
 	useGetClientKeyQuery
-} = userApi;
+} = authApi;

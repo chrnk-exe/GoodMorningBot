@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 const mypath = path.resolve(process.cwd(), '.env');
 dotenv.config({path: mypath});
 
+
 module.exports = {
 	async up (queryInterface: QueryInterface) {
 		const arr = [];

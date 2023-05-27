@@ -9,7 +9,6 @@ export interface UserModel extends Model<InferAttributes<UserModel>, InferCreati
     vk_access_token?: string
     added_videos: string;
     // isAdmin: boolean;
-    activated: boolean;
 }
 
 export interface MailingUserModel extends Model<InferAttributes<MailingUserModel>, InferCreationAttributes<MailingUserModel>> {

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../db/models/index");
+const models_1 = require("../db/models");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../config"));
 function getRandomInt(min, max) {
@@ -24,14 +24,13 @@ const minId = 1111111111;
 const maxId = 2000000000;
 exports.default = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     const hashedPassword = bcrypt_1.default.hashSync(password, config_1.default.saltRounds);
-    const user = yield index_1.User.create({
+    const user = yield models_1.User.create({
         id: getRandomInt(minId, maxId),
         email,
         password: hashedPassword,
         vklink: '',
         last_vizit: new Date(),
         added_videos: '[]',
-        activated: false,
     }, {
         raw: true,
     });

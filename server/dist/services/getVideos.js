@@ -24,5 +24,5 @@ exports.default = (page) => __awaiter(void 0, void 0, void 0, function* () {
     for (const numb of arr) {
         result.push(videos[numb - 1]);
     }
-    return result.map(video => ({ data: video.vkcontent, day: video.day }));
+    return [result.map(video => ({ data: video.vkcontent, day: video.day })), videos.length];
 });

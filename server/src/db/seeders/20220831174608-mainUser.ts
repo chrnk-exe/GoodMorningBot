@@ -5,8 +5,8 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import config from '../../config';
 
-const mypath = path.resolve(process.cwd(), '.env');
-dotenv.config({path: mypath});
+const myPath = path.resolve(process.cwd(), '.env');
+dotenv.config({path: myPath});
 
 module.exports = {
 	async up (queryInterface: QueryInterface) {
@@ -18,7 +18,6 @@ module.exports = {
 			vklink: '',
 			last_vizit: new Date(),
 			added_videos: '[]',
-			activated: true,
 			createdAt: new Date(),
 			updatedAt: new Date()
 		}], {});

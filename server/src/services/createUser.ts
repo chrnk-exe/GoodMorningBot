@@ -1,6 +1,7 @@
-import { User } from '../db/models/index';
+import { User } from '../db/models';
 import bcrypt from 'bcrypt';
 import config from '../config';
+
 
 function getRandomInt(min: number, max: number): number {
 	min = Math.ceil(min);
@@ -22,7 +23,6 @@ export default async (email: string, password: string) => {
 			vklink: '',
 			last_vizit: new Date(),
 			added_videos: '[]',
-			activated: false,
 		},
 		{
 			raw: true,
